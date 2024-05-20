@@ -1,0 +1,89 @@
+# version: "3"
+
+# 笔记：重启一个服务而不重启依赖  docker compose up --no-deps xxx_service -d
+
+services:
+  # xray:
+  #   extends:
+  #       file: ../standalone/xray/docker-compose.yml
+  #       service: xray
+
+  # clash:
+  #   extends:
+  #       file: ../standalone/clash/docker-compose.yml
+  #       service: clash
+  #   depends_on:
+  #     - xray
+
+  # metacubexd:
+  #   extends:
+  #       file: ../standalone/clash/docker-compose.yml
+  #       service: metacubexd
+  #   depends_on:
+  #     - clash
+
+  mosdns:
+    extends:
+        file: ../standalone/mosdns/docker-compose.yml
+        service: mosdns
+
+  # ddns_go:
+  #   extends:
+  #       file: ../standalone/ddns_go/docker-compose.yml
+  #       service: ddns_go
+  #   depends_on:
+  #     - mosdns
+
+  # mariadb:
+  #   extends:
+  #       file: ../standalone/mariadb/docker-compose.yml
+  #       service: mariadb
+
+  # nginx:
+  #   extends:
+  #       file: ../standalone/nginx/docker-compose.yml
+  #       service: nginx
+
+  # php_fpm:
+  #   extends:
+  #       file: ../standalone/php_fpm/docker-compose.yml
+  #       service: php_fpm
+
+  # acme_sh:
+  #   extends:
+  #       file: ../standalone/acme_sh/docker-compose.yml
+  #       service: acme_sh
+  #   depends_on:
+  #     - mosdns
+
+  # qbittorrent_nox:
+  #   extends:
+  #       file: ../standalone/qbittorrent_nox/docker-compose.yml
+  #       service: qbittorrent_nox
+  #   depends_on:
+  #     - mosdns
+
+  # jenkins:
+  #   extends:
+  #       file: ../standalone/jenkins/docker-compose.yml
+  #       service: jenkins
+  #   depends_on:
+  #     - mosdns
+  #     - clash
+
+  # gitlab:
+  #   extends:
+  #       file: ../standalone/gitlab/docker-compose.yml
+  #       service: gitlab
+
+  # gitea:
+  #   extends:
+  #       file: ../standalone/gitea/docker-compose.yml
+  #       service: gitea
+
+  # xfl_cv_javaweb:
+  #   extends:
+  #       file: ../standalone/xfl_cv_javaweb/docker-compose.yml
+  #       service: xfl_cv_javaweb
+  #   depends_on:
+  #     - mariadb

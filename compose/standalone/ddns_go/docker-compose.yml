@@ -1,0 +1,13 @@
+# version: "3"
+services:
+  ddns_go:
+    container_name: ddns-go
+    image: jeessy/ddns-go:v6.5.0
+    volumes:
+      - /media/justsave/docker/volume/ddns_go:/root:rw
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: host
+    command: -l 127.0.0.1:9876 -f 10
+    restart: always

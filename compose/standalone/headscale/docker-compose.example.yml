@@ -1,0 +1,93 @@
+# version: "3"
+services:
+  headscale:
+    image: headscale/headscale:0.22.3
+    # image: headscale/headscale:v0.23.0-alpha7
+    container_name: headscale
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.accept_ra=2
+      - net.ipv6.conf.all.proxy_ndp=1
+      - net.ipv6.conf.all.autoconf=1
+    volumes:
+      - /media/justsave/docker/volume/headscale/data:/var/lib/headscale
+      - /media/justsave/docker/volume/headscale/config:/etc/headscale
+      - /var/run/headscale:/var/run/headscale
+    # network_mode: bridge
+    networks:
+      headscale-net:
+        ipv4_address: 172.20.0.1
+    ports:
+      # - "8090:8090"
+      - "127.0.0.1:28015:8080"
+      - "0.0.0.0:9090:9090"
+      - "3478:3478/udp"
+    # command: "serve"
+    command: "headscale serve"
+    restart: unless-stopped
+
+  headscale_webui:
+    env_file: /media/justsave/docker/env/headscale/headscale-webui.env
+    image: ifargle/headscale-webui:latest
+    # image: ifargle/headscale-webui:v0.7.0
+    container_name: headscale-webui
+    user: "1000"
+    environment:
+      - "TZ=Asia/Hong_Kong"
+      - "HS_SERVER=http://172.20.0.1:8080"
+      - "DOMAIN_NAME=https:/headscale.example.com:2083" # 端口号可以改，改了后文5050也需要修改
+      - COLOR=blue-gray
+      - SCRIPT_NAME=/admin
+      - LOG_LEVEL=info
+    volumes:
+      - /media/justsave/docker/volume/headscale/web-ui:/data:rw
+      - /media/justsave/docker/volume/headscale/config:/etc/headscale/:ro
+      - /var/run/headscale:/var/run/headscale
+    # network_mode: bridge
+    networks:
+      headscale-net:
+        ipv4_address: 172.20.0.2
+    ports:
+      - "127.0.0.1:28016:5000"
+    restart: unless-stopped
+
+  # 需要进容器里手动 tailscale login --login-server=https://xxx
+  tailscale_client:
+    container_name: tailscale-client
+    image: tailscale/tailscale:latest
+    hostname: tailscale-client
+    environment:
+      - "TS_EXTRA_ARGS=--advertise-tags=tag:container --netfilter-mode=off --login-server=https://headscale.example.com:2083"
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+      - TS_ACCEPT_DNS=true
+    volumes:
+      - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
+      - /var/run/tailscale:/var/run/tailscale
+      - /dev/net/tun:/dev/net/tun
+      - /lib/modules:/lib/modules:ro
+    cap_add:
+      - net_admin
+      - sys_module
+    network_mode: host
+    # command: "tailscaled"
+    depends_on:
+      - headscale
+      - headscale_webui
+    restart: unless-stopped
+
+networks:
+  headscale-net:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.20.0.0/24"
+          gateway: "172.20.0.254"
+          ip_range: "172.20.0.0/25"
+        - subnet: "fd7a:115c:a1e0:ffff::/64"

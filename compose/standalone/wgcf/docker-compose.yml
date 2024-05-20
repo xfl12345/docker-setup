@@ -1,0 +1,26 @@
+# version: "3"
+services:
+  wgcf:
+    sysctls:
+      # - net.ipv6.conf.default.disable_ipv6=0
+      # - net.ipv6.conf.default.autoconf=1
+      # - net.ipv6.conf.lo.disable_ipv6=0
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.accept_ra=2
+      - net.ipv6.conf.all.proxy_ndp=1
+      - net.ipv6.conf.all.autoconf=1
+    cap_add:
+      - ALL
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - http_proxy=http://host.docker.internal:7890
+      - https_proxy=http://host.docker.internal:7890
+      - all_proxy=socks5://host.docker.internal:7890
+    container_name: wgcf
+    image: neilpang/wgcf-docker
+    network_mode: bridge
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /media/justsave/docker/volume/wgcf:/wgcf

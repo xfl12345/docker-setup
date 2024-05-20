@@ -1,0 +1,54 @@
+# version: "3"
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
+    user: "2004"   # id -u jenkins 重装系统后需要自己创建一个 jenkins 用户
+    # 这里不能直接使用"jenkins"作为用户名，因为 docker 镜像内部有独立的 /etc/passwd 会重名。而 uid 不对，将导致无读写权限
+    # docker镜像内部参考 →   jenkins:x:1000:1000::/var/jenkins_home:/bin/bash
+    hostname: jenkins
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
+      # 挂载 docker ，直通宿主机
+      - /usr/bin/docker:/usr/bin/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 共享host的GNU库
+      # - /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu:ro
+      # - /usr/lib/arm-linux-gnu:/usr/lib/arm-linux-gnu:ro
+      # - /usr/lib/arm-linux-gnueabi:/usr/lib/arm-linux-gnueabi:ro
+      # - /usr/lib/arm-linux-gnueabihf:/usr/lib/arm-linux-gnueabihf:ro
+      # - /usr/lib/i386-linux-gnu:/usr/lib/i386-linux-gnu:ro
+      # - /usr/lib/mips64el-linux-gnuabi64:/usr/lib/mips64el-linux-gnuabi64:ro
+      # - /usr/lib/mips64-linux-gnuabi64:/usr/lib/mips64-linux-gnuabi64:ro
+      # - /usr/lib/mipsel-linux-gnu:/usr/lib/mipsel-linux-gnu:ro
+      # - /usr/lib/mipsisa32r6el-linux-gnu:/usr/lib/mipsisa32r6el-linux-gnu:ro
+      # - /usr/lib/mipsisa64r6el-linux-gnuabi64:/usr/lib/mipsisa64r6el-linux-gnuabi64:ro
+      # - /usr/lib/mipsisa32r6-linux-gnu:/usr/lib/mipsisa32r6-linux-gnu:ro
+      # - /usr/lib/mipsisa64r6-linux-gnuabi64:/usr/lib/mipsisa64r6-linux-gnuabi64:ro
+      # - /usr/lib/mips-linux-gnu:/usr/lib/mips-linux-gnu:ro
+      # - /usr/lib/s390x-linux-gnu:/usr/lib/s390x-linux-gnu:ro
+      # - /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:ro
+      # - /usr/lib/x86_64-linux-gnux32:/usr/lib/x86_64-linux-gnux32:ro
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28011:8080"
+      - "127.0.0.1:28011:8080/udp"
+      - "50000:50000"
+      - "50000:50000/udp"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # environment:
+    #   - JENKINS_OPTS="--prefix=/jenkins"
+    # network_mode: host
+    # environment:
+    #   - JENKINS_PREFIX=/jenkins
+    #   - JENKINS_LISTEN_ADDRESS=127.0.0.1
+    #   - JENKINS_PORT=8100
+    restart: always
+
+
+# docker run --name jenkins -p 7080:8080 -p 50000:50000 -v /etc/timezone:/etc/timezone -v /etc/localtime:/etc/localtime -v /var/docker_data/jenkins/jenkins_home:/var/jenkins_home -v /var/docker_data/jenkins/settings:/var/settings -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -d my-jenkins

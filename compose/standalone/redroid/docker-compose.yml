@@ -1,0 +1,65 @@
+# version: "3"
+services:
+  redroid:
+    sysctls:
+      # - net.ipv6.conf.default.disable_ipv6=0
+      # - net.ipv6.conf.default.autoconf=1
+      # - net.ipv6.conf.lo.disable_ipv6=0
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.accept_ra=2
+      - net.ipv6.conf.all.proxy_ndp=1
+      - net.ipv6.conf.all.autoconf=1
+    container_name: redroid
+    image: redroid/redroid:13.0.0-latest
+    privileged: true
+    volumes:
+      - /media/justsave/docker/volume/redroid/data:/data
+    networks:
+      my_redroid_network_bridge_host:
+        ipv6_address: "fd00:250:0:ffff::250"
+      my_redroid_network_macvlan:
+        ipv4_address: 192.168.8.112
+    # network_mode: bridge
+    ports:
+      - "5555:5555"
+    command: androidboot.redroid_gpu_mode=host androidboot.use_memfd=1 androidboot.redroid_width=1080 androidboot.redroid_height=1920 androidboot.redroid_fps=120 ro.enable_ipv6_default=true persist.sys.ipv6.enable=true persist.sys.ipv4.enable=true
+
+    # restart: always
+    restart: "no"
+
+# networks:
+#   redroid_network:
+#     external: true
+
+networks:
+  my_redroid_network_bridge_host:
+    # external: true
+    # name: bridge
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "fd00:250:0:ffff::/64"
+
+  my_redroid_network_macvlan:
+    driver: macvlan
+    driver_opts:
+      # parent: eth4docker100
+      parent: eth0
+      # parent: eth0.250
+    ipam:
+      config:
+        - subnet: "192.168.8.0/24"
+          gateway: "192.168.8.1"
+        # - subnet: "fd00:250:250:ffff::/64"
+
+# [root@docker3 ~]# docker network create -d macvlan \
+# > --subnet=172.16.100.0/24 \
+# > --gateway=172.16.100.1 \
+# > -o parent=eno16777736.100 \
+# > macvlan_net100
+
+# ip addr add fd00:250:0:ffff::250/64 dev eth0
+# ip route add default via fd00:250:0:ffff::1 dev eth0 metric 1 pref medium
+# ip route get 240c::6666

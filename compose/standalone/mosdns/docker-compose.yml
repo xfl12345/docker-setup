@@ -1,0 +1,23 @@
+# version: "3"
+services:
+  mosdns:
+    container_name: mosdns
+    image: irinesistiana/mosdns:v5.3.1
+    logging:
+      options:
+        max-size: "10m"
+    volumes:
+      - /media/justsave/docker/volume/mosdns:/etc/mosdns:rw
+      # nginx ssl cert
+      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # # 共享host的可信SSL证书环境
+      # - /etc/ssl:/etc/ssl:ro
+      # - /usr/share/ca-certificates:/usr/share/ca-certificates:ro
+    network_mode: host
+    # ports:
+    #   - "5553:5553"
+    #   - "5553:5553/udp"
+    restart: always

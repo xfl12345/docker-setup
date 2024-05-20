@@ -1,0 +1,23 @@
+# version: "3"
+services:
+  acme_sh:
+    container_name: acme.sh
+    image: acme-sh-xfl
+    build:
+      context: ./
+      dockerfile: acme-sh-bundle-with-docker.Dockerfile
+    network_mode: host
+    restart: always
+    command: daemon
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # acme.sh
+      - /media/justsave/docker/volume/acme_sh/app:/acme.sh
+      # nginx ssl cert
+      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
+      # docker socket
+      - /var/run/docker.sock:/var/run/docker.sock 
+      # 自己写的工具脚本
+      - ./xfl_acme_util.sh:/xfl_acme_util.sh:ro

@@ -1,0 +1,26 @@
+# version: "3"
+services:
+  transmission:
+    env_file:
+      - /media/justsave/docker/env/transmission/docker.env
+    container_name: transmission
+    image: linuxserver/transmission:latest
+    environment:
+      - PUID=2008
+      - PGID=1999
+      # - TZ=Asia/Hong_Kong
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      - /media/justsave/docker/volume/transmission/data:/config
+      - /media/justsave/docker/volume/transmission/downloads:/downloads
+      - /media/justsave/docker/volume/transmission/folder:/watch
+      # BT客户端专享目录
+      - /media/justsave/BT:/media/justsave/BT
+      - /media/justsave/PT:/media/justsave/PT
+      # WebUI
+      - /media/justsave/wwwroot/zpqsunny-transmission-webui:/media/justsave/wwwroot/zpqsunny-transmission-webui:ro
+    network_mode: host
+    restart: unless-stopped

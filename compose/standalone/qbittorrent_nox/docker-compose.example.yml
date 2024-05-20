@@ -1,0 +1,40 @@
+# version: "3"
+services:
+  qbittorrent_nox:
+    container_name: qbittorrent-nox
+    # image: qbittorrentofficial/qbittorrent-nox:4.6.3-1
+    # image: qbittorrent-nox-xfl:4.6.4-1
+    image: qbittorrent-nox-xfl:4.6.3-1
+    build:
+      context: ./
+      dockerfile: qbittorrent-nox.Dockerfile
+    # for debugging
+    cap_add:
+      - SYS_PTRACE
+    environment:
+      #- PAGID=10000
+      - PUID=2005
+      - PGID=1999
+      - QBT_EULA=accept
+      - QBT_VERSION=4.6.3-1
+      - QBT_WEBUI_PORT=28012
+    # read_only: true
+    stop_grace_period: 30m
+    tmpfs:
+      - /tmp
+    tty: true
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 数据持久化
+      - /media/justsave/docker/volume/qbittorrent_nox/config:/config
+      - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /media/justsave/BT:/media/justsave/BT
+      - /media/justsave/PT:/media/justsave/PT
+      # 挂载 WebUI
+      - /media/justsave/wwwroot/vuetorrent:/media/justsave/wwwroot/vuetorrent:ro
+    network_mode: host
+    # restart: always
+    # restart: "no"
+    restart: unless-stopped

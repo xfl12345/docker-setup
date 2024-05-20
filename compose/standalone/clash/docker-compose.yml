@@ -1,0 +1,34 @@
+# version: "3"
+services:
+  clash:
+    container_name: clash-meta
+    image: metacubex/mihomo:v1.18.4    # 最新版用 metacubex/mihomo:Alpha
+    restart: always
+    # user: "2002"
+    pid: host
+    ipc: host
+    network_mode: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - /media/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
+      - /dev/net/tun:/dev/net/tun
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+  metacubexd:
+    container_name: metacubexd
+    image: ghcr.io/metacubex/metacubexd
+    restart: always
+    user: "2002"
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28002:80
+    volumes:
+      - /media/justsave/docker/volume/clash_meta/caddy:/config/caddy
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro

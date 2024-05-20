@@ -1,0 +1,111 @@
+# version: "3.4"
+
+# source code URL=https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml
+
+services:
+
+  netclient_cn:
+    container_name: netclient-cn
+    image: gravitl/netclient:v0.23.0
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
+    # privileged: true
+    pid: host
+    ipc: host
+    network_mode: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      - /media/justsave/docker/volume/netmaker/cn/etc/netclient:/etc/netclient
+    restart: always
+
+  netmaker_cn:
+    container_name: netmaker-cn
+    image: gravitl/netmaker:v0.23.0
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    restart: always
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/config/dnsconfig
+      - /media/justsave/docker/volume/netmaker/cn/sqldata:/root/data
+    environment:
+      # config-dependant vars
+      - STUN_LIST=stun.miwifi.com:3478,stun1.netmaker.io:3478,stun2.netmaker.io:3478,stun1.l.google.com:19302,stun2.l.google.com:19302
+      # The domain/host IP indicating the mq broker address
+      - BROKER_ENDPOINT=wss://broker.netmaker.example.com # For EMQX broker use `BROKER_ENDPOINT=wss://broker.${NM_DOMAIN}/mqtt`
+      # For EMQX broker (uncomment the two lines below)
+      #- BROKER_TYPE=emqx
+      #- EMQX_REST_ENDPOINT=http://mq:18083
+      # The base domain of netmaker
+      - SERVER_NAME=netmaker.example.com
+      - SERVER_API_CONN_STRING=api.netmaker.example.com:443
+      # Address of the CoreDNS server. Defaults to SERVER_HOST
+      - COREDNS_ADDR=192.168.8.111
+      # Overrides SERVER_HOST if set. Useful for making HTTP available via different interfaces/networks.
+      - SERVER_HTTP_HOST=api.netmaker.example.com
+    ports:
+      - "127.0.0.1:28021:8081"
+
+  netmaker_ui_cn:
+    container_name: netmaker-ui-cn
+    image: gravitl/netmaker-ui:v0.23.0
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    environment:
+      # config-dependant vars
+      # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
+      BACKEND_URL: "https://api.netmaker.example.com"
+    depends_on:
+      - netmaker_cn
+    ports:
+      - "127.0.0.1:28020:80"
+    links:
+      - "netmaker_cn:api"
+    restart: always
+
+  # caddy:
+  #   image: caddy:2.6.2
+  #   container_name: caddy
+  #   env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+  #   restart: unless-stopped
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     # storage for Caddy
+  #     - /media/justsave/docker/volume/netmaker/cn/caddy/data:/data
+  #     - /media/justsave/docker/volume/netmaker/cn/caddy/conf:/config
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+
+  coredns_cn:
+    #network_mode: host
+    container_name: coredns-cn
+    image: coredns/coredns:1.10.1
+    command: -conf /root/dnsconfig/Corefile
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    restart: always
+    depends_on:
+      - netmaker_cn
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/dnsconfig
+
+  mq_cn:
+    container_name: mq-cn
+    image: eclipse-mosquitto:2.0.15-openssl
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    depends_on:
+      - netmaker_cn
+    restart: unless-stopped
+    command: [ "/mosquitto/config/wait.sh" ]
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./wait.sh:/mosquitto/config/wait.sh
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
+      - /media/justsave/docker/volume/netmaker/cn/mosquitto/data:/mosquitto/data
+    ports:
+      - "127.0.0.1:28023:8883"
+

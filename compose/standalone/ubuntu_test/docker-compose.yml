@@ -1,0 +1,17 @@
+# version: "3"
+services:
+  ubuntu_test:
+    container_name: ubuntu-test
+    image: ubuntu:24.04
+    restart: "no"
+    network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - http_proxy=http://host.docker.internal:7890
+      - https_proxy=http://host.docker.internal:7890
+      - all_proxy=socks5://host.docker.internal:7890
+    command: /bin/bash -c "touch /tmp/just_hold_docker_bash.txt && tail -f /tmp/just_hold_docker_bash.txt"
+
+# 强行停机方法
+# docker compose down --timeout 1

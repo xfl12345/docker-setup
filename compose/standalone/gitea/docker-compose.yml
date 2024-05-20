@@ -1,0 +1,24 @@
+# version: "3"
+services:
+  gitea:
+    env_file:
+      - /media/justsave/docker/env/gitea/docker.env
+    image: gitea/gitea:1.22.0-rc1
+    container_name: gitea
+    # UID: id -u gitea
+    environment:
+      - USER_UID=2009
+      - USER_GID=2009
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      - /media/justsave/docker/volume/gitea/data:/data
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28014:3000"
+      - "22014:22"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped

@@ -1,0 +1,24 @@
+# version: "3"
+services:
+  debian4build:
+    container_name: debian4build
+    image: debian-bookworm-xfl
+    build:
+      context: ./
+      dockerfile: bookworm.Dockerfile
+    restart: "no"
+    network_mode: bridge
+    devices:
+      - /dev/mem:/dev/mem
+      # - /dev/gpiochip0:/dev/gpiochip0
+      # - /dev/gpiochip1:/dev/gpiochip1
+      # - /dev/gpiochip2:/dev/gpiochip2
+      # - /dev/gpiochip3:/dev/gpiochip3
+      # - /dev/gpiochip4:/dev/gpiochip4
+    # volumes:
+    #   - /dev/gpiochip0:/dev/gpiochip0
+    #   - /dev/gpiochip1:/dev/gpiochip1
+    #   - /dev/gpiochip2:/dev/gpiochip2
+    #   - /dev/gpiochip3:/dev/gpiochip3
+    #   - /dev/gpiochip4:/dev/gpiochip4
+    command: /bin/bash -c "touch /tmp/just_hold_docker_bash.txt && tail -f /tmp/just_hold_docker_bash.txt"

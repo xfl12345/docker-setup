@@ -1,0 +1,24 @@
+# version: "3"
+services:
+  xfl_cv_javaweb:
+    image: curriculum-vitae-web-server:1.0-SNAPSHOT
+    container_name: xfl-cv-javaweb
+    user: "1000"
+    environment:
+      - SPRING_CONFIG_ADDITIONAL_LOCATION=/app/config/
+    logging:
+      options:
+        max-size: "10m"
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      - /media/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
+      - /media/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28010:8880"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
