@@ -9,6 +9,9 @@
 !/volume/nginx/snippets/
 /volume/nginx/snippets/private/
 !/volume/nginx/nginx.example.conf
+!/volume/nginx/conf.d/
+/volume/nginx/conf.d/*
+!/volume/nginx/conf.d/my_default.conf
 
 !/compose/standalone/busybox_test/docker-compose.yml
 !/compose/standalone/clash/docker-compose.yml
