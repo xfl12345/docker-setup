@@ -1,8 +1,14 @@
-/.idea/
-/volume/
-/env/
+/.idea
+/volume/*
+/env
 **/docker-compose.yml
 **/*.bak
+
+!/volume/nginx/
+/volume/nginx/*
+!/volume/nginx/snippets/
+/volume/nginx/snippets/private/
+!/volume/nginx/nginx.example.conf
 
 !/compose/standalone/busybox_test/docker-compose.yml
 !/compose/standalone/clash/docker-compose.yml
