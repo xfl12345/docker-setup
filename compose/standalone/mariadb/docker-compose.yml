@@ -4,8 +4,10 @@ services:
     container_name: mariadb
     image: mariadb:11
     healthcheck:
-      test: ["CMD", "mariadb-admin" ,"ping", "-h", "localhost"]
-      start_period: 10s
+      # test: ["CMD", "mariadb-admin" ,"ping", "-h", "localhost"]
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost"]
+      start_period: 180s
+      start_interval: 2s
       timeout: 3s
       retries: 200
     network_mode: bridge
