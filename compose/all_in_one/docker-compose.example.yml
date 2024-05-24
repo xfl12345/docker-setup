@@ -86,4 +86,5 @@ services:
   #       file: ../standalone/xfl_cv_javaweb/docker-compose.yml
   #       service: xfl_cv_javaweb
   #   depends_on:
-  #     - mariadb
+  #     mariadb:
+  #       condition: service_healthy
