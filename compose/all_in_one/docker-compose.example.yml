@@ -31,8 +31,6 @@ services:
   #   extends:
   #       file: ../standalone/ddns_go/docker-compose.yml
   #       service: ddns_go
-  #   depends_on:
-  #     - mosdns
 
   # mariadb:
   #   extends:
@@ -54,14 +52,16 @@ services:
   #       file: ../standalone/acme_sh/docker-compose.yml
   #       service: acme_sh
   #   depends_on:
-  #     - mosdns
+  #     mosdns:
+  #       condition: service_healthy
 
   # qbittorrent_nox:
   #   extends:
   #       file: ../standalone/qbittorrent_nox/docker-compose.yml
   #       service: qbittorrent_nox
   #   depends_on:
-  #     - mosdns
+  #     mosdns:
+  #       condition: service_healthy
 
   # jenkins:
   #   extends:
