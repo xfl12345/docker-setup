@@ -5,7 +5,7 @@ services:
     image: mariadb:11
     healthcheck:
       # test: ["CMD", "mariadb-admin" ,"ping", "-h", "localhost"]
-      test: ["CMD-SHELL", "mariadb-admin ping -h localhost"]
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u healthcheck"]
       start_period: 180s
       start_interval: 2s
       timeout: 3s
@@ -23,6 +23,7 @@ services:
       # This allows ip ranges from 192.168.0.49 to 192.168.0.54 to connect to root
       - MYSQL_ROOT_HOST=172.16.0.0/255.240.0.0
       - MARIADB_AUTO_UPGRADE=1
+      # - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
     volumes:
       - /media/justsave/docker/volume/mariadb/conf:/etc/mysql/conf.d
       - /media/justsave/docker/volume/mariadb/data:/var/lib/mysql
