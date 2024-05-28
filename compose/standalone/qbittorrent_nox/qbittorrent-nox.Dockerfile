@@ -19,7 +19,7 @@ RUN \
 # image for building
 FROM base AS builder
 
-ARG QBT_VERSION="4.6.3"
+ARG QBT_VERSION="4.6.4"
 ARG LIBBT_CMAKE_FLAGS=""
 ARG LIBBT_VERSION="2.0.10"
 
@@ -144,6 +144,6 @@ COPY --from=builder /usr/bin/qbittorrent-nox /usr/bin/qbittorrent-nox
 COPY --from=builder /sbom.txt /sbom.txt
 
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod 777 /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 ENTRYPOINT ["/sbin/tini", "-g", "--", "/entrypoint.sh"]
