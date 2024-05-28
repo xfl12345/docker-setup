@@ -1,0 +1,19 @@
+# version: "3"
+services:
+  hertzbeat:
+    image: apache/hertzbeat
+    container_name: hertzbeat
+    environment:
+      - "TZ=Asia/Hong_Kong"
+    volumes:
+      - /media/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data
+      - /media/justsave/docker/volume/hertzbeat/logs:/opt/hertzbeat/logs
+      - /media/justsave/docker/volume/hertzbeat/config/application.yml:/opt/hertzbeat/config/application.yml
+      - /media/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28018:1157"
+      - "127.0.0.1:1158:1158"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always

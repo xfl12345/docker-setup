@@ -36,7 +36,8 @@
 |28015|Headscale Web API|
 |28016|Headscale ADMIN Web UI|
 |28017|wg-easy|
-|28018~28019|`reserved`|
+|28018|hertzbeat|
+|28019|`reserved`|
 |28020|Netmaker dashboard Web UI|
 |28021|Netmaker Web API|
 |28022|Netmaker broker|
