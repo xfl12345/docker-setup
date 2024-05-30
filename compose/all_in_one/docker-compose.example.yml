@@ -63,6 +63,14 @@ services:
   #     mosdns:
   #       condition: service_healthy
 
+  # transmission:
+  #   extends:
+  #       file: ../standalone/transmission/docker-compose.yml
+  #       service: transmission
+  #   depends_on:
+  #     mosdns:
+  #       condition: service_healthy
+
   # jenkins:
   #   extends:
   #       file: ../standalone/jenkins/docker-compose.yml
