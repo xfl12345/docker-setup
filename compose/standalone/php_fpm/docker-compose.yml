@@ -4,6 +4,7 @@ services:
     container_name: php-fpm
     # image: php:8.3.3-fpm-bookworm
     image: php-fpm-bookworm-xfl:7.4
+    pull_policy: build
     build:
       context: ./
       dockerfile: php-fpm.Dockerfile

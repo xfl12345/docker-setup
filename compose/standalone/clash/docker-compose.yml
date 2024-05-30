@@ -3,6 +3,7 @@ services:
   clash:
     container_name: clash-meta
     image: metacubex/mihomo:v1.18.4    # 最新版用 metacubex/mihomo:Alpha
+    pull_policy: always
     restart: always
     # user: "2002"
     pid: host

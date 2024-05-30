@@ -1,8 +1,9 @@
 # version: "3"
 services:
   xfl_cv_javaweb:
-    image: curriculum-vitae-web-server:1.0-SNAPSHOT
     container_name: xfl-cv-javaweb
+    image: curriculum-vitae-web-server:1.0-SNAPSHOT
+    pull_policy: never
     user: "1000"
     environment:
       - SPRING_CONFIG_ADDITIONAL_LOCATION=/app/config/

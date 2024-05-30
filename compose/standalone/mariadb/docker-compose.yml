@@ -3,6 +3,7 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb:11
+    pull_policy: always
     healthcheck:
       test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u healthcheck"]
       start_period: 180s

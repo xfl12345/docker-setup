@@ -3,6 +3,7 @@ services:
   debian_test:
     container_name: debian-test
     image: debian:bookworm
+    pull_policy: always
     restart: "no"
     network_mode: bridge
     command: /bin/bash -c "touch /tmp/just_hold_docker_bash.txt && tail -f /tmp/just_hold_docker_bash.txt"

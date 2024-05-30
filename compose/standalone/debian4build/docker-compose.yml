@@ -3,6 +3,7 @@ services:
   debian4build:
     container_name: debian4build
     image: debian-bookworm-xfl
+    pull_policy: build
     build:
       context: ./
       dockerfile: bookworm.Dockerfile

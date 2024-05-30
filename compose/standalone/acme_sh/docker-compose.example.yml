@@ -3,6 +3,7 @@ services:
   acme_sh:
     container_name: acme.sh
     image: acme-sh-xfl
+    pull_policy: build
     build:
       context: ./
       dockerfile: acme-sh-bundle-with-docker.Dockerfile

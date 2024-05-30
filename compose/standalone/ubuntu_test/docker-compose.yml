@@ -3,6 +3,7 @@ services:
   ubuntu_test:
     container_name: ubuntu-test
     image: ubuntu:24.04
+    pull_policy: always
     restart: "no"
     network_mode: bridge
     extra_hosts:

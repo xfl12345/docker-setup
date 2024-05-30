@@ -3,6 +3,7 @@ services:
   nginx:
     container_name: nginx
     image: nginx:latest
+    pull_policy: always
     network_mode: host
     restart: always
     volumes:

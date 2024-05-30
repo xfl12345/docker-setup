@@ -3,8 +3,8 @@ services:
   qbittorrent_nox:
     container_name: qbittorrent-nox
     # image: qbittorrentofficial/qbittorrent-nox:4.6.3-1
-    # image: qbittorrent-nox-xfl:4.6.4-1
-    image: qbittorrent-nox-xfl:4.6.3-1
+    image: qbittorrent-nox-xfl:4.6.4
+    pull_policy: build
     build:
       context: ./
       dockerfile: qbittorrent-nox.Dockerfile
@@ -16,7 +16,7 @@ services:
       - PUID=2005
       - PGID=1999
       - QBT_EULA=accept
-      - QBT_VERSION=4.6.3-1
+      - QBT_VERSION=4.6.4
       - QBT_WEBUI_PORT=28012
     # read_only: true
     stop_grace_period: 30m

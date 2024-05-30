@@ -5,6 +5,7 @@ services:
       - /media/justsave/docker/env/transmission/docker.env
     container_name: transmission
     image: linuxserver/transmission:latest
+    pull_policy: always
     environment:
       - PUID=2008
       - PGID=1999

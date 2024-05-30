@@ -3,6 +3,7 @@ services:
   jenkins:
     container_name: jenkins
     image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
+    pull_policy: always
     user: "2004"   # id -u jenkins 重装系统后需要自己创建一个 jenkins 用户
     # 这里不能直接使用"jenkins"作为用户名，因为 docker 镜像内部有独立的 /etc/passwd 会重名。而 uid 不对，将导致无读写权限
     # docker镜像内部参考 →   jenkins:x:1000:1000::/var/jenkins_home:/bin/bash

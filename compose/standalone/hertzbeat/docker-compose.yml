@@ -1,8 +1,9 @@
 # version: "3"
 services:
   hertzbeat:
-    image: apache/hertzbeat
     container_name: hertzbeat
+    image: apache/hertzbeat
+    pull_policy: always
     environment:
       - "TZ=Asia/Hong_Kong"
     volumes:

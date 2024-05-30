@@ -3,6 +3,7 @@ services:
   mosdns:
     container_name: mosdns
     image: irinesistiana/mosdns:v5.3.1
+    pull_policy: always
     healthcheck:
       # test: ["CMD", "nslookup", "-port=5553", "qq.com", "localhost", "2>&1", ">/dev/null"]
       test: ["CMD-SHELL", "nslookup -port=5553 qq.com localhost 2>&1 >/dev/null"]
