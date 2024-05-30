@@ -2,7 +2,7 @@
 services:
   xray:
     container_name: xray
-    image: teddysun/xray:1.8.11
+    image: teddysun/xray:1.8.13
     pull_policy: always
     hostname: xray
     user: "2001" # id -u xray 重装系统后需要自己创建一个 xray 用户
