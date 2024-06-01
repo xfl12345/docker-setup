@@ -2,7 +2,7 @@
 services:
   ddns_go:
     container_name: ddns-go
-    image: jeessy/ddns-go:v6.5.0
+    image: jeessy/ddns-go:v6.6.1
     pull_policy: always
     volumes:
       - /media/justsave/docker/volume/ddns_go:/root:rw
