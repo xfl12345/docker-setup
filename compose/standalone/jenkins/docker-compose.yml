@@ -11,7 +11,7 @@ services:
     volumes:
       # 持久化
       - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
-      # 挂载 docker ，直通宿主机
+      # 挂载 docker socket ，直通宿主机
       - /usr/bin/docker:/usr/bin/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock:rw
       # 共享host的时间环境
