@@ -3,7 +3,7 @@ services:
   gitea:
     env_file:
       - /media/justsave/docker/env/gitea/docker.env
-    image: gitea/gitea:1.22.0-rc1
+    image: gitea/gitea:1.22
     pull_policy: always
     container_name: gitea
     # UID: id -u gitea
