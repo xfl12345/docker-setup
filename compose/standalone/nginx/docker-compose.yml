@@ -1,4 +1,6 @@
 # version: "3"
+
+# official docs URL=https://github.com/docker-library/docs/blob/master/nginx/README.md
 services:
   nginx:
     container_name: nginx

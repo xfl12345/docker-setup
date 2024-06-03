@@ -1,4 +1,6 @@
 # version: "3"
+
+# official repo URL=https://github.com/jeessy2/ddns-go
 services:
   ddns_go:
     container_name: ddns-go

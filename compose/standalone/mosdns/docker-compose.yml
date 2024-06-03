@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/IrineSistiana/mosdns
+# official docs URL=https://irine-sistiana.gitbook.io/mosdns-wiki
 services:
   mosdns:
     container_name: mosdns

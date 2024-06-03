@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/apache/hertzbeat
+# official docs URL=https://hertzbeat.apache.org/docs/start/docker-deploy/
 services:
   hertzbeat:
     container_name: hertzbeat

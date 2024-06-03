@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/XTLS/Xray-core
+# official docs URL=https://xtls.github.io/
 services:
   xray:
     container_name: xray

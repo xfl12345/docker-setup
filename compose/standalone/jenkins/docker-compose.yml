@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/jenkinsci/docker
+# official docs URL=https://www.jenkins.io/doc/book/installing/docker/
 services:
   jenkins:
     container_name: jenkins

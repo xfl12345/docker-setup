@@ -1,5 +1,7 @@
 # version: "3"
 services:
+  # official repo URL=https://github.com/juanfont/headscale
+  # official docs URL=https://headscale.net/running-headscale-container/
   headscale:
     image: headscale/headscale:0.22.3
     # image: headscale/headscale:v0.23.0-alpha7
@@ -31,6 +33,7 @@ services:
     command: "headscale serve"
     restart: unless-stopped
 
+  # official repo URL=https://github.com/iFargle/headscale-webui
   headscale_webui:
     env_file: /media/justsave/docker/env/headscale/headscale-webui.env
     image: ifargle/headscale-webui:latest
@@ -56,6 +59,8 @@ services:
       - "127.0.0.1:28016:5000"
     restart: unless-stopped
 
+  # official repo URL=https://github.com/tailscale/tailscale
+  # official docs URL=https://tailscale.com/kb/1282/docker
   # 需要进容器里手动 tailscale login --login-server=https://xxx
   tailscale_client:
     container_name: tailscale-client

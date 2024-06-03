@@ -1,4 +1,6 @@
 # version: "3"
+
+# official repo URL=https://github.com/qbittorrent/docker-qbittorrent-nox
 services:
   qbittorrent_nox:
     container_name: qbittorrent-nox

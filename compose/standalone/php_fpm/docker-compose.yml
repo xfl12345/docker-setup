@@ -1,4 +1,6 @@
 # version: "3"
+
+# official docs URL=https://github.com/docker-library/docs/blob/master/php/README.md
 services:
   php_fpm:
     container_name: php-fpm

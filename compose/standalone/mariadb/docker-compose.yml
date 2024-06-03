@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/MariaDB/mariadb-docker
+# official docs URL=https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/
 services:
   mariadb:
     container_name: mariadb

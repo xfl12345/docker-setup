@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/linuxserver/docker-transmission
+# official docs URL=https://docs.linuxserver.io/images/docker-transmission/
 services:
   transmission:
     env_file:

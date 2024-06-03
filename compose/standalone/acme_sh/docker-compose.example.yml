@@ -1,4 +1,7 @@
 # version: "3"
+
+# official repo URL=https://github.com/acmesh-official/acme.sh
+# official docs URL=https://wiki.acme.sh/
 services:
   acme_sh:
     container_name: acme.sh

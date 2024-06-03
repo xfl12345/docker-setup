@@ -1,4 +1,5 @@
 # version: "3"
+
 # source code URL=https://github.com/wg-easy/wg-easy/blob/master/docker-compose.yml
 services:
   wg_easy:

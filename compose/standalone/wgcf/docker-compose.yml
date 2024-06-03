@@ -1,4 +1,6 @@
 # version: "3"
+
+# official repo URL=https://github.com/Neilpang/wgcf-docker
 services:
   wgcf:
     sysctls:

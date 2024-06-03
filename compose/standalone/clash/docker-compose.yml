@@ -1,5 +1,7 @@
 # version: "3"
 services:
+  # official repo URL=https://github.com/MetaCubeX/mihomo
+  # official docs URL=https://wiki.metacubex.one/
   clash:
     container_name: clash-meta
     image: metacubex/mihomo:v1.18.5    # 最新版用 metacubex/mihomo:Alpha
@@ -20,6 +22,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
 
+  # official repo URL=https://github.com/MetaCubeX/metacubexd
   metacubexd:
     container_name: metacubexd
     image: ghcr.io/metacubex/metacubexd
