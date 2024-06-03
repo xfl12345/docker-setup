@@ -3,6 +3,8 @@
 # official repo URL=https://github.com/Neilpang/wgcf-docker
 services:
   wgcf:
+    container_name: wgcf
+    image: neilpang/wgcf-docker
     sysctls:
       # - net.ipv6.conf.default.disable_ipv6=0
       # - net.ipv6.conf.default.autoconf=1
@@ -20,9 +22,7 @@ services:
       - http_proxy=http://host.docker.internal:7890
       - https_proxy=http://host.docker.internal:7890
       - all_proxy=socks5://host.docker.internal:7890
-    container_name: wgcf
-    image: neilpang/wgcf-docker
-    network_mode: bridge
     volumes:
       - /lib/modules:/lib/modules:ro
       - /media/justsave/docker/volume/wgcf:/wgcf
+    network_mode: bridge
