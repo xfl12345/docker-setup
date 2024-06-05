@@ -3,8 +3,7 @@
 # source code URL=https://github.com/wg-easy/wg-easy/blob/master/docker-compose.yml
 services:
   wg_easy:
-    env_file:
-      - /media/justsave/docker/env/wg_easy/docker.env
+    env_file: /media/justsave/docker/env/wg_easy/docker.env
     environment:
       # Change Language:
       # (Supports: en, ua, ru, tr, no, pl, fr, de, ca, es, ko, vi, nl, is, pt, chs, cht, it, th, hi)

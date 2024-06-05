@@ -3,8 +3,7 @@
 # official docs URL=https://docs.gitea.com/installation/install-with-docker
 services:
   gitea:
-    env_file:
-      - /media/justsave/docker/env/gitea/docker.env
+    env_file: /media/justsave/docker/env/gitea/docker.env
     image: gitea/gitea:1.22
     pull_policy: always
     container_name: gitea
