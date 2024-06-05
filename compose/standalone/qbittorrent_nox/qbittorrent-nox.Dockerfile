@@ -19,7 +19,7 @@ RUN \
 # image for building
 FROM base AS builder
 
-ARG QBT_VERSION="4.6.5"
+ARG QBT_VERSION="4.6.4"
 ARG LIBBT_CMAKE_FLAGS=""
 ARG LIBBT_VERSION="2.0.10"
 

@@ -12,16 +12,15 @@ services:
   qbittorrent_nox:
     container_name: qbittorrent-nox
     # image: qbittorrentofficial/qbittorrent-nox:4.6.5-1
-    image: qbittorrent-nox-xfl:4.6.5
+    image: qbittorrent-nox-xfl:4.6.4
     pull_policy: build
     build:
       context: ./
       dockerfile: qbittorrent-nox.Dockerfile
-      # network: host
       # args:
-      #   - HTTP_PROXY=http://127.0.0.1:7890
-      #   - HTTPS_PROXY=http://127.0.0.1:7890
-      #   - ALL_PROXY=socks5://127.0.0.1:7890
+      #   - ALL_PROXY=socks5://host.docker.internal:7890
+      # extra_hosts:
+      #   - "host.docker.internal:host-gateway"
     # for debugging
     cap_add:
       - SYS_PTRACE
@@ -30,7 +29,7 @@ services:
       - PUID=2005
       - PGID=1999
       - QBT_EULA=accept
-      - QBT_VERSION=4.6.5
+      - QBT_VERSION=4.6.4
       - QBT_WEBUI_PORT=28012
     # read_only: true
     stop_grace_period: 30m
