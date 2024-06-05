@@ -1,0 +1,28 @@
+# version: '3'
+
+services:
+  glances:
+    env_file:
+    - path: ./default.env
+      required: true # default
+    - path: /media/justsave/docker/env/glances/docker.env
+      required: false
+    container_name: glances
+    image: nicolargo/glances:latest-full
+    pull_policy: always
+    pid: host
+    ipc: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/glances/local_config:/root/.config/glances
+      - /media/justsave/docker/volume/glances/global_config:/etc/glances:ro
+      # 挂载 docker socket ，直通宿主机
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Uncomment the below line if you want glances to display host OS detail instead of container's
+      - /etc/os-release:/etc/os-release:ro
+    network_mode: host
+    restart: always

@@ -115,3 +115,8 @@ services:
   #       file: ../standalone/portainer/docker-compose.yml
   #       service: portainer
 
+  # glances:
+  #   extends:
+  #       file: ../standalone/glances/docker-compose.yml
+  #       service: glances
+

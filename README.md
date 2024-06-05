@@ -47,3 +47,5 @@
 |28031|Netmaker Web API|
 |28032|Netmaker broker|
 |28033~28039|`reserved`|
+|28040|glances Web UI|
+|28041~28049|`reserved`|

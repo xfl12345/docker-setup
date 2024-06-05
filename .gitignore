@@ -19,6 +19,7 @@
 !/compose/standalone/debian_test/docker-compose.yml
 !/compose/standalone/debian4build/docker-compose.yml
 !/compose/standalone/gitea/docker-compose.yml
+!/compose/standalone/glances/docker-compose.yml
 !/compose/standalone/hertzbeat/docker-compose.yml
 !/compose/standalone/jenkins/docker-compose.yml
 !/compose/standalone/mariadb/docker-compose.yml
