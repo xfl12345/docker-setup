@@ -5,8 +5,9 @@
 services:
   phpmyadmin:
     env_file: /media/justsave/docker/env/phpmyadmin/docker.env
-    image: phpmyadmin
     container_name: phpmyadmin
+    image: phpmyadmin
+    pull_policy: always
     environment:
       # - PMA_ARBITRARY=0
       - PMA_SOCKET=/var/run/mysqld/mysqld.sock
