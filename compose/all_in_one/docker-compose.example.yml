@@ -101,3 +101,17 @@ services:
   #   depends_on:
   #     mariadb:
   #       condition: service_healthy
+
+  # hertzbeat:
+  #   extends:
+  #       file: ../standalone/hertzbeat/docker-compose.yml
+  #       service: hertzbeat
+  #   depends_on:
+  #     mariadb:
+  #       condition: service_healthy
+
+  # portainer:
+  #   extends:
+  #       file: ../standalone/portainer/docker-compose.yml
+  #       service: portainer
+
