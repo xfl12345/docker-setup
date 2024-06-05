@@ -4,11 +4,12 @@
 # official docs URL=https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/
 services:
   mariadb:
+    env_file: /media/justsave/docker/env/mariadb/docker.env
     container_name: mariadb
     image: mariadb:11
     pull_policy: always
     healthcheck:
-      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u healthcheck"]
+      test: ["CMD-SHELL", "mariadb-admin ping --socket=/run/mysqld/mysqld.sock -u healthcheck"]
       start_period: 180s
       start_interval: 2s
       timeout: 3s
