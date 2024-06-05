@@ -17,6 +17,7 @@ services:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - /media/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
     network_mode: bridge
     ports:
       - 28009:80
