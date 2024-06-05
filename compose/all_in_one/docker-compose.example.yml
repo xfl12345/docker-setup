@@ -5,118 +5,120 @@
 services:
   # xray:
   #   extends:
-  #       file: ../standalone/xray/docker-compose.yml
-  #       service: xray
+  #     file: ../standalone/xray/docker-compose.yml
+  #     service: xray
 
   # clash:
   #   extends:
-  #       file: ../standalone/clash/docker-compose.yml
-  #       service: clash
+  #     file: ../standalone/clash/docker-compose.yml
+  #     service: clash
   #   depends_on:
   #     - xray
 
   # metacubexd:
   #   extends:
-  #       file: ../standalone/clash/docker-compose.yml
-  #       service: metacubexd
+  #     file: ../standalone/clash/docker-compose.yml
+  #     service: metacubexd
   #   depends_on:
   #     - clash
 
   mosdns:
     extends:
-        file: ../standalone/mosdns/docker-compose.yml
-        service: mosdns
+      file: ../standalone/mosdns/docker-compose.yml
+      service: mosdns
 
   # ddns_go:
   #   extends:
-  #       file: ../standalone/ddns_go/docker-compose.yml
-  #       service: ddns_go
+  #     file: ../standalone/ddns_go/docker-compose.yml
+  #     service: ddns_go
 
   # mariadb:
   #   extends:
-  #       file: ../standalone/mariadb/docker-compose.yml
-  #       service: mariadb
+  #     file: ../standalone/mariadb/docker-compose.yml
+  #     service: mariadb
 
   # nginx:
   #   extends:
-  #       file: ../standalone/nginx/docker-compose.yml
-  #       service: nginx
+  #     file: ../standalone/nginx/docker-compose.yml
+  #     service: nginx
 
   # php_fpm:
   #   extends:
-  #       file: ../standalone/php_fpm/docker-compose.yml
-  #       service: php_fpm
+  #     file: ../standalone/php_fpm/docker-compose.yml
+  #     service: php_fpm
 
   # phpmyadmin:
   #   extends:
-  #       file: ../standalone/phpmyadmin/docker-compose.yml
-  #       service: phpmyadmin
+  #     file: ../standalone/phpmyadmin/docker-compose.yml
+  #     service: phpmyadmin
 
   # acme_sh:
   #   extends:
-  #       file: ../standalone/acme_sh/docker-compose.yml
-  #       service: acme_sh
+  #     file: ../standalone/acme_sh/docker-compose.yml
+  #     service: acme_sh
   #   depends_on:
   #     mosdns:
   #       condition: service_healthy
 
   # qbittorrent_nox:
   #   extends:
-  #       file: ../standalone/qbittorrent_nox/docker-compose.yml
-  #       service: qbittorrent_nox
+  #     file: ../standalone/qbittorrent_nox/docker-compose.yml
+  #     service: qbittorrent_nox
   #   depends_on:
   #     mosdns:
   #       condition: service_healthy
 
   # transmission:
   #   extends:
-  #       file: ../standalone/transmission/docker-compose.yml
-  #       service: transmission
+  #     file: ../standalone/transmission/docker-compose.yml
+  #     service: transmission
   #   depends_on:
   #     mosdns:
   #       condition: service_healthy
 
-  # jenkins:
-  #   extends:
-  #       file: ../standalone/jenkins/docker-compose.yml
-  #       service: jenkins
-  #   depends_on:
-  #     - mosdns
-  #     - clash
+  # # jenkins:
+  # #   extends:
+  # #     file: ../standalone/jenkins/docker-compose.yml
+  # #     service: jenkins
+  # #   depends_on:
+  # #     - mosdns
+  # #     - clash
 
-  # gitlab:
-  #   extends:
-  #       file: ../standalone/gitlab/docker-compose.yml
-  #       service: gitlab
+  # # gitlab:
+  # #   extends:
+  # #     file: ../standalone/gitlab/docker-compose.yml
+  # #     service: gitlab
 
   # gitea:
   #   extends:
-  #       file: ../standalone/gitea/docker-compose.yml
-  #       service: gitea
+  #     file: ../standalone/gitea/docker-compose.yml
+  #     service: gitea
+  #   depends_on:
+  #     mariadb:
+  #       condition: service_healthy
 
   # xfl_cv_javaweb:
   #   extends:
-  #       file: ../standalone/xfl_cv_javaweb/docker-compose.yml
-  #       service: xfl_cv_javaweb
+  #     file: ../standalone/xfl_cv_javaweb/docker-compose.yml
+  #     service: xfl_cv_javaweb
   #   depends_on:
   #     mariadb:
   #       condition: service_healthy
 
   # hertzbeat:
   #   extends:
-  #       file: ../standalone/hertzbeat/docker-compose.yml
-  #       service: hertzbeat
+  #     file: ../standalone/hertzbeat/docker-compose.yml
+  #     service: hertzbeat
   #   depends_on:
   #     mariadb:
   #       condition: service_healthy
 
   # portainer:
   #   extends:
-  #       file: ../standalone/portainer/docker-compose.yml
-  #       service: portainer
+  #     file: ../standalone/portainer/docker-compose.yml
+  #     service: portainer
 
   # glances:
   #   extends:
-  #       file: ../standalone/glances/docker-compose.yml
-  #       service: glances
-
+  #     file: ../standalone/glances/docker-compose.yml
+  #     service: glances
