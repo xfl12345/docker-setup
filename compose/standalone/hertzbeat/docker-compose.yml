@@ -4,6 +4,7 @@
 # official docs URL=https://hertzbeat.apache.org/docs/start/docker-deploy/
 services:
   hertzbeat:
+    env_file: /media/justsave/docker/env/hertzbeat/docker.env
     container_name: hertzbeat
     image: apache/hertzbeat
     pull_policy: always
