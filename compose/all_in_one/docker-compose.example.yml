@@ -47,6 +47,11 @@ services:
   #       file: ../standalone/php_fpm/docker-compose.yml
   #       service: php_fpm
 
+  # phpmyadmin:
+  #   extends:
+  #       file: ../standalone/phpmyadmin/docker-compose.yml
+  #       service: phpmyadmin
+
   # acme_sh:
   #   extends:
   #       file: ../standalone/acme_sh/docker-compose.yml

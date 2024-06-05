@@ -27,7 +27,8 @@
 |28000|`reserved`|
 |28001|clash web API|
 |28002|clash web UI|
-|28003~28009|`reserved`|
+|28003~28008|`reserved`|
+|28009|phpMyAdmin|
 |28010|XFL的个人简历 Web APP|
 |28011|Jenkins|
 |28012|qBittorrent Web UI|
