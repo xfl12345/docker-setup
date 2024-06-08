@@ -1,0 +1,37 @@
+# version: "3.8"
+
+# official repo URL=https://github.com/tsl0922/ttyd
+services:
+  ttyd:
+    env_file:
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/ttyd/docker.env
+        required: false
+    container_name: ttyd
+    # image: tsl0922/ttyd:alpine
+    image: tsl0922/ttyd:alpine-xfl
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: ttyd-xfl.Dockerfile
+    environment:
+      - PUID=33 # id -u www-data 重装系统后可能需要自己创建一个 www-data 用户
+      - PGID=33 # id -g www-data 重装系统后可能需要自己创建一个 www-data 用户组
+    # command: "ttyd --writable --ipv6 --port 28041 bash"
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/ttyd/home:/home/ttyd
+      # socket 通信
+      - /var/run/ttyd:/var/run/ttyd
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    network_mode: bridge
+    # ports:
+    #   - 28041:28041
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+# Nginx 

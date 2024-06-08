@@ -29,6 +29,7 @@
 !/compose/standalone/phpmyadmin/docker-compose.yml
 !/compose/standalone/portainer/docker-compose.yml
 !/compose/standalone/redroid/docker-compose.yml
+!/compose/standalone/ttyd/docker-compose.yml
 !/compose/standalone/ubuntu_test/docker-compose.yml
 !/compose/standalone/wg_easy/docker-compose.yml
 !/compose/standalone/wgcf/docker-compose.yml

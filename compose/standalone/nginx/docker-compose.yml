@@ -20,6 +20,8 @@ services:
       - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets:ro
       # nginx ssl cert
       - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      # apache htpasswd file
+      - /media/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
       # nginx web root
       - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
       # - /media/justsave/wwwroot/default:/var/www/html:ro
@@ -34,4 +36,6 @@ services:
       - /var/run/php:/var/run/php
       # mysql unix socket
       - /var/run/mysqld:/var/run/mysqld
+      # ttyd unix socket
+      - /var/run/ttyd:/var/run/ttyd
 
