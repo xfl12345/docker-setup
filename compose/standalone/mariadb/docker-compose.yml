@@ -4,12 +4,17 @@
 # official docs URL=https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/
 services:
   mariadb:
-    env_file: /media/justsave/docker/env/mariadb/docker.env
+    env_file:
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/mariadb/docker.env
+        required: false
     container_name: mariadb
     image: mariadb:11
     pull_policy: always
     healthcheck:
-      test: ["CMD-SHELL", "mariadb-admin ping --socket=/run/mysqld/mysqld.sock -u healthcheck"]
+      # test: ["CMD-SHELL", "mariadb-admin ping --socket=/run/mysqld/mysqld.sock -u healthcheck"]
+      test: ["CMD-SHELL", "/my_mariadb_healthcheck.sh"]
       start_period: 180s
       start_interval: 2s
       timeout: 3s
@@ -18,12 +23,12 @@ services:
     ports:
       - 127.0.0.1:3306:3306
       # host-gateway 改变的时候，这里也要改！
-      - 172.17.0.1:3306:3306 
+      - 172.17.0.1:3306:3306
     hostname: "docker-mariadb"
     environment:
-      ## Use % to allow remote access to all addresses. 
+      ## Use % to allow remote access to all addresses.
       ## Generally not recommended by some people to allow for root.
-      #- MYSQL_ROOT_HOST=% 
+      #- MYSQL_ROOT_HOST=%
       - MYSQL_ROOT_HOST=172.16.0.0/255.240.0.0
       - MARIADB_AUTO_UPGRADE=1
       # - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
@@ -32,6 +37,8 @@ services:
       - /media/justsave/docker/volume/mariadb/data:/var/lib/mysql
       - /media/justsave/docker/volume/mariadb/log:/var/log/mysql
       - /var/run/mysqld:/var/run/mysqld
+      # healthcheck 小工具
+      - ./my_mariadb_healthcheck.sh:/my_mariadb_healthcheck.sh:ro
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
