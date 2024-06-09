@@ -20,6 +20,8 @@ services:
       - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets:ro
       # nginx ssl cert
       - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      # openssl dhparam
+      - /media/justsave/docker/volume/nginx/dhparam:/etc/ssl/dhparam:ro
       # apache htpasswd file
       - /media/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
       # nginx web root
