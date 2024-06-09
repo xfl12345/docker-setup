@@ -20,10 +20,12 @@
 !/compose/standalone/debian4build/docker-compose.yml
 !/compose/standalone/gitea/docker-compose.yml
 !/compose/standalone/glances/docker-compose.yml
+!/compose/standalone/headscale/docker-compose.yml
 !/compose/standalone/hertzbeat/docker-compose.yml
 !/compose/standalone/jenkins/docker-compose.yml
 !/compose/standalone/mariadb/docker-compose.yml
 !/compose/standalone/mosdns/docker-compose.yml
+!/compose/standalone/netmaker/*/docker-compose.yml
 !/compose/standalone/nginx/docker-compose.yml
 !/compose/standalone/php_fpm/docker-compose.yml
 !/compose/standalone/phpmyadmin/docker-compose.yml

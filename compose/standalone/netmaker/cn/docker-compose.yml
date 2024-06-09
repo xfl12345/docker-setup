@@ -1,0 +1,69 @@
+# version: "3.4"
+
+# source code URL=https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml
+name: netmaker_cn
+services:
+  netclient_cn:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netclient
+    container_name: netclient-cn
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
+    volumes:
+      - /media/justsave/docker/volume/netmaker/cn/etc/netclient:/etc/netclient
+
+  netmaker_cn:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netmaker
+    container_name: netmaker-cn
+    env_file:
+      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+        required: false
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/config/dnsconfig
+      - /media/justsave/docker/volume/netmaker/cn/sqldata:/root/data
+
+
+  netmaker_ui_cn:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netmaker_ui
+    container_name: netmaker-ui-cn
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker-ui.env
+
+  coredns_cn:
+    extends:
+      file: ../docker-compose.common.yml
+      service: coredns
+    container_name: coredns-cn
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/dnsconfig
+
+  mq_cn:
+    extends:
+      file: ../docker-compose.common.yml
+      service: mq
+    container_name: mq-cn
+    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
+      - /media/justsave/docker/volume/netmaker/cn/mosquitto/data:/mosquitto/data
+
+networks:
+  netmaker-docker-bridge:
+    name: "netmaker-docker-bridge"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.20.2.0/24"
+          gateway: "172.20.2.1"
+          ip_range: "172.20.2.0/24"
+        - subnet: "fd00:dcdc:2::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-netmaker2"

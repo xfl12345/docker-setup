@@ -1,0 +1,63 @@
+# version: "3.4"
+
+# source code URL=https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml
+name: netmaker_cloudflare
+services:
+  netclient:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netclient
+    env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker-client.env
+    volumes:
+      - /media/justsave/docker/volume/netmaker/cloudflare/etc/netclient:/etc/netclient
+
+  netmaker:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netmaker
+    env_file:
+      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+        required: false
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/config/dnsconfig
+      - /media/justsave/docker/volume/netmaker/cloudflare/sqldata:/root/data
+
+  netmaker_ui:
+    extends:
+      file: ../docker-compose.common.yml
+      service: netmaker_ui
+    env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker-ui.env
+
+  coredns:
+    extends:
+      file: ../docker-compose.common.yml
+      service: coredns
+    env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/dnsconfig
+
+  mq:
+    extends:
+      file: ../docker-compose.common.yml
+      service: mq
+    env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+    volumes:
+      # storage for mqtt
+      - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/logs:/mosquitto/log
+      - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/data:/mosquitto/data
+
+networks:
+  netmaker-docker-bridge:
+    name: "netmaker-docker-bridge"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.20.1.0/24"
+          gateway: "172.20.1.1"
+          ip_range: "172.20.1.0/24"
+        - subnet: "fd00:dcdc:1::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-netmaker1"

@@ -22,8 +22,7 @@ services:
       - /var/run/headscale:/var/run/headscale
     # network_mode: bridge
     networks:
-      headscale-net:
-        ipv4_address: 172.20.0.1
+      - headscale-docker-bridge
     ports:
       # - "8090:8090"
       - "127.0.0.1:28015:8080"
@@ -35,26 +34,24 @@ services:
 
   # official repo URL=https://github.com/iFargle/headscale-webui
   headscale_webui:
-    env_file: /media/justsave/docker/env/headscale/headscale-webui.env
+    env_file:
+      - path: ./default-headscale-webui.env
+        required: true # default
+      - path: /media/justsave/docker/env/headscale/headscale-webui.env
+        required: false
     image: ifargle/headscale-webui:latest
     # image: ifargle/headscale-webui:v0.7.0
     container_name: headscale-webui
     user: "1000"
     environment:
-      - "TZ=Asia/Hong_Kong"
-      - "HS_SERVER=http://172.20.0.1:8080"
-      - "DOMAIN_NAME=https:/headscale.example.com:2083" # 端口号可以改，改了后文5050也需要修改
-      - COLOR=blue-gray
-      - SCRIPT_NAME=/admin
-      - LOG_LEVEL=info
+      - "HS_SERVER=http://headscale:8080"
     volumes:
       - /media/justsave/docker/volume/headscale/web-ui:/data:rw
       - /media/justsave/docker/volume/headscale/config:/etc/headscale/:ro
       - /var/run/headscale:/var/run/headscale
     # network_mode: bridge
     networks:
-      headscale-net:
-        ipv4_address: 172.20.0.2
+      - headscale-docker-bridge
     ports:
       - "127.0.0.1:28016:5000"
     restart: unless-stopped
@@ -63,14 +60,16 @@ services:
   # official docs URL=https://tailscale.com/kb/1282/docker
   # 需要进容器里手动 tailscale login --login-server=https://xxx
   tailscale_client:
+    env_file:
+      - path: ./default-tailscale-clinet.env
+        required: true # default
+      - path: /media/justsave/docker/env/tailscale/client.env
+        required: false
     container_name: tailscale-client
     image: tailscale/tailscale:latest
     hostname: tailscale-client
     environment:
-      - "TS_EXTRA_ARGS=--advertise-tags=tag:container --netfilter-mode=off --login-server=https://headscale.example.com:2083"
       - TS_STATE_DIR=/var/lib/tailscale
-      - TS_USERSPACE=false
-      - TS_ACCEPT_DNS=true
     volumes:
       - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale
@@ -87,12 +86,15 @@ services:
     restart: unless-stopped
 
 networks:
-  headscale-net:
+  headscale-docker-bridge:
+    name: "headscale-docker-bridge"
     driver: bridge
     enable_ipv6: true
     ipam:
       config:
-        - subnet: "172.20.0.0/24"
-          gateway: "172.20.0.254"
-          ip_range: "172.20.0.0/25"
-        - subnet: "fd7a:115c:a1e0:ffff::/64"
+        - subnet: "172.20.3.0/24"
+          gateway: "172.20.3.1"
+          ip_range: "172.20.3.0/24"
+        - subnet: "fd00:dcdc:3::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-headscale0"
