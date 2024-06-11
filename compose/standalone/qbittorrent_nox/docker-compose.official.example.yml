@@ -41,12 +41,10 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # 数据持久化
-      - /media/justsave/docker/volume/qbittorrent_nox/config:/config
+      - /media/justsave/docker/volume/qbittorrent_nox/official/config:/config
       - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
       - /media/justsave/BT:/media/justsave/BT
       - /media/justsave/PT:/media/justsave/PT
-      # 挂载 WebUI
-      - /media/justsave/wwwroot/vuetorrent:/media/justsave/wwwroot/vuetorrent:ro
     network_mode: host
     # restart: always
     # restart: "no"
