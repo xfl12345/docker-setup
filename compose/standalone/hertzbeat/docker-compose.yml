@@ -13,6 +13,7 @@ services:
     volumes:
       - /media/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data
       - /media/justsave/docker/volume/hertzbeat/logs:/opt/hertzbeat/logs
+      - /media/justsave/docker/volume/hertzbeat/ext-lib:/opt/hertzbeat/ext-lib
       - /media/justsave/docker/volume/hertzbeat/config/application.yml:/opt/hertzbeat/config/application.yml
       - /media/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
     network_mode: bridge
