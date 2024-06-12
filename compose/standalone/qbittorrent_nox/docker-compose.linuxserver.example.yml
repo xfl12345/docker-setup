@@ -27,6 +27,7 @@ services:
       # 数据持久化
       - /media/justsave/docker/volume/qbittorrent_nox:/media/justsave/docker/volume/qbittorrent_nox
       - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
+      - /media/justsave/docker/volume/qbittorrent_nox/official/config/.cache:/config/.cache
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/BT_backup:/config/qBittorrent/BT_backup
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/GeoDB:/config/qBittorrent/GeoDB
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
