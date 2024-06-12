@@ -35,13 +35,13 @@ services:
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/rss:/config/qBittorrent/rss
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/articles:/config/qBittorrent/rss/articles
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db:/config/qBittorrent/torrents.db
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db-shm:/config/qBittorrent/torrents.db-shm
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db-wal:/config/qBittorrent/torrents.db-wal
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/categories.json:/config/qBittorrent/categories.json
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/qBittorrent.conf:/config/qBittorrent/qBittorrent.conf
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/qBittorrent-data.conf:/config/qBittorrent/qBittorrent-data.conf
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/watched_folders.json:/config/qBittorrent/watched_folders.json
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db:/config/qBittorrent/torrents.db
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db-shm:/config/qBittorrent/torrents.db-shm
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db-wal:/config/qBittorrent/torrents.db-wal
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/categories.json:/config/qBittorrent/categories.json
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/qBittorrent.conf:/config/qBittorrent/qBittorrent.conf
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/qBittorrent-data.conf:/config/qBittorrent/qBittorrent-data.conf
+      # - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/watched_folders.json:/config/qBittorrent/watched_folders.json
       - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
       - /media/justsave/BT:/media/justsave/BT
       - /media/justsave/PT:/media/justsave/PT
