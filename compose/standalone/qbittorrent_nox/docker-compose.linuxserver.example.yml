@@ -29,7 +29,7 @@ services:
       - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/BT_backup:/config/qBittorrent/BT_backup
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/GeoDB:/config/qBittorrent/GeoDB
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/logs:/config/qBittorrent/logs
+      - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/config/rss:/config/qBittorrent/rss
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/articles:/config/qBittorrent/rss/articles
       - /media/justsave/docker/volume/qbittorrent_nox/official/config/qBittorrent/data/torrents.db:/config/qBittorrent/torrents.db
