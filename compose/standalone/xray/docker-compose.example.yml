@@ -4,6 +4,9 @@
 # official docs URL=https://xtls.github.io/
 services:
   xray:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: xray
     image: teddysun/xray:1.8.13
     pull_policy: always
@@ -13,9 +16,6 @@ services:
       - /media/justsave/docker/volume/xray/config.json:/etc/xray/config.json:ro
       - /media/justsave/docker/volume/xray:/var/log/xray:rw
       - /media/justsave/docker/volume/xray:/usr/share/xray:ro
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
     network_mode: host
     cap_add:
       - ALL

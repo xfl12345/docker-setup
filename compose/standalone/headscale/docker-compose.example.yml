@@ -20,6 +20,9 @@ services:
       - /media/justsave/docker/volume/headscale/data:/var/lib/headscale
       - /media/justsave/docker/volume/headscale/config:/etc/headscale
       - /var/run/headscale:/var/run/headscale
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     # network_mode: bridge
     networks:
       - headscale-docker-bridge
@@ -35,6 +38,8 @@ services:
   # official repo URL=https://github.com/iFargle/headscale-webui
   headscale_webui:
     env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
       - path: ./default-headscale-webui.env
         required: true # default
       - path: /media/justsave/docker/env/headscale/headscale-webui.env
@@ -75,6 +80,9 @@ services:
       - /var/run/tailscale:/var/run/tailscale
       - /dev/net/tun:/dev/net/tun
       - /lib/modules:/lib/modules:ro
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     cap_add:
       - net_admin
       - sys_module

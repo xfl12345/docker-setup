@@ -4,12 +4,14 @@
 # official docs URL=https://hertzbeat.apache.org/docs/start/docker-deploy/
 services:
   hertzbeat:
-    env_file: /media/justsave/docker/env/hertzbeat/docker.env
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/hertzbeat/docker.env
+        required: false
     container_name: hertzbeat
     image: apache/hertzbeat
     pull_policy: always
-    environment:
-      - "TZ=Asia/Hong_Kong"
     volumes:
       - /media/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data
       - /media/justsave/docker/volume/hertzbeat/logs:/opt/hertzbeat/logs

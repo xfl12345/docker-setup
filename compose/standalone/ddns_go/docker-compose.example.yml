@@ -3,14 +3,14 @@
 # official repo URL=https://github.com/jeessy2/ddns-go
 services:
   ddns_go:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: ddns-go
     image: jeessy/ddns-go:v6.6.1
     pull_policy: always
     volumes:
       - /media/justsave/docker/volume/ddns_go:/root:rw
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
     network_mode: host
     command: -l 127.0.0.1:9876 -f 10
     restart: always

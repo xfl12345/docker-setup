@@ -4,6 +4,8 @@
 services:
   qbittorrent_nox:
     env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
       - path: ./default.env
         required: true # default
       - path: /media/justsave/docker/env/qbittorrent_nox/docker.env

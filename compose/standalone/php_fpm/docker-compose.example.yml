@@ -10,8 +10,6 @@ services:
     build:
       context: ./
       dockerfile: php-fpm.Dockerfile
-    network_mode: host
-    restart: always
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
@@ -41,4 +39,5 @@ services:
       - /var/run/mysqld:/var/run/mysqld
       # override the php-fpm default configuration
       - /media/justsave/docker/volume/php_fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
-
+    network_mode: host
+    restart: always

@@ -4,6 +4,8 @@
 services:
   ttyd:
     env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
       - path: ./default.env
         required: true # default
       - path: /media/justsave/docker/env/ttyd/docker.env
@@ -24,9 +26,6 @@ services:
       - /media/justsave/docker/volume/ttyd/home:/home/ttyd
       # socket 通信
       - /var/run/ttyd:/var/run/ttyd
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
     network_mode: bridge
     # ports:
     #   - 28041:28041

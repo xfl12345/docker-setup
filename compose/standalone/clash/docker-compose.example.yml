@@ -3,6 +3,9 @@ services:
   # official repo URL=https://github.com/MetaCubeX/mihomo
   # official docs URL=https://wiki.metacubex.one/
   clash:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: clash-meta
     image: metacubex/mihomo:v1.18.5    # 最新版用 metacubex/mihomo:Alpha
     pull_policy: always
@@ -18,9 +21,6 @@ services:
     volumes:
       - /media/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
       - /dev/net/tun:/dev/net/tun
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
 
   # official repo URL=https://github.com/MetaCubeX/metacubexd
   metacubexd:

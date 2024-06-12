@@ -1,6 +1,8 @@
 FROM tsl0922/ttyd:alpine
 RUN apk update
 RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop
+RUN apk add tzdata
+ENV TZ=Asia/Hong_Kong
 RUN apk add doas && echo "permit nopass :root" >> "/etc/doas.d/doas.conf"
 RUN chmod 755 /usr/bin/ttyd
 RUN mkdir -p /var/run/ttyd

@@ -6,8 +6,6 @@ services:
     container_name: nginx
     image: nginx:latest
     pull_policy: always
-    network_mode: host
-    restart: always
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
@@ -27,17 +25,16 @@ services:
       # nginx web root
       - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
       # - /media/justsave/wwwroot/default:/var/www/html:ro
-      - /media/justsave/BT:/media/justsave/BT:ro
-      - /media/justsave/PT:/media/justsave/PT:ro
-      - /etc/apt:/etc/apt:ro
-      - /usr/share/keyrings:/usr/share/keyrings:ro
-      - /media:/media:ro
       # nginx log
       - /media/justsave/wwwlogs:/media/justsave/wwwlogs
       # php-fpm unix socket
       - /var/run/php:/var/run/php
+      # # phpMyAdmin php-fpm unix socket
+      # - /var/run/phpmyadmin:/var/run/phpmyadmin
       # mysql unix socket
       - /var/run/mysqld:/var/run/mysqld
       # ttyd unix socket
       - /var/run/ttyd:/var/run/ttyd
+    network_mode: host
+    restart: always
 

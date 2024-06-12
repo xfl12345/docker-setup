@@ -4,6 +4,9 @@
 # official docs URL=https://wiki.acme.sh/
 services:
   acme_sh:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: acme.sh
     image: acme-sh-xfl
     pull_policy: build
@@ -14,9 +17,6 @@ services:
     restart: always
     command: daemon
     volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
       # acme.sh
       - /media/justsave/docker/volume/acme_sh/app:/acme.sh
       # nginx ssl cert

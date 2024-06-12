@@ -1,6 +1,9 @@
 # version: "3"
 services:
   xfl_cv_javaweb:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: xfl-cv-javaweb
     image: curriculum-vitae-web-server:1.0-SNAPSHOT
     pull_policy: never
@@ -11,9 +14,9 @@ services:
       options:
         max-size: "10m"
     volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      # # 共享host的时间环境
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
       # 持久化
       - /media/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
       - /media/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs

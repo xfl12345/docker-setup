@@ -10,6 +10,13 @@
 # official repo URL=https://github.com/qbittorrent/docker-qbittorrent-nox
 services:
   qbittorrent_nox:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/qbittorrent_nox/docker.env
+        required: false
     container_name: qbittorrent-nox
     # image: qbittorrentofficial/qbittorrent-nox:4.6.5-1
     image: qbittorrent-nox-xfl:4.6.4
@@ -37,9 +44,6 @@ services:
       - /tmp
     tty: true
     volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
       # 数据持久化
       - /media/justsave/docker/volume/qbittorrent_nox/official/config:/config
       - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads

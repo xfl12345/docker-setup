@@ -5,7 +5,7 @@ name: netmaker_cn
 services:
   netclient_cn:
     extends:
-      file: ../docker-compose.common.yml
+      file: ./docker-compose.common.yml
       service: netclient
     container_name: netclient-cn
     env_file: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
@@ -14,7 +14,7 @@ services:
 
   netmaker_cn:
     extends:
-      file: ../docker-compose.common.yml
+      file: ./docker-compose.common.yml
       service: netmaker
     container_name: netmaker-cn
     env_file:
@@ -28,14 +28,14 @@ services:
 
   netmaker_ui_cn:
     extends:
-      file: ../docker-compose.common.yml
+      file: ./docker-compose.common.yml
       service: netmaker_ui
     container_name: netmaker-ui-cn
     env_file: /media/justsave/docker/env/netmaker/cn/netmaker-ui.env
 
   coredns_cn:
     extends:
-      file: ../docker-compose.common.yml
+      file: ./docker-compose.common.yml
       service: coredns
     container_name: coredns-cn
     env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
@@ -45,7 +45,7 @@ services:
 
   mq_cn:
     extends:
-      file: ../docker-compose.common.yml
+      file: ./docker-compose.common.yml
       service: mq
     container_name: mq-cn
     env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env

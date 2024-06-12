@@ -25,4 +25,7 @@ services:
     volumes:
       - /lib/modules:/lib/modules:ro
       - /media/justsave/docker/volume/wgcf:/wgcf
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     network_mode: bridge
