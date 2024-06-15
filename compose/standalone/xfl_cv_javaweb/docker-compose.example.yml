@@ -5,7 +5,7 @@ services:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
     container_name: xfl-cv-javaweb
-    image: curriculum-vitae-web-server:1.0-SNAPSHOT
+    image: curriculum-vitae-web-server
     pull_policy: never
     user: "1000"
     environment:
