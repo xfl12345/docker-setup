@@ -6,7 +6,7 @@ services:
 
   netclient:
     container_name: netclient
-    image: gravitl/netclient:v0.24.1
+    image: gravitl/netclient:v0.24.2
     # privileged: true
     pid: host
     ipc: host
@@ -19,7 +19,7 @@ services:
 
   netmaker:
     container_name: netmaker
-    image: gravitl/netmaker:v0.24.1
+    image: gravitl/netmaker:v0.24.2
     env_file:
       - path: ./default-netmaker.env
         required: true # default
@@ -46,7 +46,7 @@ services:
 
   netmaker_ui:
     container_name: netmaker-ui
-    image: gravitl/netmaker-ui:v0.24.1
+    image: gravitl/netmaker-ui:v0.24.2
     # environment:
     #   # config-dependant vars
     #   # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
