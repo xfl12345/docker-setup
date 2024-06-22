@@ -4,22 +4,36 @@
 # official docs URL=https://www.jenkins.io/doc/book/installing/docker/
 services:
   jenkins:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: jenkins
-    image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
-    pull_policy: always
-    user: "2004"   # id -u jenkins 重装系统后需要自己创建一个 jenkins 用户
-    # 这里不能直接使用"jenkins"作为用户名，因为 docker 镜像内部有独立的 /etc/passwd 会重名。而 uid 不对，将导致无读写权限
-    # docker镜像内部参考 →   jenkins:x:1000:1000::/var/jenkins_home:/bin/bash
+    # image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
+    image: jenkins/jenkins:lts-jdk17-xfl
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /media/justsave/docker/compose/build_resource
+      dockerfile: jenkins-xfl.Dockerfile
+    security_opt:
+      - apparmor=unconfined
     hostname: jenkins
+    environment:
+      - MY_DOCKER_APP_USER_NAME=jenkins
+      - MY_DOCKER_APP_USER_HOME=/var/jenkins_home
+      - MY_DOCKER_APP_USER_ADD_GROUP=2000
+      - PUID=2004
+      # - PGID=2004
     volumes:
       # 持久化
       - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
-      # 挂载 docker socket ，直通宿主机
-      - /usr/bin/docker:/usr/bin/docker:ro
-      - /var/run/docker.sock:/var/run/docker.sock:rw
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      # # 挂载 docker socket ，直通宿主机
+      # - /usr/bin/docker:/usr/bin/docker:ro
+      # - /var/run/docker.sock:/var/run/docker.sock:rw
+      # # 共享host的时间环境
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
       # 共享host的GNU库
       # - /usr/lib/aarch64-linux-gnu:/usr/lib/aarch64-linux-gnu:ro
       # - /usr/lib/arm-linux-gnu:/usr/lib/arm-linux-gnu:ro
