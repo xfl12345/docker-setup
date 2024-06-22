@@ -93,4 +93,4 @@
 |`ghcr.io/wg-easy/wg-easy`|NULL|
 |`neilpang/wgcf-docker`|NULL|
 |`curriculum-vitae-web-server`|NULL|
-|`teddysun/xray`|`1.8.13`|
+|`teddysun/xray`|`1.8.16`|
