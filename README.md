@@ -51,3 +51,46 @@
 |28040|glances Web UI|
 |28041|netdata Web UI|
 |28042~28049|`reserved`|
+
+## Docker Tag 指定情况 （不含强依赖镜像）  
+
+- 所谓“强依赖”，指的是官方文档指定的版本号，但不是全局版本唯一的镜像。  
+
+| 镜像名 | tag |
+|-:|:-|
+|`neilpang/acme.sh`|`latest`|
+|`busybox`|`NULL`|
+|`metacubex/mihomo`|`v1.18.5`|
+|`ghcr.io/metacubex/metacubexd`|`NULL`|
+|`ghcr.io/curl/curl-container/curl`|`master`|
+|`jeessy/ddns-go`|`6.6.1`|
+|`debian`|`bookworm`|
+|`gitea/gitea`|`1.22`|
+|`yrzr/gitlab-ce-arm64v8`|`16.10.1-ce.0`|
+|`nicolargo/glances`|`latest-full`|
+|`headscale/headscale`|`0.22.3`|
+|`ifargle/headscale-webui`|`latest`|
+|`tailscale/tailscale`|`latest`|
+|`apache/hertzbeat`|`NULL`|
+|`jenkins/jenkins`|`lts-jdk17`|
+|`mariadb`|`11`|
+|`irinesistiana/mosdns`|`v5.3.1`|
+|`netdata/netdata`|`NULL`|
+|`gravitl/netclient`|`v0.24.2`|
+|`gravitl/netmaker`|`v0.24.2`|
+|`gravitl/netmaker-ui`|`v0.24.2`|
+|`eclipse-mosquitto`|`2.0.15-openssl`|
+|`nginx`|`latest`|
+|`php`|`7.4-fpm-bullseye`|
+|`phpmyadmin`|`NULL`|
+|`portainer/portainer-ce`|`latest`|
+|`ghcr.io/heyputer/puter`|`sha-ec31007`|
+|`linuxserver/qbittorrent`|`latest`|
+|`redroid/redroid`|`13.0.0-latest`|
+|`linuxserver/transmission`|`latest`|
+|`tsl0922/ttyd`|`alpine`|
+|`ubuntu`|`24.04`|
+|`ghcr.io/wg-easy/wg-easy`|`NULL`|
+|`neilpang/wgcf-docker`|`NULL`|
+|`curriculum-vitae-web-server`|`NULL`|
+|`teddysun/xray`|`1.8.13`|
