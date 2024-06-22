@@ -49,4 +49,5 @@
 |28032|Netmaker broker|
 |28033~28039|`reserved`|
 |28040|glances Web UI|
-|28041~28049|`reserved`|
+|28041|netdata Web UI|
+|28042~28049|`reserved`|
