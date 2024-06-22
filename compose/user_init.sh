@@ -97,18 +97,3 @@ done
 mkdir -p /var/run/tailscale/
 ln -s /var/run/headscale/headscale.sock /var/run/tailscale/tailscale.sock
 
-ln -s $my_docker_volume_dir/qbittorrent_nox/official/config/qBittorrent/data/torrents.d* $my_docker_volume_dir/qbittorrent_nox/linuxserver/config/qBittorrent/
-ln -s $my_docker_volume_dir/qbittorrent_nox/official/config/qBittorrent/config/*.json $my_docker_volume_dir/qbittorrent_nox/linuxserver/config/qBittorrent/
-ln -s $my_docker_volume_dir/qbittorrent_nox/official/config/qBittorrent/config/*.conf $my_docker_volume_dir/qbittorrent_nox/linuxserver/config/qBittorrent/
-
-# for the_user_name in "${!my_app_user_dir_map[@]}"; do
-#     the_relative_dir=${my_app_user_dir_map[$the_user_name]}
-#     the_dir=$(realpath -P "$my_docker_volume_dir/$the_relative_dir")
-#     echo "$the_user_name <---> $the_dir"
-#     if [ -e $the_dir ]; then
-#         # echo "chown $the_user_name:$the_user_name -Rh $the_dir"
-#         chown $the_user_name:$the_user_name -Rh $the_dir
-#     else
-#         echo "Error: Docker volume dir[$the_dir] not found!!! Please create it first!!!"
-#     fi
-# done

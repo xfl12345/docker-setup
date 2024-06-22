@@ -45,8 +45,14 @@ services:
     tty: true
     volumes:
       # 数据持久化
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config:/config
       - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /media/justsave/docker/volume/qbittorrent_nox/official/config:/config
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/.cache:/config/.cache
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/BT_backup:/config/qBittorrent/data/BT_backup
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/GeoDB:/config/qBittorrent/data/GeoDB
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss:/config/qBittorrent/config/rss
+      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss/articles:/config/qBittorrent/data/rss/articles
       - /media/justsave/BT:/media/justsave/BT
       - /media/justsave/PT:/media/justsave/PT
     network_mode: host
