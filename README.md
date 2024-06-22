@@ -63,7 +63,7 @@
 |`metacubex/mihomo`|`v1.18.5`|
 |`ghcr.io/metacubex/metacubexd`|NULL|
 |`ghcr.io/curl/curl-container/curl`|`master`|
-|`jeessy/ddns-go`|`6.6.1`|
+|`jeessy/ddns-go`|`6.6.3`|
 |`debian`|`bookworm`|
 |`gitea/gitea`|`1.22`|
 |`yrzr/gitlab-ce-arm64v8`|`16.10.1-ce.0`|
