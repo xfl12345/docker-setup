@@ -50,7 +50,8 @@
 |28033~28039|`reserved`|
 |28040|glances Web UI|
 |28041|netdata Web UI|
-|28042~28049|`reserved`|
+|28042|code-server|
+|28043~28049|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）  
 
@@ -62,6 +63,7 @@
 |`busybox`|NULL|
 |`metacubex/mihomo`|`v1.18.5`|
 |`ghcr.io/metacubex/metacubexd`|NULL|
+|`codercom/code-server`|`latest`|
 |`ghcr.io/curl/curl-container/curl`|`master`|
 |`jeessy/ddns-go`|`6.6.3`|
 |`debian`|`bookworm`|
