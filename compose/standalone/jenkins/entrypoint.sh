@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 . /entrypoint_common_environment_setup.sh
 export HOME=$MY_DOCKER_APP_USER_HOME
 cd $HOME

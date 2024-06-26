@@ -28,6 +28,8 @@ services:
     volumes:
       # 持久化
       - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
+      # 带环境进入容器 bash 的小工具
+      - ./just_bash.sh:/usr/local/bin/just_bash.sh
       # # 挂载 docker socket ，直通宿主机
       # - /usr/bin/docker:/usr/bin/docker:ro
       # - /var/run/docker.sock:/var/run/docker.sock:rw
