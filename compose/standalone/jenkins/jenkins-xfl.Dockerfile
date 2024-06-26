@@ -1,6 +1,6 @@
 FROM jenkins/jenkins:lts-jdk17
 USER root
-# COPY docker.sources /etc/apt/sources.list.d/docker.sources
+# COPY --chmod=764 --from=resources docker.sources /etc/apt/sources.list.d/docker.sources
 RUN apt update
 RUN apt install -y busybox
 # RUN apt install -y tini doas
