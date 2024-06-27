@@ -122,3 +122,17 @@ services:
   #   extends:
   #     file: ../standalone/glances/docker-compose.yml
   #     service: glances
+
+networks:
+  netmaker-docker-bridge:
+    name: "docker-bridge-for-stack-all-in-one"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.18.0.0/16"
+          gateway: "172.18.0.1"
+          ip_range: "172.18.0.0/16"
+        - subnet: "fd00:dcdc::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-docker-all-in-one"
