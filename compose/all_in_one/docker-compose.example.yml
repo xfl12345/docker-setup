@@ -76,18 +76,18 @@ services:
   #     mosdns:
   #       condition: service_healthy
 
-  # # jenkins:
-  # #   extends:
-  # #     file: ../standalone/jenkins/docker-compose.yml
-  # #     service: jenkins
-  # #   depends_on:
-  # #     - mosdns
-  # #     - clash
+  # jenkins:
+  #   extends:
+  #     file: ../standalone/jenkins/docker-compose.yml
+  #     service: jenkins
+  #   depends_on:
+  #     # - mosdns
+  #     - clash
 
-  # # gitlab:
-  # #   extends:
-  # #     file: ../standalone/gitlab/docker-compose.yml
-  # #     service: gitlab
+  # gitlab:
+  #   extends:
+  #     file: ../standalone/gitlab/docker-compose.yml
+  #     service: gitlab
 
   # gitea:
   #   extends:
@@ -96,6 +96,15 @@ services:
   #   depends_on:
   #     mariadb:
   #       condition: service_healthy
+  #     clash:
+  #       condition: service_started
+
+  # gitea_runner:
+  #   extends:
+  #     file: ../standalone/gitea/docker-compose.yml
+  #     service: gitea_runner
+  #   depends_on:
+  #     - gitea
 
   # xfl_cv_javaweb:
   #   extends:
@@ -113,18 +122,23 @@ services:
   #     mariadb:
   #       condition: service_healthy
 
-  # portainer:
-  #   extends:
-  #     file: ../standalone/portainer/docker-compose.yml
-  #     service: portainer
-
   # glances:
   #   extends:
   #     file: ../standalone/glances/docker-compose.yml
   #     service: glances
 
+  # ttyd:
+  #   extends:
+  #     file: ../standalone/ttyd/docker-compose.yml
+  #     service: ttyd
+
+  # netdata:
+  #   extends:
+  #     file: ../standalone/netdata/docker-compose.yml
+  #     service: netdata
+
 networks:
-  netmaker-docker-bridge:
+  docker-bridge-for-stack-all-in-one:
     name: "docker-bridge-for-stack-all-in-one"
     driver: bridge
     enable_ipv6: true
