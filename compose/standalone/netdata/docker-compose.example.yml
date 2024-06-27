@@ -12,6 +12,8 @@ services:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
+    environment:
+      - NETDATA_LISTENER_PORT=28041
     volumes:
       - /media/justsave/docker/volume/netdata/config:/etc/netdata
       - /media/justsave/docker/volume/netdata/lib:/var/lib/netdata
