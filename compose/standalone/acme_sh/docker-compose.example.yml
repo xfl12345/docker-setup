@@ -1,27 +1,6 @@
-# version: "3"
-
-# official repo URL=https://github.com/acmesh-official/acme.sh
-# official docs URL=https://wiki.acme.sh/
 services:
   acme_sh:
-    env_file:
-      - path: /media/justsave/docker/compose/global_default.env
-        required: true
-    container_name: acme.sh
-    image: acme-sh-xfl
-    pull_policy: build
-    build:
-      context: ./
-      dockerfile: acme-sh-bundle-with-docker.Dockerfile
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: acme_sh
     network_mode: host
-    restart: always
-    command: daemon
-    volumes:
-      # acme.sh
-      - /media/justsave/docker/volume/acme_sh/app:/acme.sh
-      # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
-      # docker socket
-      - /var/run/docker.sock:/var/run/docker.sock 
-      # 自己写的工具脚本
-      - ./xfl_acme_util.sh:/xfl_acme_util.sh:ro

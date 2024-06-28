@@ -1,0 +1,29 @@
+# version: '3.1'
+
+# official repo URL=https://github.com/phpmyadmin/docker
+# official docs URL=https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
+services:
+  phpmyadmin:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/phpmyadmin/docker.env
+        required: false
+    container_name: phpmyadmin
+    image: phpmyadmin
+    pull_policy: always
+    environment:
+      # - PMA_ARBITRARY=0
+      - PMA_SOCKET=/var/run/mysqld/mysqld.sock
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
+      # mysql unix socket
+      - /var/run/mysqld:/var/run/mysqld
+      # # 开启 socket 监听
+      # - ./just_listen_on_sock.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+      # # php-fpm unix socket
+      # - /var/run/phpmyadmin:/var/run/php
+    ports:
+      - 28009:80
+    restart: unless-stopped

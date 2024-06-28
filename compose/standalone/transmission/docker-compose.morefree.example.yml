@@ -1,0 +1,26 @@
+# version: "3"
+
+# official repo URL=https://github.com/linuxserver/docker-transmission
+# official docs URL=https://docs.linuxserver.io/images/docker-transmission/
+services:
+  transmission:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/transmission/docker.env
+        required: false
+    container_name: transmission
+    image: linuxserver/transmission:latest
+    pull_policy: always
+    environment:
+      - PUID=2008
+      - PGID=1999
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/transmission/data:/config
+      - /media/justsave/docker/volume/transmission/downloads:/downloads
+      - /media/justsave/docker/volume/transmission/folder:/watch
+      # BT客户端专享目录
+      - /media/justsave/BT:/media/justsave/BT
+      - /media/justsave/PT:/media/justsave/PT
+    restart: unless-stopped

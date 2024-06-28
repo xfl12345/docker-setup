@@ -55,7 +55,6 @@ services:
       # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss/articles:/config/qBittorrent/data/rss/articles
       - /media/justsave/BT:/media/justsave/BT
       - /media/justsave/PT:/media/justsave/PT
-    network_mode: host
     # restart: always
     # restart: "no"
     restart: unless-stopped

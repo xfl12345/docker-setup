@@ -32,7 +32,6 @@ services:
       - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
       - /media/justsave/BT:/media/justsave/BT
       - /media/justsave/PT:/media/justsave/PT
-    network_mode: host
     # restart: always
     # restart: "no"
     restart: unless-stopped

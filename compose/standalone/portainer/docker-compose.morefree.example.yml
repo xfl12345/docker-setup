@@ -1,0 +1,31 @@
+# version: "3"
+
+# official repo URL=https://github.com/portainer/portainer
+# official docs URL=https://docs.portainer.io/start/install-ce/server/docker/linux
+services:
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    pull_policy: always
+    pid: host
+    ipc: host
+    cap_add:
+      - ALL
+    privileged: true
+    volumes:
+      # 持久化
+      - /media/justsave/docker/volume/portainer/data:/data
+      # 挂载 docker socket ，直通宿主机
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      # - 9443:9443
+      - 127.0.0.1:28019:9000
+      # - 8000:8000
+    restart: always
+
+# docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest

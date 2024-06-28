@@ -1,38 +1,11 @@
-# version: "3"
 services:
-  # official repo URL=https://github.com/MetaCubeX/mihomo
-  # official docs URL=https://wiki.metacubex.one/
   clash:
-    env_file:
-      - path: /media/justsave/docker/compose/global_default.env
-        required: true
-    container_name: clash-meta
-    image: metacubex/mihomo:v1.18.5    # 最新版用 metacubex/mihomo:Alpha
-    pull_policy: always
-    restart: always
-    # user: "2002"
-    pid: host
-    ipc: host
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: clash
     network_mode: host
-    cap_add:
-      - ALL
-    security_opt:
-      - apparmor=unconfined
-    volumes:
-      - /media/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
-      - /dev/net/tun:/dev/net/tun
-
-  # official repo URL=https://github.com/MetaCubeX/metacubexd
   metacubexd:
-    container_name: metacubexd
-    image: ghcr.io/metacubex/metacubexd
-    restart: always
-    user: "2002"
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: metacubexd
     network_mode: bridge
-    ports:
-      - 127.0.0.1:28002:80
-    volumes:
-      - /media/justsave/docker/volume/clash_meta/caddy:/config/caddy
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro

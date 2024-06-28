@@ -1,32 +1,6 @@
-# version: "3.8"
-
-# official repo URL=https://github.com/HeyPuter/puter
 services:
   puter:
-    env_file:
-      - path: /media/justsave/docker/compose/global_default.env
-        required: true
-    container_name: puter
-    # image: ghcr.io/heyputer/puter:latest
-    image: ghcr.io/heyputer/puter:sha-ec31007
-    pull_policy: always
-    # build: ./
-    healthcheck:
-      test: wget --no-verbose --tries=1 --spider http://puter.local:4100/test || exit 1
-      interval: 30s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-    environment:
-      # TZ: Europe/Paris
-      # TZ: Asia/Hong_Kong
-      CONFIG_PATH: /etc/puter
-      PUID: 1000
-      PGID: 1000
-    volumes:
-      - /media/justsave/docker/volume/puter/config:/etc/puter
-      - /media/justsave/docker/volume/puter/data:/var/puter
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: puter
     network_mode: bridge
-    ports:
-      - '4100:4100'
-    restart: unless-stopped

@@ -1,43 +1,6 @@
-# version: "3"
-
-# official docs URL=https://github.com/docker-library/docs/blob/master/php/README.md
 services:
   php_fpm:
-    container_name: php-fpm
-    # image: php:8.3.3-fpm-bookworm
-    image: php-fpm-bookworm-xfl:7.4
-    pull_policy: build
-    build:
-      context: ./
-      dockerfile: php-fpm.Dockerfile
-    volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-      # nginx conf file
-      - /media/justsave/docker/volume/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      # nginx vhost
-      - /media/justsave/docker/volume/nginx/conf.d:/etc/nginx/conf.d:ro
-      # nginx snippets
-      - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets:ro
-      # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
-      # nginx web root
-      - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
-      - /media/justsave/wwwroot/phpmyadmin:/media/justsave/wwwroot/phpmyadmin:rw
-      # - /media/justsave/wwwroot/default:/var/www/html:ro
-      - /media/justsave/BT:/media/justsave/BT:ro
-      - /media/justsave/PT:/media/justsave/PT:ro
-      - /etc/apt:/etc/apt:ro
-      - /usr/share/keyrings:/usr/share/keyrings:ro
-      - /media:/media:ro
-      # nginx log
-      - /media/justsave/wwwlogs:/media/justsave/wwwlogs
-      # php-fpm unix socket
-      - /var/run/php:/var/run/php
-      # mysql unix socket
-      - /var/run/mysqld:/var/run/mysqld
-      # override the php-fpm default configuration
-      - /media/justsave/docker/volume/php_fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: php_fpm
     network_mode: host
-    restart: always

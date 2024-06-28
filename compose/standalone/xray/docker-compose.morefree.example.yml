@@ -1,0 +1,37 @@
+# version: "3"
+
+# official repo URL=https://github.com/XTLS/Xray-core
+# official docs URL=https://xtls.github.io/
+services:
+  xray:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+    container_name: xray
+    image: teddysun/xray:1.8.16
+    pull_policy: always
+    hostname: xray
+    user: "2001" # id -u xray 重装系统后需要自己创建一个 xray 用户
+    volumes:
+      - /media/justsave/docker/volume/xray/config.json:/etc/xray/config.json:ro
+      - /media/justsave/docker/volume/xray:/var/log/xray:rw
+      - /media/justsave/docker/volume/xray:/usr/share/xray:ro
+    cap_add:
+      - ALL
+    restart: always
+
+    # 为兼容 clash 按进程名匹配，下面这些不能再用了。 xray 服务不能躲在 NAT 后面，否则无法被探测到
+    # ports:
+    #   # inbound socks5
+    #   - 127.0.0.1:1088:1088
+    #   - 127.0.0.1:1088:1088/udp
+    #   - 192.168.8.111:1088:1088
+    #   - 192.168.8.111:1088:1088/udp
+    #   # inbound http
+    #   - 127.0.0.1:1090:1090
+    #   # inbound dokodemo door
+    #   - 0.0.0.0:1099:1099
+    #   # inbound vmess
+    #   - 20000:20000
+    #   # inbound shadowsocks
+    #   - 30001:30001

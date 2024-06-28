@@ -1,40 +1,6 @@
-# version: "3"
-
-# official docs URL=https://github.com/docker-library/docs/blob/master/nginx/README.md
 services:
   nginx:
-    container_name: nginx
-    image: nginx:latest
-    pull_policy: always
-    volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-      # nginx conf file
-      - /media/justsave/docker/volume/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      # nginx vhost
-      - /media/justsave/docker/volume/nginx/conf.d:/etc/nginx/conf.d:ro
-      # nginx snippets
-      - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets:ro
-      # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
-      # openssl dhparam
-      - /media/justsave/docker/volume/nginx/dhparam:/etc/ssl/dhparam:ro
-      # apache htpasswd file
-      - /media/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
-      # nginx web root
-      - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
-      # - /media/justsave/wwwroot/default:/var/www/html:ro
-      # nginx log
-      - /media/justsave/wwwlogs:/media/justsave/wwwlogs
-      # php-fpm unix socket
-      - /var/run/php:/var/run/php
-      # # phpMyAdmin php-fpm unix socket
-      # - /var/run/phpmyadmin:/var/run/phpmyadmin
-      # mysql unix socket
-      - /var/run/mysqld:/var/run/mysqld
-      # ttyd unix socket
-      - /var/run/ttyd:/var/run/ttyd
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: nginx
     network_mode: host
-    restart: always
-

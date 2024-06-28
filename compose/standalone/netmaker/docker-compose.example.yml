@@ -1,31 +1,29 @@
-# version: "3.4"
+services:
+  netclient:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: netclient
+    network_mode: host
+
+  netmaker:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: netmaker
+
+  netmaker_ui:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: netmaker_ui
+
+  coredns:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: coredns
+
+  mq:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: mq
 
 include:
-  - ./docker-compose.cloudflare.examlpe.yml
-
-# source code URL=https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml
-# services:
-#   netclient:
-#     extends:
-#       file: ./docker-compose.example.yml
-#       service: netclient
-
-#   netmaker:
-#     extends:
-#       file: ./docker-compose.example.yml
-#       service: netmaker
-
-#   netmaker_ui:
-#     extends:
-#       file: ./docker-compose.example.yml
-#       service: netmaker_ui
-
-#   coredns:
-#     extends:
-#       file: ./docker-compose.example.yml
-#       service: coredns
-
-#   mq:
-#     extends:
-#       file: ./docker-compose.example.yml
-#       service: mq
+  - ./docker-compose.cloudflare.network.yml

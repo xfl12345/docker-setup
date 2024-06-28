@@ -1,108 +1,27 @@
-# version: "3"
-services:
-  # official repo URL=https://github.com/juanfont/headscale
-  # official docs URL=https://headscale.net/running-headscale-container/
-  headscale:
-    image: headscale/headscale:0.22.3
-    # image: headscale/headscale:v0.23.0-alpha7
-    container_name: headscale
-    cap_add:
-      - NET_ADMIN
-      - SYS_MODULE
-    sysctls:
-      - net.ipv4.ip_forward=1
-      - net.ipv6.conf.all.disable_ipv6=0
-      - net.ipv6.conf.all.forwarding=1
-      - net.ipv6.conf.all.accept_ra=2
-      - net.ipv6.conf.all.proxy_ndp=1
-      - net.ipv6.conf.all.autoconf=1
-    volumes:
-      - /media/justsave/docker/volume/headscale/data:/var/lib/headscale
-      - /media/justsave/docker/volume/headscale/config:/etc/headscale
-      - /var/run/headscale:/var/run/headscale
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    # network_mode: bridge
-    networks:
-      - headscale-docker-bridge
-    ports:
-      # - "8090:8090"
-      - "127.0.0.1:28015:8080"
-      - "0.0.0.0:9090:9090"
-      - "3478:3478/udp"
-    # command: "serve"
-    command: "headscale serve"
-    restart: unless-stopped
-
-  # official repo URL=https://github.com/iFargle/headscale-webui
-  headscale_webui:
-    env_file:
-      - path: /media/justsave/docker/compose/global_default.env
-        required: true
-      - path: ./default-headscale-webui.env
-        required: true # default
-      - path: /media/justsave/docker/env/headscale/headscale-webui.env
-        required: false
-    image: ifargle/headscale-webui:latest
-    # image: ifargle/headscale-webui:v0.7.0
-    container_name: headscale-webui
-    user: "1000"
-    environment:
-      - "HS_SERVER=http://headscale:8080"
-    volumes:
-      - /media/justsave/docker/volume/headscale/web-ui:/data:rw
-      - /media/justsave/docker/volume/headscale/config:/etc/headscale/:ro
-      - /var/run/headscale:/var/run/headscale
-    # network_mode: bridge
-    networks:
-      - headscale-docker-bridge
-    ports:
-      - "127.0.0.1:28016:5000"
-    restart: unless-stopped
-
-  # official repo URL=https://github.com/tailscale/tailscale
-  # official docs URL=https://tailscale.com/kb/1282/docker
-  # 需要进容器里手动 tailscale login --login-server=https://xxx
-  tailscale_client:
-    env_file:
-      - path: ./default-tailscale-clinet.env
-        required: true # default
-      - path: /media/justsave/docker/env/tailscale/client.env
-        required: false
-    container_name: tailscale-client
-    image: tailscale/tailscale:latest
-    hostname: tailscale-client
-    environment:
-      - TS_STATE_DIR=/var/lib/tailscale
-    volumes:
-      - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
-      - /var/run/tailscale:/var/run/tailscale
-      - /dev/net/tun:/dev/net/tun
-      - /lib/modules:/lib/modules:ro
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-    cap_add:
-      - net_admin
-      - sys_module
-    network_mode: host
-    # command: "tailscaled"
-    depends_on:
-      - headscale
-      - headscale_webui
-    restart: unless-stopped
-
 networks:
   headscale-docker-bridge:
-    name: "headscale-docker-bridge"
     driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-headscale0
     enable_ipv6: true
     ipam:
       config:
-        - subnet: "172.20.3.0/24"
-          gateway: "172.20.3.1"
-          ip_range: "172.20.3.0/24"
-        - subnet: "fd00:dcdc:3::/64"
-    driver_opts:
-      com.docker.network.bridge.name: "br-headscale0"
+      - gateway: 172.20.3.1
+        ip_range: 172.20.3.0/24
+        subnet: 172.20.3.0/24
+      - subnet: fd00:dcdc:3::/64
+    name: headscale-docker-bridge
+services:
+  headscale:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: headscale
+  headscale_webui:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: headscale_webui
+  tailscale_client:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: tailscale_client
+    network_mode: host

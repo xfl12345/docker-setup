@@ -1,0 +1,26 @@
+# version: "3"
+
+# official repo URL=https://github.com/apache/hertzbeat
+# official docs URL=https://hertzbeat.apache.org/docs/start/docker-deploy/
+services:
+  hertzbeat:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/hertzbeat/docker.env
+        required: false
+    container_name: hertzbeat
+    image: apache/hertzbeat
+    pull_policy: always
+    volumes:
+      - /media/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data
+      - /media/justsave/docker/volume/hertzbeat/logs:/opt/hertzbeat/logs
+      - /media/justsave/docker/volume/hertzbeat/ext-lib:/opt/hertzbeat/ext-lib
+      - /media/justsave/docker/volume/hertzbeat/config/application.yml:/opt/hertzbeat/config/application.yml
+      - /media/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
+    ports:
+      - "127.0.0.1:28018:1157"
+      - "127.0.0.1:1158:1158"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always

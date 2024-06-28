@@ -1,0 +1,94 @@
+# version: "3"
+
+# docker image source code repo URL=https://github.com/yrzr/gitlab-ce-arm64v8-docker
+services:
+  gitlab:
+    image: yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
+    container_name: gitlab
+    restart: unless-stopped
+    hostname: "gitlab.example.com"
+    # 记得添加并修改下面的环境变量！！！！！
+    # environment:
+    #   GITLAB_OMNIBUS_CONFIG: |
+    #     manage_accounts['enable'] = true
+
+    #     user['username'] = "gitlab"
+    #     user['group'] = "gitlab"
+    #     consul['username'] = "gitlab-consul"
+    #     consul['group'] = "gitlab-consul"
+    #     mattermost['username'] = "gitlab-mattermost"
+    #     mattermost['group'] = "gitlab-mattermost"
+    #     prometheus['username'] = "gitlab-prometheus"
+    #     prometheus['group'] = "gitlab-prometheus"
+    #     postgresql['username'] = "gitlab-postgresql"
+    #     postgresql['group'] = "gitlab-postgresql"
+    #     redis['username'] = "gitlab-redis"
+    #     redis['group'] = "gitlab-redis"
+    #     registry['username'] = "gitlab-registry"
+    #     registry['group'] = "gitlab-registry"
+    #     web_server['username'] = "gitlab-www"
+    #     web_server['group'] = "gitlab-www"
+
+    #     user['uid']       = 3001
+    #     user['gid']       = 3001
+    #     consul['uid']     = 3002 
+    #     consul['gid']     = 3002 
+    #     mattermost['uid'] = 3003
+    #     mattermost['gid'] = 3003
+    #     prometheus['uid'] = 3004
+    #     prometheus['gid'] = 3004
+    #     postgresql['uid'] = 3005
+    #     postgresql['gid'] = 3005
+    #     redis['uid']      = 3006
+    #     redis['gid']      = 3006
+    #     registry['uid']   = 3007
+    #     registry['gid']   = 3007
+    #     web_server['uid'] = 3008
+    #     web_server['gid'] = 3008
+
+    #     # Add any other gitlab.rb configuration here, each on its own line
+    #     gitlab_rails["gitlab_shell_ssh_port"] = 2424
+    #     external_url "https://gitlab.example.com:2083"
+    #     nginx['listen_port'] = 80
+    #     nginx['listen_https'] = false
+    #     letsencrypt['enable'] = false
+    #     registry_nginx['listen_https'] = false
+    #     # registry_nginx['proxy_set_headers'] = {
+    #     #   "X-Forwarded-Proto" => "https",
+    #     #   "X-Forwarded-Ssl" => "on"
+    #     # }
+    #     puma['worker_processes'] = 0
+    #     sidekiq['max_concurrency'] = 5
+    #     prometheus_monitoring['enable'] = false
+    #     gitaly['configuration'] = {
+    #       concurrency: [
+    #         {
+    #           'rpc' => "/gitaly.SmartHTTPService/PostReceivePack",
+    #           'max_per_repo' => 3,
+    #         }, {
+    #           'rpc' => "/gitaly.SSHService/SSHUploadPack",
+    #           'max_per_repo' => 3,
+    #         }
+    #       ]
+    #     }
+
+    #     gitlab_rails['env'] = {
+    #       'MALLOC_CONF' => 'dirty_decay_ms:1000,muzzy_decay_ms:1000'
+    #     }
+
+    #     gitaly['env'] = {
+    #       'MALLOC_CONF' => 'dirty_decay_ms:1000,muzzy_decay_ms:1000',
+    #       'GITALY_COMMAND_SPAWN_MAX_PARALLEL' => '2'
+    #     }
+    #     gitlab_rails['time_zone'] = 'Asia/Hong_Kong'
+
+    ports:
+      - "127.0.0.1:28013:80"
+      # - "443:443"
+      - "2424:2424"
+    volumes:
+      - "/media/justsave/docker/volume/gitlab/config:/etc/gitlab"
+      - "/media/justsave/docker/volume/gitlab/logs:/var/log/gitlab"
+      - "/media/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
+      - "/media/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
+    shm_size: "256m"

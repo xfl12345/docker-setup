@@ -1,21 +1,6 @@
-# version: "3"
-
-# official repo URL=https://github.com/curl/curl-container
 services:
   curl_test:
-    container_name: curl-test
-    image: ghcr.io/curl/curl-container/curl:master
-    pull_policy: always
-    # extra_hosts:
-    #   - "host.docker.internal:host-gateway"
-    # environment:
-    #   - http_proxy=http://host.docker.internal:7890
-    #   - https_proxy=http://host.docker.internal:7890
-    #   - all_proxy=socks5://host.docker.internal:7890
-    command: "curl --head https://www.google.com/"
-    volumes:
-      # 共享host的时间环境
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: curl_test
     network_mode: bridge
-    restart: "no"

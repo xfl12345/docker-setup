@@ -54,16 +54,5 @@ services:
       - /media/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
       - /media/justsave/docker/volume/netmaker/cn/mosquitto/data:/mosquitto/data
 
-networks:
-  netmaker-docker-bridge:
-    name: "netmaker-docker-bridge"
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      config:
-        - subnet: "172.20.2.0/24"
-          gateway: "172.20.2.1"
-          ip_range: "172.20.2.0/24"
-        - subnet: "fd00:dcdc:2::/64"
-    driver_opts:
-      com.docker.network.bridge.name: "br-netmaker2"
+include:
+  - ./docker-compose.cn.network.yml
