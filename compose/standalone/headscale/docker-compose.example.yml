@@ -1,16 +1,3 @@
-networks:
-  headscale-docker-bridge:
-    driver: bridge
-    driver_opts:
-      com.docker.network.bridge.name: br-headscale0
-    enable_ipv6: true
-    ipam:
-      config:
-      - gateway: 172.20.3.1
-        ip_range: 172.20.3.0/24
-        subnet: 172.20.3.0/24
-      - subnet: fd00:dcdc:3::/64
-    name: headscale-docker-bridge
 services:
   headscale:
     extends:
@@ -25,3 +12,6 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: tailscale_client
     network_mode: host
+
+include:
+  - ./docker-compose.network.yml
