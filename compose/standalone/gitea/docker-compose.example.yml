@@ -24,3 +24,24 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
+
+  gitea_runner:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/gitea/runner/docker.env
+        required: false
+    image: gitea/act_runner:latest
+    container_name: gitea-runner
+    environment:
+      CONFIG_FILE: /config.yaml
+    volumes:
+      - /media/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
+      - /media/justsave/docker/volume/gitea/runner/data:/data
+      - /media/justsave/docker/volume/gitea/runner/root:/root
+      - /media/justsave/docker:/media/justsave/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: bridge
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
