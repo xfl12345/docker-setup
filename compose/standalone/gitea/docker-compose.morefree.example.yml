@@ -31,6 +31,7 @@ services:
       - path: /media/justsave/docker/env/gitea/runner/docker.env
         required: false
     image: gitea/act_runner:latest
+    pull_policy: always
     container_name: gitea-runner
     environment:
       CONFIG_FILE: /config.yaml
