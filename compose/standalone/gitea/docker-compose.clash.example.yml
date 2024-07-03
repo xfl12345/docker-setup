@@ -1,0 +1,66 @@
+# version: "3"
+
+# official docs URL=https://docs.gitea.com/installation/install-with-docker
+services:
+  gitea:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: gitea
+    networks:
+      gitea-docker-bridge:
+        ipv4_address: 172.20.4.2
+        ipv6_address: fd00:dcdc:4::2
+
+  gitea_runner:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: gitea_runner
+    image: gitea/act_runner:latest-xfl
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: gitea-runner-xfl.Dockerfile
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - /dev/net/tun:/dev/net/tun
+      - ./clash:/root/.config/mihomo
+      # - /media/justsave/docker/volume/gitea/runner/clash:/root/.config/mihomo
+    networks:
+      gitea-docker-bridge:
+        ipv4_address: 172.20.4.3
+        ipv6_address: fd00:dcdc:4::3
+
+  # gitea_breakwall:
+  #   sysctls:
+  #     - net.ipv4.conf.all.forwarding=1
+  #     - net.ipv6.conf.all.disable_ipv6=0
+  #     - net.ipv6.conf.all.forwarding=1
+  #     - net.ipv6.conf.all.accept_ra=2
+  #     - net.ipv6.conf.all.proxy_ndp=1
+  #     - net.ipv6.conf.all.autoconf=1
+  #   env_file:
+  #     - path: /media/justsave/docker/compose/global_default.env
+  #       required: true
+  #   container_name: gitea-breakwall
+  #   # image: metacubex/mihomo:v1.18.5    # 最新版用 metacubex/mihomo:Alpha
+  #   image: metacubex/mihomo:Alpha
+  #   pull_policy: always
+  #   # user: "2002"
+  #   # pid: host
+  #   # ipc: host
+  #   cap_add:
+  #     - NET_ADMIN
+  #   # security_opt:
+  #   #   - apparmor=unconfined
+  #   volumes:
+  #     - /media/justsave/docker/volume/gitea/runner/clash:/root/.config/mihomo
+  #     - /dev/net/tun:/dev/net/tun
+  #   networks:
+  #     gitea-docker-bridge:
+  #       ipv4_address: 172.20.4.4
+  #       ipv6_address: fd00:dcdc:4::4
+  #   restart: "no"
+
+include:
+  - ./docker-compose.network.yml

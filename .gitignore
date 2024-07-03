@@ -13,3 +13,7 @@
 !/volume/nginx/conf.d/
 /volume/nginx/conf.d/*
 !/volume/nginx/conf.d/my_default.conf
+
+!/compose/standalone/gitea/clash/
+/compose/standalone/gitea/clash/*
+!/compose/standalone/gitea/clash/config.yaml

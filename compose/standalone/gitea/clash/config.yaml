@@ -1,0 +1,50 @@
+mixed-port: 7890
+allow-lan: true
+external-controller: 0.0.0.0:28001
+secret: fb8a474c-38fd-11ef-a477-2a00002eb09a
+
+
+mode: rule
+proxies:
+  - name: "本地小蓝猫"
+    type: socks5
+    server: host.docker.internal
+    port: 7890
+    udp: true
+
+proxy-groups:
+  - name: "我的跳板"
+    type: select
+    proxies:
+      - "本地小蓝猫"
+
+dns:
+  enable: true
+  ipv6: true
+  nameserver:
+    - https://[2606:4700:4700::1111]/dns-query
+    - https://223.5.5.5/dns-query
+    - 223.5.5.5
+  fake-ip-filter:
+    - +.stun.*.*
+    - +.stun.*.*.*
+    - +.stun.*.*.*.*
+    - +.stun.*.*.*.*.*
+    - "*.n.n.srv.nintendo.net"
+    - +.stun.playstation.net
+    - xbox.*.*.microsoft.com
+    - "*.*.xboxlive.com"
+    - "*.msftncsi.com"
+    - "*.msftconnecttest.com"
+    - WORKGROUP
+
+rules:
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR6,fd00::/16,DIRECT,no-resolve
+  - MATCH,我的跳板
+
+tun:
+  enable: true
+  stack: Mixed
+  auto-route: true
+  auto-detect-interface: true
