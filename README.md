@@ -61,7 +61,7 @@
 |-:|:-|
 |`neilpang/acme.sh`|`latest`|
 |`busybox`|NULL|
-|`metacubex/mihomo`|`v1.18.5`|
+|`metacubex/mihomo`|`v1.18.6`|
 |`ghcr.io/metacubex/metacubexd`|NULL|
 |`codercom/code-server`|`latest`|
 |`ghcr.io/curl/curl-container/curl`|`master`|
