@@ -4,7 +4,7 @@ my_docker_volume_dir="/media/justsave/docker/volume"
 # 用户名 和 ID 映射表
 declare -A my_id_map
 my_id_map["www-data"]=33
-my_id_map["xray"]=2001
+# 2001 reserve
 my_id_map["metacubex"]=2002
 # my_id_map["nginx"]=2003
 my_id_map["jenkins"]=2004
@@ -29,7 +29,6 @@ my_app_user_dir_map["www-data:www-data"]="$my_docker_volume_dir/nginx/"
 my_app_user_dir_map["www-data:www-data"]="/media/justsave/wwwroot/download/"
 my_app_user_dir_map["www-data:www-data"]="/media/justsave/wwwlogs/"
 # my_app_user_dir_map["nginx:nginx"]="$my_docker_volume_dir/nginx/"
-my_app_user_dir_map["xray:xray"]="$my_docker_volume_dir/xray/"
 my_app_user_dir_map["metacubex:metacubex"]="$my_docker_volume_dir/clash_meta/"
 my_app_user_dir_map["jenkins:jenkins"]="$my_docker_volume_dir/jenkins/"
 my_app_user_dir_map["gitea:gitea"]="$my_docker_volume_dir/gitea/"

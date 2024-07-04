@@ -11,13 +11,12 @@ services:
     image: teddysun/xray:1.8.16
     pull_policy: always
     hostname: xray
-    user: "2001" # id -u xray 重装系统后需要自己创建一个 xray 用户
     volumes:
       - /media/justsave/docker/volume/xray/config.json:/etc/xray/config.json:ro
       - /media/justsave/docker/volume/xray:/var/log/xray:rw
       - /media/justsave/docker/volume/xray:/usr/share/xray:ro
     cap_add:
-      - ALL
+      - NET_ADMIN
     restart: always
 
     # 为兼容 clash 按进程名匹配，下面这些不能再用了。 xray 服务不能躲在 NAT 后面，否则无法被探测到
