@@ -23,6 +23,3 @@ services:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: mq
-
-include:
-  - ./docker-compose.cloudflare.network.yml
