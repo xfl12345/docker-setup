@@ -17,9 +17,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
       # 持久化
       - /media/justsave/docker/volume/gitea/data:/data
-    ports:
-      - "127.0.0.1:28014:3000"
-      - "22014:22"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

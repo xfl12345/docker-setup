@@ -25,11 +25,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     networks:
       - headscale-docker-bridge
-    ports:
-      # - "8090:8090"
-      - "127.0.0.1:28015:8080"
-      - "0.0.0.0:9090:9090"
-      - "3478:3478/udp"
     # command: "serve"
     command: "headscale serve"
     restart: unless-stopped
@@ -55,8 +50,6 @@ services:
       - /var/run/headscale:/var/run/headscale
     networks:
       - headscale-docker-bridge
-    ports:
-      - "127.0.0.1:28016:5000"
     restart: unless-stopped
 
   # official repo URL=https://github.com/tailscale/tailscale
@@ -89,6 +82,3 @@ services:
       - headscale
       - headscale_webui
     restart: unless-stopped
-
-include:
-  - ./docker-compose.network.yml

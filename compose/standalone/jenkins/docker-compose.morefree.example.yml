@@ -53,11 +53,6 @@ services:
       # - /usr/lib/s390x-linux-gnu:/usr/lib/s390x-linux-gnu:ro
       # - /usr/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:ro
       # - /usr/lib/x86_64-linux-gnux32:/usr/lib/x86_64-linux-gnux32:ro
-    ports:
-      - "127.0.0.1:28011:8080"
-      - "127.0.0.1:28011:8080/udp"
-      - "50000:50000"
-      - "50000:50000/udp"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     # environment:

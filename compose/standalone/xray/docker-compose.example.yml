@@ -4,3 +4,20 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: xray
     network_mode: host
+
+    # 为兼容 clash 按进程名匹配，下面这些不能再用了。 xray 服务不能躲在 NAT 后面，否则无法被探测到
+    # ports:
+    #   # inbound socks5
+    #   - 127.0.0.1:1088:1088
+    #   - 127.0.0.1:1088:1088/udp
+    #   - 192.168.8.111:1088:1088
+    #   - 192.168.8.111:1088:1088/udp
+    #   # inbound http
+    #   - 127.0.0.1:1090:1090
+    #   # inbound dokodemo door
+    #   - 0.0.0.0:1099:1099
+    #   # inbound vmess
+    #   - 20000:20000
+    #   # inbound shadowsocks
+    #   - 30001:30001
+    # network_mode: bridge

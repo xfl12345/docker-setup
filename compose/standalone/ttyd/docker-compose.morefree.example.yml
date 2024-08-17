@@ -29,8 +29,6 @@ services:
       - /media/justsave/docker/volume/ttyd/home:/home/ttyd
       # socket 通信
       - /var/run/ttyd:/var/run/ttyd
-    # ports:
-    #   - 28041:28041
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

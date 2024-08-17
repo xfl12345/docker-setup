@@ -4,3 +4,5 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: ttyd
     network_mode: bridge
+    # ports:
+    #   - 28041:28041

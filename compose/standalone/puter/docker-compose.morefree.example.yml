@@ -26,6 +26,4 @@ services:
     volumes:
       - /media/justsave/docker/volume/puter/config:/etc/puter
       - /media/justsave/docker/volume/puter/data:/var/puter
-    ports:
-      - '4100:4100'
     restart: unless-stopped

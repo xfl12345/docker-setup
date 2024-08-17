@@ -82,10 +82,6 @@ services:
     #     }
     #     gitlab_rails['time_zone'] = 'Asia/Hong_Kong'
 
-    ports:
-      - "127.0.0.1:28013:80"
-      # - "443:443"
-      - "2424:2424"
     volumes:
       - "/media/justsave/docker/volume/gitlab/config:/etc/gitlab"
       - "/media/justsave/docker/volume/gitlab/logs:/var/log/gitlab"

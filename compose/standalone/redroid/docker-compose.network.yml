@@ -1,0 +1,15 @@
+networks:
+  my_redroid_network_bridge_host:
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+      - subnet: fd00:250:0:ffff::/64
+  my_redroid_network_macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+      - gateway: 192.168.8.1
+        subnet: 192.168.8.0/24

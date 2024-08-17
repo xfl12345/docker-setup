@@ -41,7 +41,4 @@ services:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "51820:51820/udp"
-      - "127.0.0.1:28017:28017/tcp"
     restart: unless-stopped

@@ -4,3 +4,7 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: mosdns
     network_mode: host
+    # ports:
+    #   - "5553:5553"
+    #   - "5553:5553/udp"
+    # network_mode: bridge

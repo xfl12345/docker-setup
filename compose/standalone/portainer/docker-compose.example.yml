@@ -4,3 +4,7 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: portainer
     network_mode: bridge
+    ports:
+      # - 9443:9443
+      - 127.0.0.1:28019:9000
+      # - 8000:8000

@@ -19,15 +19,12 @@ services:
       start_interval: 2s
       timeout: 3s
       retries: 200
-    ports:
-      - 127.0.0.1:3306:3306
-      # host-gateway 改变的时候，这里也要改！
-      - 172.17.0.1:3306:3306
     hostname: "docker-mariadb"
     environment:
       ## Use % to allow remote access to all addresses.
       ## Generally not recommended by some people to allow for root.
       #- MYSQL_ROOT_HOST=%
+      # /etc/docker/daemon.json 里的 bip 改变的时候，这里也要改！
       - MYSQL_ROOT_HOST=172.16.0.0/255.240.0.0
       - MARIADB_AUTO_UPGRADE=1
       # - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1

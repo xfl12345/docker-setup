@@ -4,3 +4,6 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: wg_easy
     network_mode: bridge
+    ports:
+      - "51820:51820/udp"
+      - "127.0.0.1:28017:28017/tcp"

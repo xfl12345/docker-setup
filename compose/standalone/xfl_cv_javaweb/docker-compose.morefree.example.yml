@@ -20,8 +20,6 @@ services:
       # 持久化
       - /media/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
       - /media/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs
-    ports:
-      - "127.0.0.1:28010:8880"
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

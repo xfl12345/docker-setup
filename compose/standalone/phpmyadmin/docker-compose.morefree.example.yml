@@ -24,6 +24,4 @@ services:
       # - ./just_listen_on_sock.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
       # # php-fpm unix socket
       # - /var/run/phpmyadmin:/var/run/php
-    ports:
-      - 28009:80
     restart: unless-stopped

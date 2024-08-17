@@ -6,3 +6,7 @@ services:
     extends:
       file: ./docker-compose.morefree.arm64.example.yml
       service: gitlab
+    ports:
+      - "127.0.0.1:28013:80"
+      # - "443:443"
+      - "2424:2424"

@@ -27,8 +27,6 @@ services:
     image: ghcr.io/metacubex/metacubexd
     restart: always
     user: "2002"
-    ports:
-      - 127.0.0.1:28002:80
     volumes:
       - /media/justsave/docker/volume/clash_meta/caddy:/config/caddy
       # 共享host的时间环境

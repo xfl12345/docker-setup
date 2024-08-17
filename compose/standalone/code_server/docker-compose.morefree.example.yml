@@ -24,8 +24,6 @@ services:
       - /media/justsave/docker/volume/code_server/home/project:/home/coder/project
       # # 挂载 docker socket ，直通宿主机
       # - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 127.0.0.1:28042:8080
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: always

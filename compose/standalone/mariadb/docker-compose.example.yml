@@ -3,4 +3,8 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: mariadb
+    ports:
+      - 127.0.0.1:3306:3306
+      # host-gateway 改变的时候，这里也要改！
+      - 172.17.0.1:3306:3306
     network_mode: bridge
