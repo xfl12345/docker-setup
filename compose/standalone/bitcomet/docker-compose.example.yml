@@ -1,0 +1,18 @@
+services:
+  bitcomet:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: bitcomet
+    ports:
+      # Web GUI client port
+      - 127.0.0.1:28043:80
+      # VNC GUI client port
+      - 127.0.0.1:55900:5900
+      # 以下配置不可或缺，需自行决定！！！
+      # BT connection
+      - 6882:6882
+      - "0.0.0.0:6882:6882/udp"
+      - "[::]:6882:6882/udp"
+    network_mode: bridge
+
+

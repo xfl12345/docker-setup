@@ -51,7 +51,8 @@
 |28040|glances Web UI|
 |28041|netdata Web UI|
 |28042|code-server|
-|28043~28049|`reserved`|
+|28043|bitcomet|
+|28044~28049|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）  
 
@@ -96,3 +97,4 @@
 |`neilpang/wgcf-docker`|NULL|
 |`curriculum-vitae-web-server`|NULL|
 |`teddysun/xray`|`1.8.16`|
+|`wxhere/bitcomet`|`latest`|

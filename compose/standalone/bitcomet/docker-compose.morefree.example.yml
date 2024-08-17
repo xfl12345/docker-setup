@@ -1,0 +1,23 @@
+# version: "3"
+
+# official docs URL=http://wiki-zh.bitcomet.com/linux%E7%89%88bitcomet%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97
+# official docs URL 2=https://hub.docker.com/r/wxhere/bitcomet
+services:
+  bitcomet:
+    env_file:
+      - /media/justsave/docker/env/bitcomet/docker.env
+    sysctls:
+      # - net.ipv6.conf.default.disable_ipv6=0
+      # - net.ipv6.conf.default.autoconf=1
+      # - net.ipv6.conf.lo.disable_ipv6=0
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.accept_ra=2
+      - net.ipv6.conf.all.proxy_ndp=1
+      - net.ipv6.conf.all.autoconf=1
+    container_name: bitcomet
+    image: wxhere/bitcomet:latest
+    volumes:
+      - /media/justsave/docker/volume/bitcomet/appdata/BitComet:/home/sandbox/.config/BitComet
+      - /media/justsave/docker/volume/bitcomet/share:/home/sandbox/share
+    restart: always
