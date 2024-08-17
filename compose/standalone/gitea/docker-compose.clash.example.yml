@@ -10,6 +10,9 @@ services:
       gitea-docker-bridge:
         ipv4_address: 172.20.4.2
         ipv6_address: fd00:dcdc:4::2
+    ports:
+      - "127.0.0.1:28014:3000"
+      - "22014:22"
 
   gitea_runner:
     extends:
