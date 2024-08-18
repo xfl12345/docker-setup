@@ -12,9 +12,9 @@ services:
     pull_policy: always
     hostname: xray
     volumes:
-      - /media/justsave/docker/volume/xray/config.json:/etc/xray/config.json:ro
-      - /media/justsave/docker/volume/xray:/var/log/xray:rw
-      - /media/justsave/docker/volume/xray:/usr/share/xray:ro
+      - /media/justsave/docker/volume/xray/config/config.json:/etc/xray/config.json:ro
+      - /media/justsave/docker/volume/xray/log:/var/log/xray:rw
+      - /media/justsave/docker/volume/xray/bin:/usr/share/xray:ro
     cap_add:
       - NET_ADMIN
     restart: always
