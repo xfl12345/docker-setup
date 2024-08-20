@@ -3,6 +3,9 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: xray
+    volumes:
+      # xtls/xray unix socket
+      - /var/run/xray:/var/run/xray
     network_mode: host
 
     # 为兼容 clash 按进程名匹配，下面这些不能再用了。 xray 服务不能躲在 NAT 后面，否则无法被探测到
