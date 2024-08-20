@@ -27,13 +27,5 @@ services:
       # - /media/justsave/wwwroot/default:/var/www/html:ro
       # nginx log
       - /media/justsave/wwwlogs:/media/justsave/wwwlogs
-      # php-fpm unix socket
-      - /var/run/php:/var/run/php
-      # # phpMyAdmin php-fpm unix socket
-      # - /var/run/phpmyadmin:/var/run/phpmyadmin
-      # mysql unix socket
-      - /var/run/mysqld:/var/run/mysqld
-      # ttyd unix socket
-      - /var/run/ttyd:/var/run/ttyd
     restart: always
 

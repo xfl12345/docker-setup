@@ -4,3 +4,14 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: nginx
     network_mode: host
+    volumes:
+      # php-fpm unix socket
+      - /var/run/php:/var/run/php
+      # # phpMyAdmin php-fpm unix socket
+      # - /var/run/phpmyadmin:/var/run/phpmyadmin
+      # mysql unix socket
+      - /var/run/mysqld:/var/run/mysqld
+      # ttyd unix socket
+      - /var/run/ttyd:/var/run/ttyd
+      # xtls/xray unix socket
+      - /var/run/xray:/var/run/xray
