@@ -16,12 +16,6 @@ services:
       - net.ipv6.conf.all.autoconf=1
     cap_add:
       - ALL
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      - http_proxy=http://host.docker.internal:7890
-      - https_proxy=http://host.docker.internal:7890
-      - all_proxy=socks5://host.docker.internal:7890
     volumes:
       - /lib/modules:/lib/modules:ro
       - /media/justsave/docker/volume/wgcf:/wgcf
