@@ -37,6 +37,4 @@ services:
       - /var/run/php:/var/run/php
       # mysql unix socket
       - /var/run/mysqld:/var/run/mysqld
-      # override the php-fpm default configuration
-      - /media/justsave/docker/volume/php_fpm/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro
     restart: always
