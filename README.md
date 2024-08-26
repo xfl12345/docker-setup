@@ -69,7 +69,7 @@
 |`ghcr.io/metacubex/metacubexd`|NULL|
 |`codercom/code-server`|`latest`|
 |`ghcr.io/curl/curl-container/curl`|`master`|
-|`jeessy/ddns-go`|`6.6.3`|
+|`jeessy/ddns-go`|`latest`|
 |`debian`|`bookworm`|
 |`gitea/gitea`|`1.22`|
 |`yrzr/gitlab-ce-arm64v8`|`16.10.1-ce.0`|
