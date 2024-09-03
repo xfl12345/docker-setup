@@ -83,9 +83,9 @@
 |`mariadb`|`11`|
 |`irinesistiana/mosdns`|`v5.3.1`|
 |`netdata/netdata`|NULL|
-|`gravitl/netclient`|`v0.24.2`|
-|`gravitl/netmaker`|`v0.24.2`|
-|`gravitl/netmaker-ui`|`v0.24.2`|
+|`gravitl/netclient`|`v0.25.0`|
+|`gravitl/netmaker`|`v0.25.0`|
+|`gravitl/netmaker-ui`|`v0.25.0`|
 |`eclipse-mosquitto`|`2.0.15-openssl`|
 |`nginx`|`latest`|
 |`php`|`7.4-fpm-bullseye`|
