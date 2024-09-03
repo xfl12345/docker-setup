@@ -78,6 +78,7 @@
 |`ifargle/headscale-webui`|`latest`|
 |`tailscale/tailscale`|`latest`|
 |`apache/hertzbeat`|NULL|
+|`purplei2p/i2pd`|`latest`|
 |`jenkins/jenkins`|`lts-jdk17`|
 |`mariadb`|`11`|
 |`irinesistiana/mosdns`|`v5.3.1`|

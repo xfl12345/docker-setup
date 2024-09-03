@@ -1,0 +1,21 @@
+# version: "3.5"
+
+# official repo URL=https://github.com/PurpleI2P/i2pd
+# official docs URL=https://i2pd.readthedocs.io/en/latest/
+services:
+  i2pd:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/i2pd/docker.env
+        required: false
+    container_name: i2pd
+    image: i2pd-xfl
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /media/justsave/docker/compose/build_resource
+      dockerfile: i2pd-xfl.Dockerfile
+    volumes:
+      - /media/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
