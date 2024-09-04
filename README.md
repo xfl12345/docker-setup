@@ -41,8 +41,8 @@
 |28015|Headscale Web API|
 |28016|Headscale ADMIN Web UI|
 |28017|wg-easy|
-|28018|hertzbeat|
-|28019|portainer|
+|28018|HertzBeat|
+|28019|Portainer|
 |28020|Netmaker dashboard Web UI|
 |28021|Netmaker Web API|
 |28022|Netmaker broker|
@@ -51,10 +51,10 @@
 |28031|Netmaker Web API|
 |28032|Netmaker broker|
 |28033~28039|`reserved`|
-|28040|glances Web UI|
-|28041|netdata Web UI|
+|28040|Glances Web UI|
+|28041|Netdata Web UI|
 |28042|code-server|
-|28043|bitcomet|
+|28043|BitComet|
 |28044~28049|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）  
