@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 my_docker_volume_dir="/media/justsave/docker/volume"
+the_realpath_feature_flag="-P"
+if [[ x"$(realpath --help | grep -w '\-\-canonicalize\-missing')" != "x" ]]; then
+    echo "[$(which realpath)] support '--canonicalize-missing'"
+    the_realpath_feature_flag="-Pm"
+fi
 
 # 用户名 和 ID 映射表
 declare -A my_id_map
@@ -80,9 +85,21 @@ just_add_user_to_group() {
 just_add_user_to_group qbtuser btuser
 just_add_user_to_group jenkins docker
 
+__the_path=""
+get_real_path() {
+    __the_path=$(realpath $the_realpath_feature_flag $1 2>&1)
+    if [ $? -eq 0 ]; then
+        echo $__the_path
+    else
+        __the_path=$(echo $__the_path | sed -n 's#^realpath: \([^:]*\): No such file or directory$#\1#p')
+        echo $__the_path
+    fi
+}
+
 for the_user_and_group in "${!my_app_user_dir_map[@]}"; do
     the_dir=${my_app_user_dir_map[$the_user_and_group]}
-    the_dir=$(realpath -P "$the_dir")
+    get_real_path "$the_dir"
+    the_dir=$__the_path
     the_user_name=$(echo "$the_user_and_group" | cut -d ":" -f 1)
     the_group_name=$(echo "$the_user_and_group" | cut -d ":" -f 2)
     echo "User[$the_user_name] & Group[$the_group_name] <---> $the_dir"
@@ -90,7 +107,7 @@ for the_user_and_group in "${!my_app_user_dir_map[@]}"; do
         # echo "chown $the_user_and_group -Rh $the_dir"
         chown $the_user_and_group -Rh $the_dir
     else
-        echo "Error: Docker volume dir[$the_dir] not found!!! Please create it first!!!"
+        echo "Error: Docker volume dir[$the_dir] not found!!! Skipped."
     fi
 done
 
