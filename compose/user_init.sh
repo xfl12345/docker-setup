@@ -107,7 +107,7 @@ for the_user_and_group in "${!my_app_user_dir_map[@]}"; do
         # echo "chown $the_user_and_group -Rh $the_dir"
         chown $the_user_and_group -Rh $the_dir
     else
-        echo "Warming: Docker volume dir[$the_dir] not found!!! Skipped."
+        echo "Warming: Docker volume dir[$the_dir] was not found!!! Skipped."
     fi
 done
 
