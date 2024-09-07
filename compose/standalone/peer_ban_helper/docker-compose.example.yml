@@ -1,0 +1,8 @@
+services:
+  peerbanhelper:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: peerbanhelper
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28048:9898"

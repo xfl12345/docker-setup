@@ -15,7 +15,7 @@ my_id_map["metacubex"]=2002
 my_id_map["jenkins"]=2004
 my_id_map["qbtuser"]=2005
 my_id_map["code-server"]=2006
-# 2007 reserve
+my_id_map["peerbanhelper"]=2007
 my_id_map["transmission"]=2008
 my_id_map["gitea"]=2009
 # gitlab user
@@ -42,6 +42,7 @@ my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/BT/"
 my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/PT/"
 my_app_user_dir_map["transmission:btuser"]="$my_docker_volume_dir/transmission/"
 my_app_user_dir_map["code-server:code-server"]="$my_docker_volume_dir/code_server/home/"
+my_app_user_dir_map["peerbanhelper:peerbanhelper"]="$my_docker_volume_dir/peer_ban_helper/app/"
 
 # $1 is group name
 # $2 is group id

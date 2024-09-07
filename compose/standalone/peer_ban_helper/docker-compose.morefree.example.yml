@@ -1,0 +1,27 @@
+# version: "3.9"
+
+# official repo URL=https://github.com/PBH-BTN/PeerBanHelper
+# official docs URL=https://github.com/PBH-BTN/PeerBanHelper/wiki
+services:
+  peerbanhelper:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/peer_ban_helper/docker.env
+        required: false
+    image: peerbanhelper-xfl
+    container_name: peerbanhelper
+    environment:
+      - MY_DOCKER_APP_USER_HOME=/app
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /media/justsave/docker/compose/build_resource
+      dockerfile: peerbanhelper-xfl.Dockerfile
+    volumes:
+      - /media/justsave/docker/volume/peer_ban_helper/app/data:/app/data
+    # restart: unless-stopped
+    restart: "no"

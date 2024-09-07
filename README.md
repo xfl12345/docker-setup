@@ -55,7 +55,9 @@
 |28041|Netdata Web UI|
 |28042|code-server|
 |28043|BitComet|
-|28044~28049|`reserved`|
+|28044~28047|`reserved`|
+|28048|PeerBanHelper|
+|28049~28099|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）  
 
@@ -88,6 +90,7 @@
 |`gravitl/netmaker-ui`|`v0.25.0`|
 |`eclipse-mosquitto`|`2.0.15-openssl`|
 |`nginx`|`latest`|
+|`ghostchu/peerbanhelper`|`latest`|
 |`php`|`7.4-fpm-bullseye`|
 |`phpmyadmin`|NULL|
 |`portainer/portainer-ce`|`latest`|
