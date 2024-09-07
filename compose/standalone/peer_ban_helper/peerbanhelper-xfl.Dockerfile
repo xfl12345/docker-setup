@@ -1,6 +1,6 @@
 FROM ghostchu/peerbanhelper:latest
 RUN apk update
-RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop sudo tini
+RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop sudo tini tzdata
 ADD https://github.com/PBH-BTN/PeerBanHelper/raw/master/Dockerfile /tmpDockerfile
 RUN cat /tmpDockerfile | grep "ENTRYPOINT" | sed -e 's#^ENTRYPOINT \[##' -e 's#\]$##' | sed -e 's#", "# #g' -e 's#"##g' | sed -e 's#\,# #g' > /origin-entrypoint.txt
 RUN rm /tmpDockerfile

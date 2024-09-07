@@ -1,7 +1,6 @@
 FROM tsl0922/ttyd:alpine
 RUN apk update
-RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop
-RUN apk add tzdata
+RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop tzdata
 ENV TZ=Asia/Hong_Kong
 # RUN apk add doas
 # RUN echo "" >> /etc/doas.conf && mkdir -p "/etc/doas.d/" && echo "permit nopass :root" >> "/etc/doas.d/doas.conf"
