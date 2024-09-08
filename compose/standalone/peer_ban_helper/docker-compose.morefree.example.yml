@@ -23,5 +23,3 @@ services:
       dockerfile: peerbanhelper-xfl.Dockerfile
     volumes:
       - /media/justsave/docker/volume/peer_ban_helper/app/data:/app/data
-    # restart: unless-stopped
-    restart: "no"
