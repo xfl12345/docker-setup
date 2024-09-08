@@ -25,6 +25,7 @@ services:
   metacubexd:
     container_name: metacubexd
     image: ghcr.io/metacubex/metacubexd
+    pull_policy: always
     restart: always
     user: "2002"
     volumes:
