@@ -34,7 +34,7 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
-      - path: ./default-headscale-webui.env
+      - path: ./default_headscale_webui.env
         required: true # default
       - path: /media/justsave/docker/env/headscale/headscale-webui.env
         required: false
@@ -42,8 +42,6 @@ services:
     # image: ifargle/headscale-webui:v0.7.0
     container_name: headscale-webui
     user: "1000"
-    environment:
-      - "HS_SERVER=http://headscale:8080"
     volumes:
       - /media/justsave/docker/volume/headscale/web-ui:/data:rw
       - /media/justsave/docker/volume/headscale/config:/etc/headscale/:ro
@@ -57,15 +55,13 @@ services:
   # 需要进容器里手动 tailscale login --login-server=https://xxx
   tailscale_client:
     env_file:
-      - path: ./default-tailscale-clinet.env
+      - path: ./default_tailscale_clinet.env
         required: true # default
       - path: /media/justsave/docker/env/tailscale/client.env
         required: false
     container_name: tailscale-client
     image: tailscale/tailscale:latest
     hostname: tailscale-client
-    environment:
-      - TS_STATE_DIR=/var/lib/tailscale
     volumes:
       - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale

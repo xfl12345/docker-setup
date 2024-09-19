@@ -13,8 +13,6 @@ services:
         required: false
     image: peerbanhelper-xfl
     container_name: peerbanhelper
-    environment:
-      - MY_DOCKER_APP_USER_HOME=/app
     pull_policy: build
     build:
       context: ./

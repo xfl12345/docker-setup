@@ -19,10 +19,6 @@ services:
       additional_contexts:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: ttyd-xfl.Dockerfile
-    environment:
-      - MY_DOCKER_APP_USER_NAME=ttyd
-      - PUID=33 # id -u www-data 重装系统后可能需要自己创建一个 www-data 用户
-      - PGID=33 # id -g www-data 重装系统后可能需要自己创建一个 www-data 用户组
     # command: "ttyd --writable --ipv6 --port 28041 bash"
     volumes:
       # 持久化

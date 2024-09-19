@@ -8,6 +8,8 @@ services:
         required: true
       - path: ./default.env
         required: true # default
+      - path: ./default_linuxserver.env
+        required: true # default
       - path: /media/justsave/docker/env/qbittorrent_nox/docker.env
         required: false
     container_name: qbittorrent-nox
@@ -16,10 +18,6 @@ services:
     # for debugging
     cap_add:
       - SYS_PTRACE
-    environment:
-      - PUID=2005
-      - PGID=1999
-      - WEBUI_PORT=28012
     # read_only: true
     stop_grace_period: 30m
     # tmpfs:

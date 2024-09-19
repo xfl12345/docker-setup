@@ -4,16 +4,15 @@
 # official repo URL=https://github.com/netdata/netdata
 services:
   netdata:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/netdata/docker.env
+        required: false
     image: netdata/netdata
     container_name: netdata
-    pid: host
-    cap_add:
-      - SYS_PTRACE
-      - SYS_ADMIN
-    security_opt:
-      - apparmor:unconfined
-    environment:
-      - NETDATA_LISTENER_PORT=28041
     volumes:
       - /media/justsave/docker/volume/netdata/config:/etc/netdata
       - /media/justsave/docker/volume/netdata/lib:/var/lib/netdata

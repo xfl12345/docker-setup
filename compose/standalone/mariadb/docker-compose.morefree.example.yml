@@ -20,14 +20,6 @@ services:
       timeout: 3s
       retries: 200
     hostname: "docker-mariadb"
-    environment:
-      ## Use % to allow remote access to all addresses.
-      ## Generally not recommended by some people to allow for root.
-      #- MYSQL_ROOT_HOST=%
-      # /etc/docker/daemon.json 里的 bip 改变的时候，这里也要改！
-      - MYSQL_ROOT_HOST=172.16.0.0/255.240.0.0
-      - MARIADB_AUTO_UPGRADE=1
-      # - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=1
     volumes:
       - /media/justsave/docker/volume/mariadb/conf:/etc/mysql/conf.d
       - /media/justsave/docker/volume/mariadb/data:/var/lib/mysql

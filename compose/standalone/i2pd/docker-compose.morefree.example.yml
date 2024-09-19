@@ -7,6 +7,8 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
+      - path: ./default.env
+        required: true # default
       - path: /media/justsave/docker/env/i2pd/docker.env
         required: false
     container_name: i2pd

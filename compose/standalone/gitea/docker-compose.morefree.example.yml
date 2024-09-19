@@ -3,14 +3,17 @@
 # official docs URL=https://docs.gitea.com/installation/install-with-docker
 services:
   gitea:
-    env_file: /media/justsave/docker/env/gitea/docker.env
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./gitea_default.env
+        required: true # default
+      - path: /media/justsave/docker/env/gitea/docker.env
+        required: false
     image: gitea/gitea:1.22
     pull_policy: always
     container_name: gitea
     # UID: id -u gitea
-    environment:
-      - USER_UID=2009
-      - USER_GID=2009
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
@@ -25,13 +28,13 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
+      - path: ./gitea_runner_default.env
+        required: true # default
       - path: /media/justsave/docker/env/gitea/runner/docker.env
         required: false
     image: gitea/act_runner:latest
     pull_policy: always
     container_name: gitea-runner
-    environment:
-      CONFIG_FILE: /config.yaml
     volumes:
       - /media/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
       - /media/justsave/docker/volume/gitea/runner/data:/data

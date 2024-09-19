@@ -7,14 +7,13 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
+      - path: ./default.env
+        required: true # default
       - path: /media/justsave/docker/env/phpmyadmin/docker.env
         required: false
     container_name: phpmyadmin
     image: phpmyadmin
     pull_policy: always
-    environment:
-      # - PMA_ARBITRARY=0
-      - PMA_SOCKET=/var/run/mysqld/mysqld.sock
     volumes:
       # 持久化
       - /media/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro

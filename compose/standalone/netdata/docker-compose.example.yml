@@ -3,4 +3,10 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: netdata
+    pid: host
+    cap_add:
+      - SYS_PTRACE
+      - SYS_ADMIN
+    security_opt:
+      - apparmor:unconfined
     network_mode: host

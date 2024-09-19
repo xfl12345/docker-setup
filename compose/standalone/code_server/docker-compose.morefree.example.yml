@@ -7,6 +7,8 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
+      - path: ./default.env
+        required: true # default
       - path: /media/justsave/docker/env/code_server/docker.env
         required: false
     container_name: code-server
@@ -15,8 +17,6 @@ services:
     build:
       context: ./
       dockerfile: code-server-xfl.Dockerfile
-    # environment:
-    #   - DOCKER_USER="code-server"
     user: "2006:2006"
     volumes:
       # 持久化

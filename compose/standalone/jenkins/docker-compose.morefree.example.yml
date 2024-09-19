@@ -7,6 +7,10 @@ services:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/jenkins/docker.env
+        required: false
     container_name: jenkins
     # image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
     image: jenkins/jenkins:lts-jdk17-xfl
@@ -19,12 +23,6 @@ services:
     security_opt:
       - apparmor=unconfined
     hostname: jenkins
-    environment:
-      - MY_DOCKER_APP_USER_NAME=jenkins
-      - MY_DOCKER_APP_USER_HOME=/var/jenkins_home
-      - MY_DOCKER_APP_USER_ADD_GROUP=2000
-      - PUID=2004
-      # - PGID=2004
     volumes:
       # 持久化
       - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
@@ -55,12 +53,6 @@ services:
       # - /usr/lib/x86_64-linux-gnux32:/usr/lib/x86_64-linux-gnux32:ro
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # environment:
-    #   - JENKINS_OPTS="--prefix=/jenkins"
-    # environment:
-    #   - JENKINS_PREFIX=/jenkins
-    #   - JENKINS_LISTEN_ADDRESS=127.0.0.1
-    #   - JENKINS_PORT=8100
     restart: always
 
 

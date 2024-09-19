@@ -7,7 +7,5 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: i2pd
-    environment:
-      - MY_DOCKER_APP_USER_NAME=i2pd
     # command: "--help"
     network_mode: host
