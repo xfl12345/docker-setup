@@ -1,6 +1,7 @@
 # version: '3'
 
-# official repo URL=https://github.com/nicolargo/glances
+# official repo URL=https://github.com/coder/code-server
+# official docs URL=https://coder.com/docs/code-server
 services:
   code_server:
     env_file:
