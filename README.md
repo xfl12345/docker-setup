@@ -102,6 +102,7 @@
 |`linuxserver/transmission`|`latest`|
 |`tsl0922/ttyd`|`alpine`|
 |`ubuntu`|`24.04`|
+|`watchtower`|`latest`|
 |`ghcr.io/wg-easy/wg-easy`|NULL|
 |`neilpang/wgcf-docker`|NULL|
 |`curriculum-vitae-web-server`|NULL|

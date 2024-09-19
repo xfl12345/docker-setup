@@ -1,0 +1,6 @@
+services:
+  watchtower:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: watchtower
+    network_mode: bridge

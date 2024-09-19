@@ -1,0 +1,15 @@
+# version: "3"
+
+# official repo URL=https://github.com/containrrr/watchtower
+# official docs URL=https://containrrr.dev/watchtower/
+services:
+  watchtower:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/watchtower/docker.env
+        required: false
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
