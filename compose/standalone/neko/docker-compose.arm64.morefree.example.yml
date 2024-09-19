@@ -1,0 +1,6 @@
+services:
+  neko:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: neko
+    image: "ghcr.io/m1k1o/neko/arm-chromium:latest"

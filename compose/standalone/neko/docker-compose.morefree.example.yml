@@ -1,0 +1,32 @@
+# version: "3.4"
+
+# official repo URL=https://github.com/m1k1o/neko
+# official docs URL=https://neko.m1k1o.net/#/getting-started/configuration
+services:
+  neko:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/neko/docker.env
+        required: false
+    image: "m1k1o/neko:chromium"
+    # image: "ghcr.io/m1k1o/neko/arm-chromium:latest"
+    container_name: neko
+    pull_policy: always
+    privileged: true
+    # environment:
+    #   NEKO_ICELITE: true
+    #   note: when setting NEKO_VIDEO, then variables NEKO_MAX_FPS and NEKO_VIDEO_BITRATE
+    #         are not being used, you can adjust them in this variable.
+    #   NEKO_VIDEO: |
+    #     ximagesrc display-name=%s use-damage=0 show-pointer=true use-damage=false
+    #       ! video/x-raw,framerate=30/1
+    #       ! videoconvert
+    #       ! queue
+    #       ! video/x-raw,framerate=30/1,format=NV12
+    #       ! v4l2h264enc extra-controls="controls,h264_profile=1,video_bitrate=1250000;"
+    #       ! h264parse config-interval=3
+    #       ! video/x-h264,stream-format=byte-stream,profile=constrained-baseline
+    restart: "unless-stopped"

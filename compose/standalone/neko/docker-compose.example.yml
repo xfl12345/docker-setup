@@ -1,0 +1,12 @@
+services:
+  neko:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: neko
+    shm_size: "1gb"
+    privileged: true
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28044:8080"
+      - "127.0.0.1:28044:8080/udp"
+      - "52000-52100:52000-52100/udp"

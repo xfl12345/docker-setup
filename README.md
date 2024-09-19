@@ -55,7 +55,8 @@
 |28041|Netdata Web UI|
 |28042|code-server|
 |28043|BitComet|
-|28044~28047|`reserved`|
+|28044|n.eko|
+|28045~28047|`reserved`|
 |28048|PeerBanHelper|
 |28049~28099|`reserved`|
 
