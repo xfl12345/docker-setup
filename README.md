@@ -85,6 +85,7 @@
 |`jenkins/jenkins`|`lts-jdk17`|
 |`mariadb`|`11`|
 |`irinesistiana/mosdns`|`v5.3.1`|
+|`m1k1o/neko`|`chromium`|
 |`netdata/netdata`|NULL|
 |`gravitl/netclient`|`v0.25.0`|
 |`gravitl/netmaker`|`v0.25.0`|
