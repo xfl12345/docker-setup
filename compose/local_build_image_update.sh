@@ -11,8 +11,11 @@ if [[ "$1" == "install" ]]; then
     # 定时任务表达式：每天凌晨 1 点
     CRON_SCHEDULE="0 1 * * *"
 
+    LOG_PATH="/media/justsave/docker/volume/docker_setup/log"
+    mkdir -p $LOG_PATH
+
     # 要添加到 crontab 的任务
-    CRON_JOB="${CRON_SCHEDULE} ${SCRIPT_PATH} &"
+    CRON_JOB="${CRON_SCHEDULE} ${SCRIPT_PATH} >> $LOG_PATH/local_build_image_update.log &"
 
     # 检查任务是否已经存在
     crontab -l | grep -q "$SCRIPT_PATH"
