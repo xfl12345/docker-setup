@@ -54,6 +54,8 @@ services:
   # official docs URL=https://tailscale.com/kb/1282/docker
   # 需要进容器里手动 tailscale login --login-server=https://xxx
   tailscale_client:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     env_file:
       - path: ./default_tailscale_clinet.env
         required: true # default

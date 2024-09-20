@@ -5,6 +5,8 @@
 services:
 
   netclient:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     container_name: netclient
     image: gravitl/netclient:v0.25.0
     # privileged: true
