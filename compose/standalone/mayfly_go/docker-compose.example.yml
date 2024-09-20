@@ -1,0 +1,9 @@
+services:
+  mayfly_go:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: mayfly_go
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28046:8888"
+    restart: always

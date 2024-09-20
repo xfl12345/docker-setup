@@ -58,7 +58,8 @@
 |28043|BitComet|
 |28044|n.eko|
 |28045|libreoffice|
-|28046~28047|`reserved`|
+|28046|mayfly-go|
+|28047|`reserved`|
 |28048|PeerBanHelper|
 |28049~28099|`reserved`|
 
@@ -87,6 +88,7 @@
 |`linuxserver/libreoffice`|`latest`|
 |`jenkins/jenkins`|`lts-jdk17`|
 |`mariadb`|`11`|
+|`https://gitee.com/dromara/mayfly-go.git`|`v1.8.8`|
 |`irinesistiana/mosdns`|`v5.3.1`|
 |`m1k1o/neko`|`chromium`|
 |`netdata/netdata`|NULL|
