@@ -1,6 +1,9 @@
 # version: "3"
 services:
   debian4build:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      - "cc.xfl12345.code.share.docker.setup.localbuild=true"
     container_name: debian4build
     image: debian-bookworm-xfl
     pull_policy: build

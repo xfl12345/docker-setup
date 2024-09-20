@@ -15,6 +15,9 @@ services:
       - "22014:22"
 
   gitea_runner:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      - "cc.xfl12345.code.share.docker.setup.localbuild=true"
     extends:
       file: ./docker-compose.morefree.example.yml
       service: gitea_runner

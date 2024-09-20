@@ -11,6 +11,9 @@ services:
         required: true # default
       - path: /media/justsave/docker/env/jenkins/docker.env
         required: false
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      - "cc.xfl12345.code.share.docker.setup.localbuild=true"
     container_name: jenkins
     # image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
     image: jenkins/jenkins:lts-jdk17-xfl

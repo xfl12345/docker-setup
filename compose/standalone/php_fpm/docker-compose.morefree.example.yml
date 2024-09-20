@@ -3,6 +3,9 @@
 # official docs URL=https://github.com/docker-library/docs/blob/master/php/README.md
 services:
   php_fpm:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      - "cc.xfl12345.code.share.docker.setup.localbuild=true"
     container_name: php-fpm
     # image: php:8.3.3-fpm-bookworm
     image: php-fpm-bookworm-xfl:7.4
