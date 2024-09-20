@@ -1,0 +1,16 @@
+
+# official repo URL=https://github.com/linuxserver/docker-libreoffice
+services:
+  libreoffice:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/libreoffice/docker.env
+        required: false
+    image: linuxserver/libreoffice:latest
+    container_name: libreoffice
+    volumes:
+      - /media/justsave/docker/volume/libreoffice/config:/config
+    restart: always

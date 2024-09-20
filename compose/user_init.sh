@@ -18,6 +18,7 @@ my_id_map["code-server"]=2006
 my_id_map["peerbanhelper"]=2007
 my_id_map["transmission"]=2008
 my_id_map["gitea"]=2009
+my_id_map["libreoffice"]=2010
 # gitlab user
 my_id_map["gitlab"]=3001
 my_id_map["gitlab-consul"]=3002
@@ -37,6 +38,7 @@ my_app_user_dir_map["www-data:www-data"]="/media/justsave/wwwlogs/"
 my_app_user_dir_map["metacubex:metacubex"]="$my_docker_volume_dir/clash_meta/"
 my_app_user_dir_map["jenkins:jenkins"]="$my_docker_volume_dir/jenkins/"
 my_app_user_dir_map["gitea:gitea"]="$my_docker_volume_dir/gitea/"
+my_app_user_dir_map["libreoffice:libreoffice"]="$my_docker_volume_dir/libreoffice/"
 my_app_user_dir_map["qbtuser:qbtuser"]="$my_docker_volume_dir/qbittorrent_nox/"
 my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/BT/"
 my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/PT/"
