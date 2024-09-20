@@ -23,6 +23,7 @@
 ## 食用准备
 
 - 需要运行一次 `./compose/user_init.sh` ，然后再跑容器。
+- （可选）运行一次 `./compose/local_build_image_update.sh install` 用以实现自动更新通过本地构建镜像的容器。
 
 ## WebAPP 端口号分配
 
