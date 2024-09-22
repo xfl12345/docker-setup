@@ -1,0 +1,28 @@
+# version: '3.5'
+
+# official repo URL=https://github.com/kalcaddle/kodbox
+# official docs URL=https://docs.kodcloud.com/
+services:
+  kodbox:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/kodbox/docker.env
+        required: false
+    container_name: kodbox
+    image: kodcloud/kodbox:latest
+    depends_on:
+      - kodbox_redis
+    volumes:
+      # 站点目录
+      - /media/justsave/docker/volume/kodbox/site:/var/www/html
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: always
+
+  kodbox_redis:
+    container_name: kodbox-redis
+    image: redis:alpine
+    restart: always

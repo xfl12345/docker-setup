@@ -1,0 +1,14 @@
+networks:
+  kodbox-docker-bridge:
+    name: kodbox-docker-bridge
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 172.20.5.0/24
+          gateway: 172.20.5.1
+          ip_range: 172.20.5.0/24
+        - subnet: fd00:dcdc:5::/64
+    driver_opts:
+      com.docker.network.bridge.name: br-kodbox0
+

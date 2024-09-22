@@ -59,7 +59,7 @@
 |28044|n.eko|
 |28045|libreoffice|
 |28046|mayfly-go|
-|28047|`reserved`|
+|28047|kodbox|
 |28048|PeerBanHelper|
 |28049~28099|`reserved`|
 
@@ -87,6 +87,7 @@
 |`purplei2p/i2pd`|`latest`|
 |`linuxserver/libreoffice`|`latest`|
 |`jenkins/jenkins`|`lts-jdk17`|
+|`kodcloud/kodbox`|`latest`|
 |`mariadb`|`11`|
 |`https://gitee.com/dromara/mayfly-go.git`|`v1.8.8`|
 |`irinesistiana/mosdns`|`v5.3.1`|

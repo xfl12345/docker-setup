@@ -1,0 +1,23 @@
+services:
+  kodbox:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: kodbox
+    networks:
+      kodbox-docker-bridge:
+        ipv4_address: "172.20.5.2"
+        ipv6_address: "fd00:dcdc:5::2"
+    ports:
+      - "127.0.0.1:28047:80"
+
+  kodbox_redis:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: kodbox_redis
+    networks:
+      kodbox-docker-bridge:
+        ipv4_address: "172.20.5.3"
+        ipv6_address: "fd00:dcdc:5::3"
+
+include:
+  - ./docker-compose.network.yml
