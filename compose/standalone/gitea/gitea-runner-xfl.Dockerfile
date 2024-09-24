@@ -5,5 +5,6 @@ RUN apk add busybox bash bash-doc bash-completion bash-completion-doc mandoc man
 RUN apk add iptables ip6tables iproute2 ipset
 RUN apk add curl wget
 COPY --from=clash /mihomo /mihomo
-COPY --chmod=+x ./entrypoint.sh /entrypoint.sh
+# COPY --chmod=07777 ./entrypoint.sh /entrypoint.sh
+COPY --chmod=777 ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/sbin/tini", "--" ,"/entrypoint.sh" ]
