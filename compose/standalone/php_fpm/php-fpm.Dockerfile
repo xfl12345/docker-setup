@@ -12,7 +12,7 @@ RUN apt install -y unixodbc-dev libcurl4-openssl-dev libsqlite3-dev libbz2-dev l
 # ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 # ADD ./install-php-extensions /usr/local/bin/
-RUN chmod 755 /usr/local/bin/install-php-extensions
+RUN chmod 0755 /usr/local/bin/install-php-extensions
 # RUN install-php-extensions cmath bz2 calendar exif ftp gettext mysqli zip
 RUN install-php-extensions bcmath bz2 calendar dba enchant exif ffi ftp gd gettext gmp imap intl ldap mysqli
 RUN install-php-extensions oci8 odbc opcache pcntl pdo_dblib pdo_firebird pdo_mysql pdo_oci pdo_odbc pdo_pgsql pgsql pspell 
