@@ -14,9 +14,13 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 # ADD ./install-php-extensions /usr/local/bin/
 RUN chmod 0755 /usr/local/bin/install-php-extensions
 # RUN install-php-extensions cmath bz2 calendar exif ftp gettext mysqli zip
-RUN install-php-extensions bcmath bz2 calendar dba enchant exif ffi ftp gd gettext gmp imap intl ldap mysqli
-RUN install-php-extensions oci8 odbc opcache pcntl pdo_dblib pdo_firebird pdo_mysql pdo_oci pdo_odbc pdo_pgsql pgsql pspell 
-RUN install-php-extensions shmop snmp soap sockets sysvmsg sysvsem sysvshm tidy xsl zip
+RUN install-php-extensions bcmath bz2 calendar dba enchant exif 
+RUN install-php-extensions ffi ftp gd gettext gmp imap intl ldap mysqli
+RUN install-php-extensions oci8 odbc opcache pcntl 
+RUN install-php-extensions pdo_dblib pdo_firebird pdo_mysql pdo_oci pdo_odbc pdo_pgsql
+RUN install-php-extensions pgsql pspell 
+RUN install-php-extensions shmop snmp soap sockets 
+RUN install-php-extensions sysvmsg sysvsem sysvshm tidy xsl zip
 # # Fix ODBC installation. For more https://github.com/docker-library/php/issues/103
 # RUN ln -s /usr/include /usr/local/incl
 # RUN docker-php-ext-configure odbc --with-unixODBC=shared,/usr
