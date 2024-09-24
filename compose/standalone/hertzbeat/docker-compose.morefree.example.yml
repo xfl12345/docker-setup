@@ -20,4 +20,17 @@ services:
       - /media/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    depends_on:
+      - hertzbeat_docker_socket_relay
+    restart: always
+
+  hertzbeat_docker_socket_relay:
+    image: alpine/socat:latest
+    container_name: hertzbeat-docker-socket-relay
+    command: "-d2 tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
+    # logging:
+    #   driver: journald
+    volumes:
+      # 挂载 docker socket ，直通宿主机
+      - /var/run/docker.sock:/var/run/docker.sock
     restart: always

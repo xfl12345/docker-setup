@@ -1,0 +1,14 @@
+networks:
+  hertzbeat-docker-bridge:
+    name: hertzbeat-docker-bridge
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: 172.20.6.0/24
+          gateway: 172.20.6.1
+          ip_range: 172.20.6.0/24
+        - subnet: fd00:dcdc:6::/64
+    driver_opts:
+      com.docker.network.bridge.name: br-hertzbeat0
+

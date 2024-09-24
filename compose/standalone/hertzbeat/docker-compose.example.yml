@@ -3,7 +3,19 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: hertzbeat
-    network_mode: bridge
+    networks:
+      - hertzbeat-docker-bridge
     ports:
       - "127.0.0.1:28018:1157"
       - "127.0.0.1:1158:1158"
+
+
+  hertzbeat_docker_socket_relay:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: hertzbeat_docker_socket_relay
+    networks:
+      - hertzbeat-docker-bridge
+
+include:
+  - ./docker-compose.network.yml

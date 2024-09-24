@@ -114,14 +114,6 @@ services:
   #     mariadb:
   #       condition: service_healthy
 
-  # hertzbeat:
-  #   extends:
-  #     file: ../standalone/hertzbeat/docker-compose.yml
-  #     service: hertzbeat
-  #   depends_on:
-  #     mariadb:
-  #       condition: service_healthy
-
   # glances:
   #   extends:
   #     file: ../standalone/glances/docker-compose.yml
