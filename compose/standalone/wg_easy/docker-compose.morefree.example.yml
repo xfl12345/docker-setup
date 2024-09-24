@@ -9,7 +9,7 @@ services:
       - path: /media/justsave/docker/env/wg_easy/docker.env
         required: true
     container_name: wg-easy
-    image: ghcr.io/wg-easy/wg-easy
+    image: ghcr.io/wg-easy/wg-easy:latest
     pull_policy: always
     cap_add:
       - NET_ADMIN

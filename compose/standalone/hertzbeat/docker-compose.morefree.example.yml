@@ -10,7 +10,7 @@ services:
       - path: /media/justsave/docker/env/hertzbeat/docker.env
         required: false
     container_name: hertzbeat
-    image: apache/hertzbeat
+    image: apache/hertzbeat:latest
     pull_policy: always
     volumes:
       - /media/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data

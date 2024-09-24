@@ -70,9 +70,9 @@
 | 镜像名 | tag |
 |-:|:-|
 |`neilpang/acme.sh`|`latest`|
-|`busybox`|NULL|
+|`busybox`|`latest`|
 |`metacubex/mihomo`|`v1.18.6`|
-|`ghcr.io/metacubex/metacubexd`|NULL|
+|`ghcr.io/metacubex/metacubexd`|`latest`|
 |`codercom/code-server`|`latest`|
 |`ghcr.io/curl/curl-container/curl`|`master`|
 |`jeessy/ddns-go`|`latest`|
@@ -83,7 +83,7 @@
 |`headscale/headscale`|`0.22.3`|
 |`ifargle/headscale-webui`|`latest`|
 |`tailscale/tailscale`|`latest`|
-|`apache/hertzbeat`|NULL|
+|`apache/hertzbeat`|`latest`|
 |`purplei2p/i2pd`|`latest`|
 |`linuxserver/libreoffice`|`latest`|
 |`jenkins/jenkins`|`lts-jdk17`|
@@ -92,7 +92,7 @@
 |`https://gitee.com/dromara/mayfly-go.git`|`v1.8.8`|
 |`irinesistiana/mosdns`|`v5.3.1`|
 |`m1k1o/neko`|`chromium`|
-|`netdata/netdata`|NULL|
+|`netdata/netdata`|`latest`|
 |`gravitl/netclient`|`v0.25.0`|
 |`gravitl/netmaker`|`v0.25.0`|
 |`gravitl/netmaker-ui`|`v0.25.0`|
@@ -100,7 +100,7 @@
 |`nginx`|`latest`|
 |`ghostchu/peerbanhelper`|`latest`|
 |`php`|`7.4-fpm-bullseye`|
-|`phpmyadmin`|NULL|
+|`phpmyadmin`|`latest`|
 |`portainer/portainer-ce`|`latest`|
 |`ghcr.io/heyputer/puter`|`sha-ec31007`|
 |`linuxserver/qbittorrent`|`latest`|
@@ -109,8 +109,8 @@
 |`tsl0922/ttyd`|`alpine`|
 |`ubuntu`|`24.04`|
 |`watchtower`|`latest`|
-|`ghcr.io/wg-easy/wg-easy`|NULL|
-|`neilpang/wgcf-docker`|NULL|
+|`ghcr.io/wg-easy/wg-easy`|`latest`|
+|`neilpang/wgcf-docker`|`latest`|
 |`curriculum-vitae-web-server`|NULL|
 |`teddysun/xray`|`latest`|
 |`wxhere/bitcomet`|`latest`|

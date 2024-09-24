@@ -11,7 +11,7 @@ services:
         required: true # default
       - path: /media/justsave/docker/env/netdata/docker.env
         required: false
-    image: netdata/netdata
+    image: netdata/netdata:latest
     container_name: netdata
     volumes:
       - /media/justsave/docker/volume/netdata/config:/etc/netdata

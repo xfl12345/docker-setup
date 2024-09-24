@@ -4,7 +4,7 @@
 services:
   wgcf:
     container_name: wgcf
-    image: neilpang/wgcf-docker
+    image: neilpang/wgcf-docker:latest
     sysctls:
       # - net.ipv6.conf.default.disable_ipv6=0
       # - net.ipv6.conf.default.autoconf=1

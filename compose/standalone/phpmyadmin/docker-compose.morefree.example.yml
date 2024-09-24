@@ -12,7 +12,7 @@ services:
       - path: /media/justsave/docker/env/phpmyadmin/docker.env
         required: false
     container_name: phpmyadmin
-    image: phpmyadmin
+    image: phpmyadmin:latest
     pull_policy: always
     volumes:
       # 持久化

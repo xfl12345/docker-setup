@@ -24,7 +24,7 @@ services:
   # official repo URL=https://github.com/MetaCubeX/metacubexd
   metacubexd:
     container_name: metacubexd
-    image: ghcr.io/metacubex/metacubexd
+    image: ghcr.io/metacubex/metacubexd:latest
     pull_policy: always
     restart: always
     user: "2002"
