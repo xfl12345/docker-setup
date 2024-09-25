@@ -61,7 +61,8 @@
 |28046|mayfly-go|
 |28047|kodbox|
 |28048|PeerBanHelper|
-|28049~28099|`reserved`|
+|28049|frigate|
+|28050~28099|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）  
 
@@ -77,6 +78,7 @@
 |`ghcr.io/curl/curl-container/curl`|`master`|
 |`jeessy/ddns-go`|`latest`|
 |`debian`|`bookworm`|
+|`ghcr.io/blakeblackshear/frigate`|`stable`|
 |`gitea/gitea`|`1.22`|
 |`yrzr/gitlab-ce-arm64v8`|`16.10.1-ce.0`|
 |`nicolargo/glances`|`latest-full`|
