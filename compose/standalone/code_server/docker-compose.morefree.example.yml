@@ -26,6 +26,8 @@ services:
       - /media/justsave/docker/volume/code_server/home/.local:/home/coder/.local
       - /media/justsave/docker/volume/code_server/home/.config:/home/coder/.config
       - /media/justsave/docker/volume/code_server/home/project:/home/coder/project
+      # Fix BUG https://github.com/coder/code-server/issues/2767
+      - ./entrypoint.sh:/usr/bin/entrypoint.sh
       # # 挂载 docker socket ，直通宿主机
       # - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
