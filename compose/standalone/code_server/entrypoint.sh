@@ -5,7 +5,7 @@ set -eu
 # Otherwise the current container UID may not exist in the passwd database.
 eval "$(fixuid -q)"
 
-echo "DOCKER_USER=[${DOCKER_USER}]"
+echo "DOCKER_USER=[${DOCKER_USER-}]"
 echo "whoami=[$(whoami)]"
 echo "cat /etc/passwd >>>"
 cat /etc/passwd
