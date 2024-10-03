@@ -143,7 +143,10 @@ if [[ x"$MY_DOCKER_APP_USER_GROUP_NAME" == "x" ]]; then
     MY_DOCKER_APP_USER_GROUP_NAME="$MY_DOCKER_APP_USER_NAME"
 fi
 if [[ x"$MY_DOCKER_APP_USER_HOME" == "x" ]]; then
-    MY_DOCKER_APP_USER_HOME="/home/${MY_DOCKER_APP_USER_NAME}"
+    MY_DOCKER_APP_USER_HOME="$(getent passwd $MY_DOCKER_APP_USER_NAME | cut -d: -f6)"
+    if [[ x"$MY_DOCKER_APP_USER_HOME" == "x" ]]; then
+        MY_DOCKER_APP_USER_HOME="/home/${MY_DOCKER_APP_USER_NAME}"
+    fi
 fi
 if [[ x"$MY_DOCKER_APP_USER_SHELL" == "x" ]]; then
     if [[ "$(test_cmd_exist bash)" == "y" ]]; then
