@@ -14,7 +14,6 @@ services:
     # image: ghcr.io/heyputer/puter:latest
     image: ghcr.io/heyputer/puter:sha-ec31007
     pull_policy: always
-    # build: ./
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://puter.local:4100/test || exit 1
       interval: 30s

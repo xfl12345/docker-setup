@@ -9,7 +9,6 @@ from loguru import logger
 from python_on_whales import docker as docker_cli
 from python_on_whales.exceptions import DockerException
 
-
 origin_working_dir = os.getcwd()
 # 连接到 Docker 守护进程
 client = docker.from_env()
@@ -18,12 +17,6 @@ label_filter = {"label": "cc.xfl12345.code.share.docker.setup.localbuild=true"}
 
 # 获取所有容器（不包括未运行的）
 containers = client.containers.list(all=False, filters=label_filter)
-
-# class JobItem:
-#     def __init__(self, docker_labels: dict):
-#         self.project_name = docker_labels["com.docker.compose.project"]
-#         self.project_config_files = docker_labels["com.docker.compose.project.config_files"]
-#         self.project_working_dir = docker_labels["com.docker.compose.project.working_dir"]
 
 the_project_map = {}
 the_project_config_files_map = {}
@@ -53,28 +46,6 @@ def fetch_service_build_context(root: dict) -> list:
 
 not_supported_docker_build_context_prefixs = ("http://", "https://", "git://", "git+https://", "git+http://", "git+ssh://")
 cache_os_path_seprator = os.path.sep
-# def get_docker_compose_dockerfile_path(docker_build_context: dict, current_working_dir: str) -> list:
-#     result = []
-#     v_dockerfile: str = docker_build_context.get("dockerfile")
-#     v_context: str = docker_build_context["context"]
-#     context_list = [ v_context ]
-#     if "additional_contexts" in docker_build_context:
-#         additional_contexts = docker_build_context["additional_contexts"]
-#         if isinstance(additional_contexts, dict):
-#             context_list += list(additional_contexts.values())
-#         else:
-#             for context_item in additional_contexts:
-#                 equal_sign_index = context_item.find("=")
-#                 if equal_sign_index > 0 and equal_sign_index + 1 < len(context_item):
-#                     context_list.append(context_item[equal_sign_index + 1:])
-#     for context_item in context_list:
-#         if not context_item.lower().startswith(not_supported_docker_build_context_prefixs):
-#             # resolve local file only
-#             if context_item.startswith(cache_os_path_seprator) or context_item.startswith('.' + cache_os_path_seprator):
-#                 the_path = Path(current_working_dir).joinpath(os.path.join(context_item, v_dockerfile)).resolve()
-#                 if os.path.exists(the_path):
-#                     result.append(the_path)
-#     return result
 def get_docker_compose_dockerfile_path(docker_build_context: dict, current_working_dir: str) -> str:
     result = ""
     v_dockerfile: str = docker_build_context.get("dockerfile")
@@ -90,15 +61,6 @@ def get_docker_compose_dockerfile_path(docker_build_context: dict, current_worki
 
 def append_docker_image_tags(line:str, tags:list):
     line = line.rstrip()
-    # match = re.match(r"FROM\s+(.*?)(?::(\w+))?\s*(AS\s+\w+)?", line)
-    # match = re.match(r"FROM\s+(\w+)(:(\w+))?\s*(AS\s+\w+)?", line)
-    # if match:
-    #     image = match.group(1)
-    #     tag = match.group(3) if match.group(3) else "latest"  # 如果没有指定tag，则默认为latest
-    #     # alias = match.group(4) if match.group(4) else ""  # 提取别名，如果有的话
-    #     # if alias:
-    #     #     print("Alias:", alias.split(' ', 1)[-1])  # 去除可能的空格并获取别名
-    #     tags.append(f"{image}:{tag}")
     if line.startswith("FROM"):
         tag = ""
         meet_index = 0
@@ -146,7 +108,6 @@ for item_name, the_container_working_dir in the_project_map.items():
                     with open(docker_compose_dockerfile_path) as file:
                         for line in file:
                             append_docker_image_tags(line, docker_image_tag_list)
-        # print(docker_image_list)
         last_time = 0
         success = False
         for retry_count in range(3):
