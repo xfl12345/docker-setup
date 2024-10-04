@@ -13,6 +13,7 @@ services:
     build:
       context: ./
       dockerfile: php-fpm.Dockerfile
+      pull: true
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro

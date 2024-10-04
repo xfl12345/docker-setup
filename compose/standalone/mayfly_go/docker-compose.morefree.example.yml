@@ -17,6 +17,7 @@ services:
     build:
       context: https://gitee.com/dromara/mayfly-go.git#v1.8.8
       dockerfile: Dockerfile
+      pull: true
     pull_policy: build
     container_name: mayfly-go
     volumes:

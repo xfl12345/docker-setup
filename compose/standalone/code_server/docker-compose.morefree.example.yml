@@ -20,6 +20,7 @@ services:
     build:
       context: ./
       dockerfile: code-server-xfl.Dockerfile
+      pull: true
     user: "2006:2006"
     volumes:
       # 持久化

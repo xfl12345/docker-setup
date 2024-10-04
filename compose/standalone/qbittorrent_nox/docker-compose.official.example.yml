@@ -30,6 +30,7 @@ services:
       #   - ALL_PROXY=socks5://host.docker.internal:7890
       # extra_hosts:
       #   - "host.docker.internal:host-gateway"
+      pull: true
     # for debugging
     cap_add:
       - SYS_PTRACE

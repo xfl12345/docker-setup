@@ -22,5 +22,6 @@ services:
       additional_contexts:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: i2pd-xfl.Dockerfile
+      pull: true
     volumes:
       - /media/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data

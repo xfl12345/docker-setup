@@ -10,6 +10,7 @@ services:
     build:
       context: ./
       dockerfile: bookworm.Dockerfile
+      pull: true
     restart: "no"
     devices:
       - /dev/mem:/dev/mem

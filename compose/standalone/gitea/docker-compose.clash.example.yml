@@ -26,6 +26,7 @@ services:
     build:
       context: ./
       dockerfile: gitea-runner-xfl.Dockerfile
+      pull: true
     cap_add:
       - NET_ADMIN
     volumes:

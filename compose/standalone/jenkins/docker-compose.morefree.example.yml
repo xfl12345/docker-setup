@@ -23,6 +23,7 @@ services:
       additional_contexts:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: jenkins-xfl.Dockerfile
+      pull: true
     security_opt:
       - apparmor=unconfined
     hostname: jenkins

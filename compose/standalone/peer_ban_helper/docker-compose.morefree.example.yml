@@ -22,5 +22,6 @@ services:
       additional_contexts:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: peerbanhelper-xfl.Dockerfile
+      pull: true
     volumes:
       - /media/justsave/docker/volume/peer_ban_helper/app/data:/app/data

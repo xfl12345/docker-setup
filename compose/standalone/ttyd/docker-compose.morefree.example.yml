@@ -22,6 +22,7 @@ services:
       additional_contexts:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: ttyd-xfl.Dockerfile
+      pull: true
     # command: "ttyd --writable --ipv6 --port 28041 bash"
     volumes:
       # 持久化

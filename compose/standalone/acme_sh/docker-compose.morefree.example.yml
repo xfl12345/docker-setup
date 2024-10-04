@@ -16,6 +16,7 @@ services:
     build:
       context: ./
       dockerfile: acme-sh-bundle-with-docker.Dockerfile
+      pull: true
     restart: always
     command: daemon
     volumes:
