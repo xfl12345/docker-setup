@@ -1,0 +1,23 @@
+# official repo URL=
+services:
+  xfl_local_build_image_updater:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /media/justsave/docker/env/xfl_local_build_image_updater/docker.env
+        required: false
+    container_name: xfl-local-build-image-updater
+    image: xfl_local_build_image_updater
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /media/justsave/docker/compose/build_resource
+      dockerfile: xfl.Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /media/justsave/docker/compose:/media/justsave/docker/compose:ro
+      # - /media/justsave/docker/volume/docker_setup/log:/media/justsave/docker/volume/docker_setup/log
+      # - ./app/updater.py:/app/updater.py

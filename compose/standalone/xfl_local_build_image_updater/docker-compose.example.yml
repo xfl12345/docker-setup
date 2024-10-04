@@ -1,0 +1,6 @@
+services:
+  xfl_local_build_image_updater:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: xfl_local_build_image_updater
+    network_mode: bridge
