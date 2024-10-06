@@ -16,9 +16,25 @@ check_and_apply_env_if_not_found() {
     fi
 }
 
+check_and_apply_env_if_found() {
+    the_env_key=$1
+    declare -n ref_to_var="${the_env_key}"  
+    if [[ x"${ref_to_var}" != "x" ]]; then
+        echo "ENV[${the_env_key}] has been defined as [${ref_to_var}]. Writing to [/etc/environment]..."
+        echo "${the_env_key}=${ref_to_var}" >> /etc/environment
+    fi
+}
+
 check_and_apply_env_if_not_found "CRON_SCHEDULE"
 # check_and_apply_env_if_not_found "LOG_DIR"
 check_and_apply_env_if_not_found "SCRIPT_PATH"
+
+check_and_apply_env_if_found "HTTP_PROXY"
+check_and_apply_env_if_found "HTTPS_PROXY"
+check_and_apply_env_if_found "ALL_PROXY"
+check_and_apply_env_if_found "http_proxy"
+check_and_apply_env_if_found "https_proxy"
+check_and_apply_env_if_found "all_proxy"
 
 # CRON_JOB="${CRON_SCHEDULE} ${SCRIPT_PATH} >> $LOG_DIR/local_build_image_update.log &"
 CRON_JOB="${CRON_SCHEDULE} ${SCRIPT_PATH} &"
