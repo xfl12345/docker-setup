@@ -1,28 +1,5 @@
 #!/bin/bash
 
-# my_ifs=' '
-# for (( i=0; i<${#IFS}; i++ )); do
-#     local char="${IFS:i:1}"
-#     case "$char" in
-#         $'\n')
-#             char='\n'
-#             ;;
-#         $'\t')
-#             char='\t'
-#             ;;
-#         ' ')
-#             char=' '
-#             ;;
-#         *)
-#             ; # do nothing
-#             ;;
-#     esac
-#     # if [[ "${#char}" -eq 1 ]]; then
-#     #     my_ifs="$char"
-#     #     break
-#     # fi
-# done
-
 just_get_ifs_char() {
     local my_ifs=${IFS:0:1}
     case "$my_ifs" in
@@ -48,10 +25,6 @@ just_get_ifs_char() {
 test_cmd_exist() {
     local tmp_result="y"
     for item in $(echo "$1" | tr ' ' "$(just_get_ifs_char)"); do
-        # if [[ x"$(which $item 2>/dev/null)" == "x" ]]; then
-        #     tmp_result="n"
-        #     break
-        # fi
         command -v "$item" >/dev/null 2>&1
         if [[ x"$?" != "x0" ]]; then
             tmp_result="n"
@@ -61,53 +34,13 @@ test_cmd_exist() {
     echo "$tmp_result"
 }
 
-# if [[ "$(test_cmd_exist 'groupadd useradd usermod')" == "y" ]]; then
-#     # $1 group name
-#     # $2 group ID
-#     my_create_group() {
-#         groupadd --gid $2 $1
-#     }
-
-#     # $1 group ID list
-#    my_create_groups() {
-#        for item in $(echo "$1" | tr ',' ' '); do
-#            item=$((10#$item))
-#            local _group_name="$(getent group $item 2>/dev/null| awk -F':' '{print $1}')"
-#            if [[ -z "$_group_name" ]]; then
-#                _group_name=$item
-#            fi
-#            my_create_group $_group_name $item
-#        done
-#    }
-
-#     # $1 user name
-#     # $2 user group name
-#     # $3 user ID
-#     # $4 user extra group name list
-#     # $5 user shell
-#     # $6 user home
-#     my_create_user() {
-#         local _uname=$1
-#         local _gname=$2
-#         local _uid=$3
-#         local _add_groups=$4
-#         local _ushell=$5
-#         local _uhome=$6
-#         useradd -u $_uid -g $_gname -G $_add_groups -s $_ushell -d "$_uhome" $_uname
-#     }
-
-#     # $1 user name
-#     # $2 group name
-#     my_add_user_to_group() {
-#         usermod -aG $2 $1
-#     }
-
-# else
-# fi
-
 if [ -n "$TZ" ]; then
     ln -snf /usr/share/zoneinfo/$TZ /etc/localtime
-    echo $TZ > /etc/timezone
+    if [[ "$(test_cmd_exist timedatectl)" == "y" ]]; then
+        timedatectl set-timezone $TZ
+    else
+        echo "$TZ" > /etc/timezone
+    fi
 fi
 
 if [[ x"$MY_DOCKER_APP_USER_NAME" == "x" && x"$PUID" == "x" ]]; then
