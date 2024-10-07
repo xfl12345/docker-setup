@@ -1,4 +1,4 @@
-# Headscale
+# headscale
 
 ## Official URL
 
