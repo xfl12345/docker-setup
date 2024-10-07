@@ -23,6 +23,8 @@
 ## 食用准备
 
 - 需要运行一次 `./compose/user_init.sh` ，然后再跑容器。
+- 配合 `./compose/standalone` 各个 APP 目录里的 `README.MD` 食用。  
+  （注意，这些 `README.MD` 不一定是最新的，不一定跟得上官方发布的新版本。如有过时内容，欢迎提交 PR 修正）
 
 ## WebAPP 端口号分配
 
