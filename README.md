@@ -63,9 +63,9 @@
 |28049|frigate|
 |28050~28099|`reserved`|
 
-## Docker Tag 指定情况 （不含强依赖镜像）  
+## Docker Tag 指定情况 （不含强依赖镜像）
 
-- 所谓“强依赖”，指的是官方文档指定的版本号，但不是全局版本唯一的镜像。  
+- 所谓“强依赖”，指的是某些 APP 官方指定的版本，但不服务于全局环境使用的其它镜像。  
 
 | 镜像名 | tag |
 |-:|:-|
@@ -115,3 +115,46 @@
 |`curriculum-vitae-web-server`|NULL|
 |`teddysun/xray`|`latest`|
 |`wxhere/bitcomet`|`latest`|
+
+## LINUX 账户分配
+
+### 同名同ID的部分
+
+- 这部分表格枚举的都是 用户名 和 组名 相同，UID 和 GID 相同的账户
+
+| 用户名 | ID |
+|-:|:-|
+|www-data|33|
+|metacubex|2002|
+|`reserve`|2003|
+|jenkins|2004|
+|qbtuser|2005|
+|code-server|2006|
+|peerbanhelper|2007|
+|transmission|2008|
+|gitea|2009|
+|libreoffice|2010|
+|`reserve`|`2011~3000`|
+|gitlab|3001|
+|gitlab-consul|3002|
+|gitlab-mattermost|3003|
+|gitlab-prometheus|3004|
+|gitlab-psql|3005|
+|gitlab-redis|3006|
+|gitlab-registry|3007|
+|gitlab-www|3008|
+
+### 独立组的部分
+
+| 组名 | ID |说明|
+|-:|:-|:-|
+|`reserve`|`1500~1998`|预留分配|
+|btuser|1999|能读写BitTorrent公共下载目录的用户组|
+|docker|2000|能读写 Docker Unix Domain Socket 的用户组|
+
+### 用户额外追加组的部分
+
+| 用户名 | 组名 |
+|-:|:-|
+|qbtuser|btuser|
+|jenkins|docker|
