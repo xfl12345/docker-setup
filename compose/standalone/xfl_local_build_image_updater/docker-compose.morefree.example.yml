@@ -22,3 +22,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /media/justsave/docker/compose:/media/justsave/docker/compose:ro
+    restart: always

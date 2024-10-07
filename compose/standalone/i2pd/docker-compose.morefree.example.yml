@@ -25,3 +25,4 @@ services:
       pull: true
     volumes:
       - /media/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
+    restart: always
