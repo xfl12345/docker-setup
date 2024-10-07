@@ -81,7 +81,8 @@ docker compose up -d --remove-orphans headscale
 docker compose up -d --remove-orphans headscale_webui
 ```
 
-- 按 [官方文档](https://headscale.net/running-headscale-container/) 完成 headscale 初始化
+- 按 [官方文档](https://headscale.net/running-headscale-container/) 完成 headscale 初始化  
+  容器配置部分可以跳过，其余环节请结合本项目的约定来完成配置。例如约定好的 WebAPI 端口号
 - 执行 `docker compose up -d --remove-orphans`
 - 执行 `docker exec -it tailscale-client sh` 进入 tailscale 容器内部
 - 在 tailscale 容器内部，按官方文档完成节点添加  
