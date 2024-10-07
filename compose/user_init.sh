@@ -87,6 +87,7 @@ just_add_user_to_group() {
 
 just_add_user_to_group qbtuser btuser
 just_add_user_to_group jenkins docker
+just_add_user_to_group gitea docker
 
 __the_path=""
 get_real_path() {

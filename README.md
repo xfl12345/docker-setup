@@ -158,3 +158,4 @@
 |-:|:-|
 |qbtuser|btuser|
 |jenkins|docker|
+|gitea|docker|
