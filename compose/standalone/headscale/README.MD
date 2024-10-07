@@ -81,13 +81,11 @@ docker compose up -d --remove-orphans headscale
 docker compose up -d --remove-orphans headscale_webui
 ```
 
-- 按官方文档完成 headscale 初始化
+- 按 [官方文档](https://headscale.net/running-headscale-container/) 完成 headscale 初始化
 - 执行 `docker compose up -d --remove-orphans`
 - 执行 `docker exec -it tailscale-client sh` 进入 tailscale 容器内部
 - 在 tailscale 容器内部，按官方文档完成节点添加  
-  - 参考文档  
-    - [https://tailscale.com/kb/1080/cli#login](https://tailscale.com/kb/1080/cli#login)
-    - [https://tailscale.com/kb/1080/cli#login](https://tailscale.com/kb/1080/cli#login)
+  - 参考文档 [https://tailscale.com/kb/1080/cli#login](https://tailscale.com/kb/1080/cli#login)
   - 假设 headscale 域名是 `headscale.hello.xfl12345`  
     那就执行 `tailscale login --login-server=https://headscale.hello.xfl12345:2083`  
     您会获得一个 key ，复制，打开 WebUI 管理页面 [https://headscale.hello.xfl12345:2083/admin/machines](https://headscale.hello.xfl12345:2083/admin/machines)  
