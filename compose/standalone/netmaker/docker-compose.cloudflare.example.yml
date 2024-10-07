@@ -5,7 +5,7 @@ name: netmaker_cloudflare
 services:
   netclient:
     extends:
-      file: ./docker-compose.common.yml
+      file: ./docker-compose.morefree.example.yml
       service: netclient
     env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker-client.env
     volumes:
@@ -13,7 +13,7 @@ services:
 
   netmaker:
     extends:
-      file: ./docker-compose.common.yml
+      file: ./docker-compose.morefree.example.yml
       service: netmaker
     env_file:
       - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
@@ -25,13 +25,13 @@ services:
 
   netmaker_ui:
     extends:
-      file: ./docker-compose.common.yml
+      file: ./docker-compose.morefree.example.yml
       service: netmaker_ui
     env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker-ui.env
 
   coredns:
     extends:
-      file: ./docker-compose.common.yml
+      file: ./docker-compose.morefree.example.yml
       service: coredns
     env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
     volumes:
@@ -40,13 +40,10 @@ services:
 
   mq:
     extends:
-      file: ./docker-compose.common.yml
+      file: ./docker-compose.morefree.example.yml
       service: mq
     env_file: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
     volumes:
       # storage for mqtt
       - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/logs:/mosquitto/log
       - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/data:/mosquitto/data
-
-include:
-  - ./docker-compose.cloudflare.network.yml

@@ -1,28 +1,28 @@
 services:
   netclient:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ./docker-compose.cloudflare.example.yml
       service: netclient
     network_mode: host
 
   netmaker:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ./docker-compose.cloudflare.example.yml
       service: netmaker
 
   netmaker_ui:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ./docker-compose.cloudflare.example.yml
       service: netmaker_ui
 
   coredns:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ./docker-compose.cloudflare.example.yml
       service: coredns
 
   mq:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ./docker-compose.cloudflare.example.yml
       service: mq
 
 include:
