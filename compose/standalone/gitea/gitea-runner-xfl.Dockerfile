@@ -1,7 +1,9 @@
 FROM metacubex/mihomo:v1.18.6 AS clash
 FROM gitea/act_runner:latest
 RUN apk update
-RUN apk add busybox bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils
+RUN mkdir -p /tmp
+COPY --chmod=644 --from=resources alpine_usually_used_packages.txt /tmp/alpine_usually_used_packages.txt
+RUN apk add $(cat /tmp/alpine_usually_used_packages.txt) && rm /tmp/alpine_usually_used_packages.txt
 RUN apk add iptables ip6tables iproute2 ipset
 RUN apk add curl wget
 COPY --from=clash /mihomo /mihomo

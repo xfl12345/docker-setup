@@ -1,6 +1,9 @@
 FROM tsl0922/ttyd:alpine
 RUN apk update
-RUN apk add openssh bash bash-doc bash-completion bash-completion-doc mandoc man-pages util-linux coreutils utmps-dev htop tzdata
+RUN mkdir -p /tmp
+COPY --chmod=644 --from=resources alpine_usually_used_packages.txt /tmp/alpine_usually_used_packages.txt
+RUN apk add $(cat /tmp/alpine_usually_used_packages.txt) && rm /tmp/alpine_usually_used_packages.txt
+RUN apk add openssh utmps-dev htop
 ENV TZ=Asia/Hong_Kong
 # RUN apk add doas
 # RUN echo "" >> /etc/doas.conf && mkdir -p "/etc/doas.d/" && echo "permit nopass :root" >> "/etc/doas.d/doas.conf"
