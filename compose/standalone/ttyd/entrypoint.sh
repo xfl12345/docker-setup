@@ -2,7 +2,7 @@
 
 . /entrypoint_common_environment_setup.sh
 
-chown $MY_DOCKER_APP_USER_NAME:$MY_DOCKER_APP_USER_NAME -Rh /var/run/ttyd
+chown $MY_DOCKER_APP_USER_NAME:$MY_DOCKER_APP_USER_GROUP_NAME -Rh /var/run/ttyd
 echo "CMD: [su $MY_DOCKER_APP_USER_NAME -c \"ttyd $TTYD_OPT\"]"
 # su -s /bin/bash ttyd -c "\"$@\""
 # exec doas -u ttyd ttyd $TTYD_OPT
