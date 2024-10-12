@@ -26,6 +26,8 @@ services:
     build:
       context: ./
       dockerfile: gitea-runner-xfl.Dockerfile
+      additional_contexts:
+        resources: /media/justsave/docker/compose/build_resource
       pull: true
     cap_add:
       - NET_ADMIN
