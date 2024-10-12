@@ -105,7 +105,7 @@ else
 fi
 
 if [[ x"$PGID" == "x" ]]; then
-    PGID=$PUID
+    PGID=$(id -g)
 else
     PGID=$((10#$PGID))
 fi
@@ -114,7 +114,12 @@ apply_env PGID
 # echo "After: PUID[$PUID] PGID[$PGID]"
 
 if [[ x"$MY_DOCKER_APP_USER_GROUP_NAME" == "x" ]]; then
-    MY_DOCKER_APP_USER_GROUP_NAME="gid_${PGID}"
+    old_groupname_id="$(getent group $MY_DOCKER_APP_USER_NAME 2>/dev/null| awk -F':' '{print $NF}')"
+    if [[ x"$old_groupname_id" == "x" ]]; then
+        MY_DOCKER_APP_USER_GROUP_NAME="gid_${PGID}"
+    else
+        MY_DOCKER_APP_USER_GROUP_NAME="$old_groupname_id"
+    fi
 fi
 if [[ x"$MY_DOCKER_APP_USER_HOME" == "x" ]]; then
     MY_DOCKER_APP_USER_HOME="$(getent passwd $MY_DOCKER_APP_USER_NAME | cut -d: -f6)"
