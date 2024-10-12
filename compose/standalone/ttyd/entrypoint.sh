@@ -1,5 +1,4 @@
-#!/bin/bash
-
+#!/usr/bin/env bash
 . /entrypoint_common_environment_setup.sh
 
 chown $MY_DOCKER_APP_USER_NAME:$MY_DOCKER_APP_USER_GROUP_NAME -Rh /var/run/ttyd
