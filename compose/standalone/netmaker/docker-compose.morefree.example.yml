@@ -4,6 +4,9 @@
 services:
 
   netclient:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     container_name: netclient
@@ -18,11 +21,13 @@ services:
     restart: always
 
   netmaker:
-    container_name: netmaker
-    image: gravitl/netmaker:v0.25.0
     env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
       - path: ./default_netmaker.env
         required: true # default
+    container_name: netmaker
+    image: gravitl/netmaker:v0.25.0
     networks:
       - netmaker-docker-bridge
     ports:
@@ -30,6 +35,9 @@ services:
     restart: always
 
   netmaker_ui:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: netmaker-ui
     image: gravitl/netmaker-ui:v0.25.0
     # environment:
@@ -65,6 +73,9 @@ services:
   #     - "443:443"
 
   coredns:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     #network_mode: host
     container_name: coredns
     image: coredns/coredns:1.10.1
@@ -78,6 +89,9 @@ services:
       - "127.0.0.1:5554:53/udp"
 
   mq:
+    env_file:
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
     container_name: mq
     image: eclipse-mosquitto:2.0.15-openssl
     depends_on:

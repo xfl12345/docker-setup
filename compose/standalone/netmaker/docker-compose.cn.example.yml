@@ -8,7 +8,9 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: netclient
     container_name: netclient-cn
-    env_file: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
+    env_file:
+      - path: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
+        required: true
     volumes:
       - /media/justsave/docker/volume/netmaker/cn/etc/netclient:/etc/netclient
 
@@ -31,14 +33,18 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: netmaker_ui
     container_name: netmaker-ui-cn
-    env_file: /media/justsave/docker/env/netmaker/cn/netmaker-ui.env
+    env_file:
+      - path: /media/justsave/docker/env/netmaker/cn/netmaker-ui.env
+        required: true
 
   coredns_cn:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: coredns
     container_name: coredns-cn
-    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    env_file:
+      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+        required: true
     volumes:
       # storage for mqtt
       - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/dnsconfig
@@ -48,7 +54,9 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: mq
     container_name: mq-cn
-    env_file: /media/justsave/docker/env/netmaker/cn/netmaker.env
+    env_file: 
+      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+        required: true
     volumes:
       # storage for mqtt
       - /media/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
