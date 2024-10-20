@@ -9,7 +9,8 @@
 !/volume/nginx/
 /volume/nginx/*
 !/volume/nginx/snippets/
-/volume/nginx/snippets/private/
+/volume/nginx/snippets/*
+!/volume/nginx/snippets/example
 !/volume/nginx/nginx.example.conf
 !/volume/nginx/conf.d/
 /volume/nginx/conf.d/*
