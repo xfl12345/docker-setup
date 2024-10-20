@@ -18,4 +18,8 @@ fi
 
 acme.sh --issue --dns $my_domain_dns -d "$my_domain" -d "*.$my_domain" --ecc --keylength ec-384 --debug
 mkdir -p /etc/nginx/ssl/$my_domain
-acme.sh --install-cert -d $my_domain --cert-file /etc/nginx/ssl/$my_domain/cert.pem --key-file /etc/nginx/ssl/$my_domain/key.pem --fullchain-file /etc/nginx/ssl/$my_domain/fullchain.pem --ecc --reloadcmd "chown 0:33 -R /etc/nginx/ssl/* && chmod 750 -R /etc/nginx/ssl/* && docker exec nginx /bin/bash -c \"nginx -t && nginx -s reload\""
+acme.sh --install-cert -d $my_domain --ecc \
+    --cert-file /etc/nginx/ssl/$my_domain/cert.pem \
+    --key-file /etc/nginx/ssl/$my_domain/key.pem \
+    --fullchain-file /etc/nginx/ssl/$my_domain/fullchain.pem \
+    --reloadcmd "chown 0:33 -R /etc/nginx/ssl/* && chmod 750 -R /etc/nginx/ssl/* && docker exec nginx /bin/bash -c \"nginx -t && nginx -s reload\""
