@@ -11,7 +11,7 @@
 # my_domain_dns="dns_cf"
 #########################################
 
-if [ x"$my_domain_dns" = "x" -o x"$my_domain" = "x" x"$ACCOUNT_EMAIL$CA_EMAIL" = "x" ]; then
+if [ x"$my_domain_dns" = "x" -o x"$my_domain" = "x" -o x"$ACCOUNT_EMAIL$CA_EMAIL" = "x" ]; then
     echo "Missing mandatory parameters! Exit..."
     exit 1
 fi
