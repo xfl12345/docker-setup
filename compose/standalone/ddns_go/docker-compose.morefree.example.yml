@@ -7,8 +7,15 @@ services:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
     container_name: ddns-go
-    image: jeessy/ddns-go:latest
-    pull_policy: always
+    image: jeessy/ddns-go:latest-xfl
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile_inline: |
+        FROM jeessy/ddns-go:latest
+        RUN apk update
+        RUN apk add bind-tools
+      pull: true
     volumes:
       - /media/justsave/docker/volume/ddns_go:/root:rw
     command: -l 127.0.0.1:9876 -f 10
