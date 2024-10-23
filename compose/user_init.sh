@@ -29,23 +29,6 @@ my_id_map["gitlab-redis"]=3006
 my_id_map["gitlab-registry"]=3007
 my_id_map["gitlab-www"]=3008
 
-# 目录拥有者 映射表
-declare -A my_app_user_dir_map
-my_app_user_dir_map["www-data:www-data"]="$my_docker_volume_dir/nginx/"
-my_app_user_dir_map["www-data:www-data"]="/media/justsave/wwwroot/download/"
-my_app_user_dir_map["www-data:www-data"]="/media/justsave/wwwlogs/"
-# my_app_user_dir_map["nginx:nginx"]="$my_docker_volume_dir/nginx/"
-my_app_user_dir_map["metacubex:metacubex"]="$my_docker_volume_dir/clash_meta/"
-my_app_user_dir_map["jenkins:jenkins"]="$my_docker_volume_dir/jenkins/"
-my_app_user_dir_map["gitea:gitea"]="$my_docker_volume_dir/gitea/"
-my_app_user_dir_map["libreoffice:libreoffice"]="$my_docker_volume_dir/libreoffice/"
-my_app_user_dir_map["qbtuser:qbtuser"]="$my_docker_volume_dir/qbittorrent_nox/"
-my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/BT/"
-my_app_user_dir_map["qbtuser:btuser"]="/media/justsave/PT/"
-my_app_user_dir_map["transmission:btuser"]="$my_docker_volume_dir/transmission/"
-my_app_user_dir_map["code-server:code-server"]="$my_docker_volume_dir/code_server/home/"
-my_app_user_dir_map["peerbanhelper:peerbanhelper"]="$my_docker_volume_dir/peer_ban_helper/app/"
-
 # $1 is group name
 # $2 is group id
 insert_or_update_group_id() {
@@ -100,8 +83,9 @@ get_real_path() {
     fi
 }
 
-for the_user_and_group in "${!my_app_user_dir_map[@]}"; do
-    the_dir=${my_app_user_dir_map[$the_user_and_group]}
+just_chown() {
+    the_user_and_group=$1
+    the_dir=$2
     get_real_path "$the_dir"
     the_dir=$__the_path
     the_user_name=$(echo "$the_user_and_group" | cut -d ":" -f 1)
@@ -113,8 +97,24 @@ for the_user_and_group in "${!my_app_user_dir_map[@]}"; do
     else
         echo "Warming: Docker volume dir[$the_dir] was not found!!! Skipped."
     fi
-done
+}
 
+just_chown "www-data:www-data" "$my_docker_volume_dir/nginx/"
+just_chown "www-data:www-data" "/media/justsave/wwwroot/download/"
+just_chown "www-data:www-data" "/media/justsave/wwwlogs/"
+# just_chown "nginx:nginx" "$my_docker_volume_dir/nginx/"
+just_chown "metacubex:metacubex" "$my_docker_volume_dir/clash_meta/"
+just_chown "jenkins:jenkins" "$my_docker_volume_dir/jenkins/"
+just_chown "gitea:gitea" "$my_docker_volume_dir/gitea/"
+just_chown "libreoffice:libreoffice" "$my_docker_volume_dir/libreoffice/"
+just_chown "qbtuser:qbtuser" "$my_docker_volume_dir/qbittorrent_nox/"
+just_chown "qbtuser:btuser" "/media/justsave/BT/"
+just_chown "qbtuser:btuser" "/media/justsave/PT/"
+just_chown "transmission:btuser" "$my_docker_volume_dir/transmission/"
+just_chown "code-server:code-server" "$my_docker_volume_dir/code_server/home/"
+just_chown "peerbanhelper:peerbanhelper" "$my_docker_volume_dir/peer_ban_helper/app/"
+
+mkdir -p /var/run/headscale/
 mkdir -p /var/run/tailscale/
 ln -s /var/run/headscale/headscale.sock /var/run/tailscale/tailscale.sock
 
