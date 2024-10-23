@@ -110,6 +110,7 @@ just_chown "transmission:btuser" "$my_docker_volume_dir/transmission/"
 just_chown "code-server:code-server" "$my_docker_volume_dir/code_server/home/"
 just_chown "peerbanhelper:peerbanhelper" "$my_docker_volume_dir/peer_ban_helper/app/"
 
+mkdir -p /var/run/headscale/
 mkdir -p /var/run/tailscale/
 ln -s /var/run/headscale/headscale.sock /var/run/tailscale/tailscale.sock
 
