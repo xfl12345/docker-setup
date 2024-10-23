@@ -46,7 +46,6 @@ insert_or_update_group_id docker 2000
 
 for the_user_name in "${!my_id_map[@]}"; do
     the_id=${my_id_map[$the_user_name]}
-    echo "$the_user_name <---> $the_id"
     insert_or_update_group_id $the_user_name $the_id
 
     if id -u $the_user_name >/dev/null 2>&1; then
@@ -75,11 +74,8 @@ just_add_user_to_group gitea docker
 __the_path=""
 get_real_path() {
     __the_path=$(realpath $the_realpath_feature_flag $1 2>&1)
-    if [ $? -eq 0 ]; then
-        echo $__the_path
-    else
+    if [ $? -ne 0 ]; then
         __the_path=$(echo $__the_path | sed -n 's#^realpath: \([^:]*\): No such file or directory$#\1#p')
-        echo $__the_path
     fi
 }
 
