@@ -3,13 +3,19 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: gitea
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
-      - "127.0.0.1:28014:3000"
-      - "22014:22"
+      - 127.0.0.1:28014:3000
+      - 22014:22
 
   gitea_runner:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: gitea_runner
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge

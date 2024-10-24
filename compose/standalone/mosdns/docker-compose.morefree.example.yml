@@ -14,9 +14,6 @@ services:
       start_interval: 1s
       timeout: 5s
       retries: 24
-    logging:
-      options:
-        max-size: "10m"
     volumes:
       - /media/justsave/docker/volume/mosdns:/etc/mosdns:rw
       # nginx ssl cert

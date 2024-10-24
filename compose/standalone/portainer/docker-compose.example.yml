@@ -3,6 +3,9 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: portainer
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
       # - 9443:9443

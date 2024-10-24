@@ -3,7 +3,10 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: peerbanhelper
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
-      - "127.0.0.1:28048:9898"
+      - 127.0.0.1:28048:9898
     restart: unless-stopped

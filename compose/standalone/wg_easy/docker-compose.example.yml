@@ -3,7 +3,10 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: wg_easy
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
-      - "51820:51820/udp"
-      - "127.0.0.1:28017:28017/tcp"
+      - 51820:51820/udp
+      - 127.0.0.1:28017:28017/tcp

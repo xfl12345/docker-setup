@@ -3,7 +3,10 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: mayfly_go
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
-      - "127.0.0.1:28046:8888"
+      - 127.0.0.1:28046:8888
     restart: always

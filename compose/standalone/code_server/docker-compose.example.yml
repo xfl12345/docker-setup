@@ -3,6 +3,9 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: code_server
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
       - 127.0.0.1:28042:8080

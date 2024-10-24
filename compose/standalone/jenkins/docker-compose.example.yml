@@ -3,9 +3,12 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: jenkins
+    logging:
+      options:
+        max-size: 4m
     ports:
-      - "127.0.0.1:28011:8080"
-      - "127.0.0.1:28011:8080/udp"
-      - "50000:50000"
-      - "50000:50000/udp"
+      - 127.0.0.1:28011:8080
+      - 127.0.0.1:28011:8080/udp
+      - 50000:50000
+      - 50000:50000/udp
     network_mode: bridge

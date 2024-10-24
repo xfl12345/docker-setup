@@ -28,8 +28,6 @@ services:
     image: alpine/socat:latest
     container_name: hertzbeat-docker-socket-relay
     command: "-d2 tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
-    # logging:
-    #   driver: journald
     volumes:
       # 挂载 docker socket ，直通宿主机
       - /var/run/docker.sock:/var/run/docker.sock

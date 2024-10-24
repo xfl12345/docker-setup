@@ -3,4 +3,7 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: glances
+    logging:
+      options:
+        max-size: 4m
     network_mode: host

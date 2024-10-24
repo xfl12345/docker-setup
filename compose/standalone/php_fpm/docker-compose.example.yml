@@ -3,6 +3,9 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: php_fpm
+    logging:
+      options:
+        max-size: 4m
     network_mode: host
     volumes:
       # override the php-fpm default configuration

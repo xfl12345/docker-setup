@@ -3,12 +3,14 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: xray
+    logging:
+      options:
+        max-size: 4m
     volumes:
       # xtls/xray unix socket
       - /var/run/xray:/var/run/xray
-    network_mode: host
-
     # 为兼容 clash 按进程名匹配，下面这些不能再用了。 xray 服务不能躲在 NAT 后面，否则无法被探测到
+    # network_mode: bridge
     # ports:
     #   # inbound socks5
     #   - 127.0.0.1:1088:1088
@@ -23,4 +25,4 @@ services:
     #   - 20000:20000
     #   # inbound shadowsocks
     #   - 30001:30001
-    # network_mode: bridge
+    network_mode: host

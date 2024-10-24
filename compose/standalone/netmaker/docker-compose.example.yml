@@ -3,27 +3,37 @@ services:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: netclient
+    logging:
+      options:
+        max-size: 4m
     network_mode: host
-
   netmaker:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: netmaker
-
+    logging:
+      options:
+        max-size: 4m
   netmaker_ui:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: netmaker_ui
-
+    logging:
+      options:
+        max-size: 4m
   coredns:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: coredns
-
+    logging:
+      options:
+        max-size: 4m
   mq:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: mq
-
+    logging:
+      options:
+        max-size: 4m
 include:
   - ./docker-compose.cloudflare.network.yml

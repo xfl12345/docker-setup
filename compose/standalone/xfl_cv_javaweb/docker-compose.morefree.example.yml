@@ -12,9 +12,6 @@ services:
     user: "1000"
     environment:
       - SPRING_CONFIG_ADDITIONAL_LOCATION=/app/config/
-    logging:
-      options:
-        max-size: "10m"
     volumes:
       # # 共享host的时间环境
       # - /etc/timezone:/etc/timezone:ro

@@ -14,4 +14,7 @@ services:
       # file: ./docker-compose.official.example.yml
       file: ./docker-compose.linuxserver.example.yml
       service: qbittorrent_nox
+    logging:
+      options:
+        max-size: 4m
     network_mode: host

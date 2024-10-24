@@ -3,9 +3,12 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: wgcf
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - host.docker.internal:host-gateway
     environment:
       - http_proxy=http://host.docker.internal:7890
       - https_proxy=http://host.docker.internal:7890

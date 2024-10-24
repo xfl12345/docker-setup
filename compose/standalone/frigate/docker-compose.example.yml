@@ -3,9 +3,12 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: frigate
+    logging:
+      options:
+        max-size: 4m
     network_mode: bridge
     ports:
-      - "127.0.0.1:28049:8971"
+      - 127.0.0.1:28049:8971
       # - "5000:5000" # Internal unauthenticated access. Expose carefully.
       # - 8554:8554   # RTSP feeds
       # - 8555:8555/tcp   # WebRTC over tcp

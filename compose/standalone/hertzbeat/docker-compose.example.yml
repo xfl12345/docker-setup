@@ -3,17 +3,23 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: hertzbeat
+    logging:
+      options:
+        max-size: 4m
     networks:
       - hertzbeat-docker-bridge
     ports:
-      - "127.0.0.1:28018:1157"
-      - "127.0.0.1:1158:1158"
+      - 127.0.0.1:28018:1157
+      - 127.0.0.1:1158:1158
 
 
   hertzbeat_docker_socket_relay:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: hertzbeat_docker_socket_relay
+    logging:
+      options:
+        max-size: 4m
     networks:
       - hertzbeat-docker-bridge
 

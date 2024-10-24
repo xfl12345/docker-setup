@@ -3,6 +3,9 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: netdata
+    logging:
+      options:
+        max-size: 4m
     pid: host
     cap_add:
       - SYS_PTRACE

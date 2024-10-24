@@ -3,24 +3,32 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: headscale
+    logging:
+      options:
+        max-size: 4m
     ports:
       # - "8090:8090"
-      - "127.0.0.1:28015:8080"
-      - "0.0.0.0:9090:9090"
-      - "3478:3478/udp"
+      - 127.0.0.1:28015:8080
+      - 0.0.0.0:9090:9090
+      - 3478:3478/udp
 
   headscale_webui:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: headscale_webui
+    logging:
+      options:
+        max-size: 4m
     ports:
-      - "127.0.0.1:28016:5000"
+      - 127.0.0.1:28016:5000
 
   tailscale_client:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: tailscale_client
+    logging:
+      options:
+        max-size: 4m
     network_mode: host
-
 include:
   - ./docker-compose.network.yml

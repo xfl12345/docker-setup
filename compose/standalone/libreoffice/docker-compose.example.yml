@@ -1,10 +1,12 @@
-
 # official repo URL=https://github.com/linuxserver/docker-libreoffice
 services:
   libreoffice:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: libreoffice
+    logging:
+      options:
+        max-size: 4m
     privileged: true
     security_opt:
       - seccomp:unconfined #optional
@@ -12,4 +14,4 @@ services:
       - /dev/dri:/dev/dri
     network_mode: bridge
     ports:
-      - "127.0.0.1:28045:3000"
+      - 127.0.0.1:28045:3000
