@@ -8,5 +8,5 @@ RUN apk add iptables ip6tables iproute2 ipset
 RUN apk add curl wget
 COPY --from=clash /mihomo /mihomo
 # COPY --chmod=07777 ./entrypoint.sh /entrypoint.sh
-COPY --chmod=777 ./entrypoint.sh /entrypoint.sh
+COPY --chmod=755 ./entrypoint.sh /entrypoint.sh
 ENTRYPOINT [ "/sbin/tini", "--" ,"/entrypoint.sh" ]
