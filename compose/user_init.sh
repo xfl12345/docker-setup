@@ -6,6 +6,14 @@ if [[ x"$(realpath --help | grep -w '\-\-canonicalize\-missing')" != "x" ]]; the
     the_realpath_feature_flag="-Pm"
 fi
 
+if [ ! -e /media/justsave/docker/compose/global_default.env ]; then
+    if [[ "$(date +%z 2>/dev/null)" == "+0800" ]]; then
+        ln -s /media/justsave/docker/compose/global_default.example.env /media/justsave/docker/compose/global_default.env
+    else
+        cp /media/justsave/docker/compose/global_default.example.env /media/justsave/docker/compose/global_default.env
+    fi
+fi
+
 # 用户名 和 ID 映射表
 declare -A my_id_map
 my_id_map["www-data"]=33
