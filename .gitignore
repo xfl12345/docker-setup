@@ -11,7 +11,7 @@
 !/volume/nginx/snippets/
 /volume/nginx/snippets/*
 !/volume/nginx/snippets/example
-!/volume/nginx/nginx.example.conf
+!/volume/nginx/nginx.conf
 !/volume/nginx/conf.d/
 /volume/nginx/conf.d/*
 !/volume/nginx/conf.d/default.conf
