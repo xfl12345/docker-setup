@@ -124,8 +124,6 @@ if [ ! -e $docker_setup_app_compose_file_path ]; then
     docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.example.yml"
 fi
 
-bash << EOF
 SCRIPT_PATH="/app/user_init.sh"
 docker compose -f $docker_setup_app_compose_file_path up
 docker compose -f $docker_setup_app_compose_file_path down
-EOF
