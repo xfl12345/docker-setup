@@ -109,3 +109,15 @@ just_chown "qbtuser:btuser" "/media/justsave/PT/"
 just_chown "transmission:btuser" "$my_docker_volume_dir/transmission/"
 just_chown "code-server:code-server" "$my_docker_volume_dir/code_server/home/"
 just_chown "peerbanhelper:peerbanhelper" "$my_docker_volume_dir/peer_ban_helper/app/"
+
+docker_setup_app_dir_path="/media/justsave/docker/compose/standalone/docker_setup"
+docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.yml"
+if [ ! -e $docker_setup_app_compose_file_path ]; then
+    docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.example.yml"
+fi
+
+bash << EOF
+SCRIPT_PATH="/app/user_init.sh"
+docker compose -f $docker_setup_app_compose_file_path up
+docker compose -f $docker_setup_app_compose_file_path down
+EOF
