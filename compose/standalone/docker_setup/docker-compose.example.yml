@@ -1,0 +1,6 @@
+services:
+  docker_setup:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: docker_setup
+    network_mode: bridge
