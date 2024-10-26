@@ -29,5 +29,7 @@ services:
       # - /media/justsave/wwwroot/default:/var/www/html:ro
       # nginx log
       - /media/justsave/wwwlogs:/media/justsave/wwwlogs
+      # nginx init
+      - ./05-xfl-init.sh:/docker-entrypoint.d/05-xfl-init.sh
     restart: always
 
