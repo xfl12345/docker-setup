@@ -17,7 +17,7 @@ services:
       # nginx vhost
       - /media/justsave/docker/volume/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx snippets
-      - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets:ro
+      - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets
       # nginx ssl cert
       - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
       # openssl dhparam
