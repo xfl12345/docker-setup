@@ -5,7 +5,10 @@
 services:
   bitcomet:
     env_file:
-      - /media/justsave/docker/env/bitcomet/docker.env
+      - path: /media/justsave/docker/compose/global_default.env
+        required: true
+      - path: /media/justsave/docker/env/bitcomet/docker.env
+        required: false
     sysctls:
       # - net.ipv6.conf.default.disable_ipv6=0
       # - net.ipv6.conf.default.autoconf=1
