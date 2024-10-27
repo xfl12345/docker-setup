@@ -19,8 +19,18 @@ services:
       - net.ipv6.conf.all.proxy_ndp=1
       - net.ipv6.conf.all.autoconf=1
     container_name: bitcomet
-    image: wxhere/bitcomet:latest
+    image: wxhere/bitcomet:latest-xfl
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile_inline: |
+        FROM wxhere/bitcomet:latest
+        RUN apt update && apt upgrade -y
+        RUN apt install -y locales locales-all at-spi2-core
+      pull: true
+    entrypoint: ["/my_entrypoint.sh"]
     volumes:
       - /media/justsave/docker/volume/bitcomet/appdata/BitComet:/home/sandbox/.config/BitComet
       - /media/justsave/docker/volume/bitcomet/share:/home/sandbox/share
+      - ./my_entrypoint.sh:/my_entrypoint.sh
     restart: always
