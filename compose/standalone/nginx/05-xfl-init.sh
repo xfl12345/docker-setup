@@ -34,4 +34,8 @@ for rel_path in $generate_file_list; do
     fi
 done
 
+if [ ! -e /etc/ssl/dhparam/dhe4096.pem ]; then
+    openssl dhparam -out /etc/ssl/dhparam/dhe4096.pem 4096
+fi
+
 just_log "All done!"
