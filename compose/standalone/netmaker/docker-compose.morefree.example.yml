@@ -44,8 +44,6 @@ services:
     #   # config-dependant vars
     #   # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
     #   BACKEND_URL: "https://api.example.com"
-    depends_on:
-      - netmaker
     networks:
       - netmaker-docker-bridge
     ports:
@@ -81,8 +79,6 @@ services:
     image: coredns/coredns:1.10.1
     command: -conf /root/dnsconfig/Corefile
     restart: always
-    depends_on:
-      - netmaker
     networks:
       - netmaker-docker-bridge
     ports:
@@ -94,8 +90,6 @@ services:
         required: true
     container_name: mq
     image: eclipse-mosquitto:2.0.15-openssl
-    depends_on:
-      - netmaker
     restart: unless-stopped
     command: [ "/mosquitto/config/wait.sh" ]
     volumes:

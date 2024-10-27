@@ -3,6 +3,8 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: hertzbeat
+    depends_on:
+      - hertzbeat_docker_socket_relay
     logging:
       options:
         max-size: 4m

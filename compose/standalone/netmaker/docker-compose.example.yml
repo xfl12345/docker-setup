@@ -18,6 +18,8 @@ services:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: netmaker_ui
+    depends_on:
+      - netmaker
     logging:
       options:
         max-size: 4m
@@ -25,6 +27,8 @@ services:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: coredns
+    depends_on:
+      - netmaker
     logging:
       options:
         max-size: 4m
@@ -32,6 +36,8 @@ services:
     extends:
       file: ./docker-compose.cloudflare.example.yml
       service: mq
+    depends_on:
+      - netmaker
     logging:
       options:
         max-size: 4m

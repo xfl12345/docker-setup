@@ -13,8 +13,6 @@ services:
         required: false
     container_name: kodbox
     image: kodcloud/kodbox:latest
-    depends_on:
-      - kodbox_redis
     volumes:
       # 站点目录
       - /media/justsave/docker/volume/kodbox/site:/var/www/html

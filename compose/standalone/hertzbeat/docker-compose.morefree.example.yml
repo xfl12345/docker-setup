@@ -20,8 +20,6 @@ services:
       - /media/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    depends_on:
-      - hertzbeat_docker_socket_relay
     restart: always
 
   hertzbeat_docker_socket_relay:

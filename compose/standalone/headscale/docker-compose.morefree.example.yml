@@ -76,7 +76,4 @@ services:
       - net_admin
       - sys_module
     # command: "tailscaled"
-    depends_on:
-      - headscale
-      - headscale_webui
     restart: unless-stopped

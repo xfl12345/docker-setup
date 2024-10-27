@@ -111,6 +111,7 @@ if os.path.exists(curr_app_file):
                 def just_copy_item(key: str, src, dest):
                     if key in src:
                         dest[key] = src[key]
+                ## 生成 docker-compose.morefree.example.yml 的内容
                 if curr_service_name not in app_morefree_example_content["services"]:
                     app_morefree_example_content["services"][curr_service_name] = OrderedDict()
                 app_service_setting = app_morefree_example_content["services"][curr_service_name]
@@ -119,11 +120,11 @@ if os.path.exists(curr_app_file):
                 just_copy_item("image", service_setting, app_service_setting)
                 just_copy_item("pull_policy", service_setting, app_service_setting)
                 just_copy_item("build", service_setting, app_service_setting)
-                just_copy_item("depends_on", service_setting, app_service_setting)
                 just_copy_item("volumes", service_setting, app_service_setting)
                 just_copy_item("extra_hosts", service_setting, app_service_setting)
                 just_copy_item("restart", service_setting, app_service_setting)
 
+                ## 生成 docker-compose.example.yml 的内容
                 if curr_service_name not in app_example_content["services"]:
                     app_example_content["services"][curr_service_name] = OrderedDict()
                 app_service_setting = app_example_content["services"][curr_service_name]
@@ -131,6 +132,7 @@ if os.path.exists(curr_app_file):
                     "file": "./docker-compose.morefree.example.yml"
                 })
                 app_service_setting["extends"]["service"] = curr_service_name
+                just_copy_item("depends_on", service_setting, app_service_setting)
                 just_copy_item("network_mode", service_setting, app_service_setting)
                 just_copy_item("networks", service_setting, app_service_setting)
                 just_copy_item("ports", service_setting, app_service_setting)
