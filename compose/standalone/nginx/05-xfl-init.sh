@@ -13,7 +13,7 @@ just_log() {
 
 just_exec_cmd() {
     just_log "CMD: [$1]"
-    $1
+    eval "$1"
 }
 
 just_log "Current ID[$(id)]"
@@ -31,14 +31,14 @@ for rel_path in $generate_file_list; do
     curr_example_file_path="$(echo $curr_private_file_path | sed 's#^/etc/nginx/snippets/private#/etc/nginx/snippets/example#')"
     just_log "Checking file[${curr_example_file_path}]..."
     if [ ! -e $curr_private_file_path ]; then
-        just_exec_cmd "mkdir -p $(dirname $curr_private_file_path 2>/dev/null)"
         if [ -e $curr_example_file_path ]; then
             just_log "Example file[${curr_example_file_path}] was found."
             file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
         else
             just_log "Example file[${curr_example_file_path}] was NOT found."
-            file_content="\n"
+            file_content=""
         fi
+        just_exec_cmd "mkdir -p $(dirname $curr_private_file_path 2>/dev/null)"
         just_exec_cmd "echo -e \"${file_content}\" >> $curr_private_file_path"
     fi
 done
