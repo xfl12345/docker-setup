@@ -11,14 +11,18 @@ just_log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')][xfl_init] $1"
 }
 
+just_exec_cmd() {
+    just_log "CMD: [$1]"
+    $1
+}
+
 just_log "Current ID[$(id)]"
 
 for rel_path in $mkdir_list; do
     curr_private_dir_path="$(realpath -Pm /etc/nginx/${rel_path})"
     just_log "Checking dir[${curr_private_dir_path}]..."
     if [ ! -e $curr_private_dir_path ]; then
-        just_log "Creating dir[${curr_private_dir_path}]..."
-        mkdir -p $curr_private_dir_path
+        just_exec_cmd "mkdir -p $curr_private_dir_path"
     fi
 done
 
@@ -26,11 +30,16 @@ for rel_path in $generate_file_list; do
     curr_private_file_path="$(realpath -Pm /etc/nginx/$rel_path)"
     curr_example_file_path="$(echo $curr_private_file_path | sed 's#^/etc/nginx/snippets/private#/etc/nginx/snippets/example#')"
     just_log "Checking file[${curr_example_file_path}]..."
-    if [ ! -e $curr_private_file_path -a -e $curr_example_file_path  ]; then
-        file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
-        just_log "Generating file[${curr_private_file_path}] with content[${file_content}]..."
-        mkdir -p $(dirname $curr_private_file_path 2>/dev/null)
-        echo "${file_content}" >> $curr_private_file_path
+    if [ ! -e $curr_private_file_path ]; then
+        just_exec_cmd "mkdir -p $(dirname $curr_private_file_path 2>/dev/null)"
+        if [ -e $curr_example_file_path ]; then
+            just_log "Example file[${curr_example_file_path}] was found."
+            file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
+        else
+            just_log "Example file[${curr_example_file_path}] was NOT found."
+            file_content=""
+        fi
+        just_exec_cmd "echo "${file_content}" >> $curr_private_file_path"
     fi
 done
 
