@@ -7,6 +7,8 @@ services:
       options:
         max-size: 4m
     network_mode: host
+    tmpfs:
+      - /var/cache/nginx
     volumes:
       # php-fpm unix socket
       - /var/run/php:/var/run/php

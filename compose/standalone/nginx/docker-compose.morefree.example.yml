@@ -6,8 +6,6 @@ services:
     container_name: nginx
     image: nginx:latest
     pull_policy: always
-    tmpfs:
-      - /var/cache/nginx
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
