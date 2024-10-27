@@ -29,7 +29,8 @@ for rel_path in $generate_file_list; do
     if [ ! -e $curr_private_file_path -a -e $curr_example_file_path  ]; then
         file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
         just_log "Generating file[${curr_private_file_path}] with content[${file_content}]..."
-        just_log "${file_content}" >> $curr_private_file_path
+        mkdir -p $(dirname $curr_private_file_path 2>/dev/null)
+        echo "${file_content}" >> $curr_private_file_path
     fi
 done
 
