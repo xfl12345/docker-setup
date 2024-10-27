@@ -56,14 +56,15 @@
 |28040|Glances Web UI|
 |28041|Netdata Web UI|
 |28042|code-server|
-|28043|BitComet|
+|28043|BitComet WebVNC|
 |28044|n.eko|
 |28045|libreoffice|
 |28046|mayfly-go|
 |28047|kodbox|
 |28048|PeerBanHelper|
 |28049|frigate|
-|28050~28099|`reserved`|
+|28050|BitComet WebAPI|
+|28051~28099|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）
 
