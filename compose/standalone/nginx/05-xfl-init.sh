@@ -37,9 +37,9 @@ for rel_path in $generate_file_list; do
             file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
         else
             just_log "Example file[${curr_example_file_path}] was NOT found."
-            file_content=""
+            file_content="\n"
         fi
-        just_exec_cmd "echo "${file_content}" >> $curr_private_file_path"
+        just_exec_cmd "echo -e \"${file_content}\" >> $curr_private_file_path"
     fi
 done
 
