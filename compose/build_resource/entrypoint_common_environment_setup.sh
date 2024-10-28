@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env /bash
 
 os_release_id="$(cat /etc/os-release | grep '^ID=')"
 if [[ ! -z "$os_release_id" && "$(echo $os_release_id | cut -d'=' -f2 | tr '[:upper:]' '[:lower:]')" == "alpine" ]]; then
