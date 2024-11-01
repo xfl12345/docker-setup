@@ -25,6 +25,4 @@ services:
       - /media/justsave/docker/volume/glances/global_config:/etc/glances:ro
       # 挂载 docker socket ，直通宿主机
       - /var/run/docker.sock:/var/run/docker.sock
-      # Uncomment the below line if you want glances to display host OS detail instead of container's
-      - /etc/os-release:/etc/os-release:ro
     restart: always

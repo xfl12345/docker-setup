@@ -6,4 +6,6 @@ services:
     logging:
       options:
         max-size: 4m
+    volumes:
+      - /etc/os-release:/etc/os-release:ro
     network_mode: host
