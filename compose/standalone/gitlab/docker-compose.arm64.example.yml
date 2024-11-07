@@ -4,7 +4,7 @@
 services:
   gitlab:
     extends:
-      file: ./docker-compose.morefree.arm64.example.yml
+      file: ./docker-compose.arm64.morefree.example.yml
       service: gitlab
     logging:
       options:
