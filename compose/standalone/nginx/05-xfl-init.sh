@@ -4,8 +4,8 @@ pv="private"
 
 # file_list="$(cat /usr/local/share/xfl/check_file_list.txt | grep -v '^$')"
 raw_file_list="$(grep -r --include="*.conf" "include snippets/private" /etc/nginx/snippets/$px /etc/nginx/snippets/$ex /etc/nginx/nginx.conf | grep -v "conf:#")"
-generate_file_list="$(echo -e "$raw_file_list" | grep -v '*.conf;' | grep -oE 'include .*$' | sed 's#;$##' | cut -d' ' -f2 | sort | uniq)"
-mkdir_list="$(echo -e "$raw_file_list" | grep '*.conf;' | grep -oE 'include .*$' | sed 's#include ##g' | sed 's#\*\.conf;##g' | cut -d':' -f2 | sort | uniq)"
+generate_file_list="$(echo -e "$raw_file_list" | grep -v '*.conf;' | grep -oE 'include .*$' | sed 's#;$##' | cut -d' ' -f2 | uniq | sort)"
+mkdir_list="$(echo -e "$raw_file_list" | grep '*.conf;' | grep -oE 'include .*$' | sed 's#include ##g' | sed 's#\*\.conf;##g' | cut -d':' -f2 | uniq | sort)"
 
 just_log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')][xfl_init] $1"
