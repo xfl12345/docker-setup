@@ -22,6 +22,12 @@ services:
       - /media/justsave/docker/volume/nginx/dhparam:/etc/ssl/dhparam
       # apache htpasswd file
       - /media/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
+      # nginx geoip
+      - /media/justsave/docker/volume/nginx/geoip:/etc/nginx/geoip
+      # GEOIP is not usable
+      # # pre-prepared GeoIP file for geoip support
+      # # Downloaded from https://github.com/Loyalsoldier/geoip/raw/af44001d23a7ce53e0594b304228822d95a1c317/GeoLite2-Country.mmdb
+      # - ./geoip:/etc/nginx/geoip/example:ro
       # nginx web root
       - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
       # - /media/justsave/wwwroot/default:/var/www/html:ro
