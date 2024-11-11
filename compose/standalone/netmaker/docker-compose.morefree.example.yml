@@ -10,7 +10,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     container_name: netclient
-    image: gravitl/netclient:v0.25.0
+    image: gravitl/netclient:v0.26.0
     # privileged: true
     pid: host
     ipc: host
@@ -27,7 +27,7 @@ services:
       - path: ./default_netmaker.env
         required: true # default
     container_name: netmaker
-    image: gravitl/netmaker:v0.25.0
+    image: gravitl/netmaker:v0.26.0
     networks:
       - netmaker-docker-bridge
     ports:
@@ -39,7 +39,7 @@ services:
       - path: /media/justsave/docker/compose/global_default.env
         required: true
     container_name: netmaker-ui
-    image: gravitl/netmaker-ui:v0.25.0
+    image: gravitl/netmaker-ui:v0.26.0
     # environment:
     #   # config-dependant vars
     #   # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
