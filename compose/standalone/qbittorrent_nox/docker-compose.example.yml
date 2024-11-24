@@ -17,4 +17,9 @@ services:
     logging:
       options:
         max-size: 4m
-    network_mode: host
+    network_mode: bridge
+    ports:
+      - "127.0.0.1:28012:28012"
+      # BT connection port (MUST be the same as the env var "TORRENTING_PORT")
+      - "55285:55285"
+      - "55285:55285/udp"
