@@ -13,6 +13,6 @@ services:
     pull_policy: build
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ubuntu.Dockerfile
       pull: true
     restart: always
