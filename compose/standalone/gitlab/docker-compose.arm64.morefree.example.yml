@@ -94,3 +94,5 @@ services:
       pull: true
       args:
         - BASE_IMAGE_TAG=yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
+    post_start:
+      - command: "service sendmail restart"
