@@ -86,6 +86,7 @@ services:
       - "/media/justsave/docker/volume/gitlab/logs:/var/log/gitlab"
       - "/media/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
       - "/media/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
+      - "./entrypoint.sh:/entrypoint.sh"
     shm_size: "256m"
     pull_policy: build
     build:
@@ -94,5 +95,8 @@ services:
       pull: true
       args:
         - BASE_IMAGE_TAG=yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
-    post_start:
-      - command: "service sendmail restart"
+    # 以下需要 Docker Compose v1.30.2 或更高版本
+    # 已弃用
+    # post_start:
+    #   - command: "service sendmail restart"
+    entrypoint: ["/entrypoint.sh"]
