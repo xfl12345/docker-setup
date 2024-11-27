@@ -6,7 +6,6 @@ services:
     image: yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
     container_name: gitlab
     restart: unless-stopped
-    hostname: "gitlab.example.com"
     # 记得添加并修改下面的环境变量！！！！！
     # environment:
     #   GITLAB_OMNIBUS_CONFIG: |
