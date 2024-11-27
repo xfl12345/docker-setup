@@ -3,7 +3,7 @@
 # docker image source code repo URL=https://github.com/yrzr/gitlab-ce-arm64v8-docker
 services:
   gitlab:
-    image: yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
+    image: localbuild/gitlab
     container_name: gitlab
     restart: unless-stopped
     # 记得添加并修改下面的环境变量！！！！！
@@ -87,3 +87,10 @@ services:
       - "/media/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
       - "/media/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
     shm_size: "256m"
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      pull: true
+      args:
+        - BASE_IMAGE_TAG=yrzr/gitlab-ce-arm64v8:16.10.1-ce.0
