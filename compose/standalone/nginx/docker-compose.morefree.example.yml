@@ -31,6 +31,7 @@ services:
       # # Downloaded from https://github.com/Loyalsoldier/geoip/raw/af44001d23a7ce53e0594b304228822d95a1c317/GeoLite2-Country.mmdb
       # - ./geoip:/etc/nginx/geoip/example:ro
       # nginx web root
+      - /media/justsave/wwwroot/default:/media/justsave/wwwroot/default:ro
       - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
       # - /media/justsave/wwwroot/default:/var/www/html:ro
       # nginx log
