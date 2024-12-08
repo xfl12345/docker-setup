@@ -20,15 +20,15 @@ services:
       options:
         max-size: 4m
     ports:
-      - 127.0.0.1:28016:5000
+      - 127.0.0.1:28016:8080
 
   tailscale_client:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: tailscale_client
-    depends_on:
-      - headscale
-      - headscale_webui
+    # depends_on:
+    #   - headscale
+    #   - headscale_webui
     logging:
       options:
         max-size: 4m

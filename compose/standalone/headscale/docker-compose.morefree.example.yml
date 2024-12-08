@@ -3,8 +3,7 @@ services:
   # official repo URL=https://github.com/juanfont/headscale
   # official docs URL=https://headscale.net/running-headscale-container/
   headscale:
-    image: headscale/headscale:0.22.3
-    # image: headscale/headscale:v0.23.0-alpha7
+    image: headscale/headscale:0.23.0
     container_name: headscale
     cap_add:
       - NET_ADMIN
@@ -25,11 +24,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
     networks:
       - headscale-docker-bridge
-    # command: "serve"
-    command: "headscale serve"
+    command: "serve"
     restart: unless-stopped
 
-  # official repo URL=https://github.com/iFargle/headscale-webui
+  # official repo URL=https://github.com/gurucomputing/headscale-ui
   headscale_webui:
     env_file:
       - path: /media/justsave/docker/compose/global_default.env
@@ -38,14 +36,9 @@ services:
         required: true # default
       - path: /media/justsave/docker/env/headscale/headscale-webui.env
         required: false
-    image: ifargle/headscale-webui:latest
-    # image: ifargle/headscale-webui:v0.7.0
+    image: ghcr.io/gurucomputing/headscale-ui:latest
     container_name: headscale-webui
     user: "1000"
-    volumes:
-      - /media/justsave/docker/volume/headscale/web-ui:/data:rw
-      - /media/justsave/docker/volume/headscale/config:/etc/headscale/:ro
-      - /var/run/headscale:/var/run/headscale
     networks:
       - headscale-docker-bridge
     restart: unless-stopped
