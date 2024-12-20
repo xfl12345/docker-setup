@@ -5,6 +5,9 @@ services:
   nginx:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
     container_name: nginx
     image: nginx:latest
     pull_policy: always
