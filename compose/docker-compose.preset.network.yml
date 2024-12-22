@@ -3,6 +3,3 @@ networks:
   my_docker_network:
     name: "my-default-docker-bridge-network"
     external: true
-  my_host_network:
-    name: "my-host-network"
-    external: true
