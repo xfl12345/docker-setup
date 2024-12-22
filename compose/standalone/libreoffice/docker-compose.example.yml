@@ -12,6 +12,10 @@ services:
       - seccomp:unconfined #optional
     devices:
       - /dev/dri:/dev/dri
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
     ports:
       - 127.0.0.1:28045:3000
+
+include:
+  - ../../docker-compose-default-bridge-network.yml

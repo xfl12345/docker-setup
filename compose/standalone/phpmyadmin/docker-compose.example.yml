@@ -6,6 +6,10 @@ services:
     logging:
       options:
         max-size: 4m
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
     ports:
       - 127.0.0.1:28009:80
+
+include:
+  - ../../docker-compose-default-bridge-network.yml

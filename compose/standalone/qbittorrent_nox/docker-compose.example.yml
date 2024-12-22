@@ -17,9 +17,13 @@ services:
     logging:
       options:
         max-size: 4m
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
     ports:
       - "127.0.0.1:28012:28012"
       # BT connection port (MUST be the same as the env var "TORRENTING_PORT")
       - "55285:55285"
       - "55285:55285/udp"
+
+include:
+  - ../../docker-compose-default-bridge-network.yml

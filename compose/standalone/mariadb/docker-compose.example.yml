@@ -9,4 +9,8 @@ services:
     ports:
       - 0.0.0.0:3306:3306
       - 0.0.0.0:3306:3306/udp
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
+
+include:
+  - ../../docker-compose-default-bridge-network.yml

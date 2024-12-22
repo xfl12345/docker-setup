@@ -7,4 +7,8 @@ services:
     #   - http_proxy=http://host.docker.internal:7890
     #   - https_proxy=http://host.docker.internal:7890
     #   - all_proxy=socks5://host.docker.internal:7890
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
+
+include:
+  - ../../docker-compose-default-bridge-network.yml

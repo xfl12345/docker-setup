@@ -1,0 +1,13 @@
+networks:
+  my_docker_network:
+    name: "my-default-docker-bridge-network"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.30.0.0/16"
+          gateway: "172.30.0.1"
+          ip_range: "172.30.0.0/16"
+        - subnet: "fd00:dcdc:1e00::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-dc30"

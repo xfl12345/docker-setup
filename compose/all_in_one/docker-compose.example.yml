@@ -3,6 +3,12 @@
 # 笔记：重启一个服务而不重启依赖  docker compose up --no-deps xxx_service -d
 
 services:
+  placeholder:
+    image: alpine:latest
+    networks:
+      my_docker_network: {}
+    command: ["true"]  # 立即退出，确保服务不会启动
+
   # xray:
   #   extends:
   #     file: ../standalone/xray/docker-compose.yml
@@ -22,10 +28,10 @@ services:
   #   depends_on:
   #     - clash
 
-  mosdns:
-    extends:
-      file: ../standalone/mosdns/docker-compose.yml
-      service: mosdns
+  # mosdns:
+  #   extends:
+  #     file: ../standalone/mosdns/docker-compose.yml
+  #     service: mosdns
 
   # ddns_go:
   #   extends:

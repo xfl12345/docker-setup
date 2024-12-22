@@ -5,6 +5,10 @@ services:
       service: ubuntu4build
     extra_hosts:
       - host.docker.internal:host-gateway
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
     ports:
       - 24023:22
+
+include:
+  - ../../docker-compose-default-bridge-network.yml
