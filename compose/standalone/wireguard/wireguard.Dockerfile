@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 RUN mkdir -p /tmp
 COPY --chmod=755 --from=resources ./* /tmp/xfl/build_resource/
 RUN /tmp/xfl/build_resource/docker_build_install_usually_used_packages.sh && rm -rf /tmp/xfl
