@@ -21,7 +21,7 @@ RUN echo 'xflworker ALL=(ALL:ALL) ALL' >> /etc/sudoers.d/xflworker
 RUN chmod 0440 /etc/sudoers.d/xflworker
 # RUN mkdir -p /home/xflworker/
 # RUN chown xflworker:xflworker -R /home/xflworker/
-# RUN bash -c 'echo -e "#!/usr/bin/env bash\nservice ssh restart &\nwhile [ 1 == 1 ]; do sleep 999999; done\n" > /entrypoint.sh'
+COPY --chmod=755 --from=resources ./infinite_sleep_loop.sh /infinite_sleep_loop.sh
 COPY --chmod=755 ./entrypoint.sh /
 ENTRYPOINT [ "/usr/bin/tini", "--" ,"/entrypoint.sh" ]
 USER xflworker

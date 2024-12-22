@@ -31,9 +31,6 @@ wg-quick up wg0 || exit $?
 
 run_hook "/entrypoint-after-up.sh"
 
-while true; do
-    # 前面表达式执行失败的时候 break
-    sleep 999999 || break
-done
+/infinite_sleep_loop.sh
 
 wg-quick down wg0
