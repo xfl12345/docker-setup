@@ -16,4 +16,4 @@ services:
       - 52000-52100:52000-52100/udp
 
 include:
-  - ../../docker-compose-default-bridge-network.yml
+  - ../../docker-compose.preset.network.yml

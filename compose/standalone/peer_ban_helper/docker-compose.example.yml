@@ -13,4 +13,4 @@ services:
     restart: unless-stopped
 
 include:
-  - ../../docker-compose-default-bridge-network.yml
+  - ../../docker-compose.preset.network.yml

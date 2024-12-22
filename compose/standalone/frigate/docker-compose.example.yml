@@ -16,4 +16,4 @@ services:
       # - 8555:8555/udp   # WebRTC over udp
 
 include:
-  - ../../docker-compose-default-bridge-network.yml
+  - ../../docker-compose.preset.network.yml

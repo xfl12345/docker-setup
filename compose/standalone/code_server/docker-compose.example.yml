@@ -12,4 +12,4 @@ services:
       - 127.0.0.1:28042:8080
 
 include:
-  - ../../docker-compose-default-bridge-network.yml
+  - ../../docker-compose.preset.network.yml

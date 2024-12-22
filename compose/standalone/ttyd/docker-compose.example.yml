@@ -10,4 +10,4 @@ services:
       my_docker_network: {}
 
 include:
-  - ../../docker-compose-default-bridge-network.yml
+  - ../../docker-compose.preset.network.yml
