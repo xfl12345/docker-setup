@@ -27,4 +27,4 @@ services:
       # docker socket
       - /var/run/docker.sock:/var/run/docker.sock 
       # 自己写的工具脚本
-      - ./xfl_acme_util.sh:/xfl_acme_util.sh:ro
+      - ./xfl_acme_util.sh:/xfl_acme_util.sh
