@@ -1,4 +1,5 @@
-FROM jenkins/jenkins:lts-jdk17
+ARG BASE_IMAGE_TAG=jenkins/jenkins:lts-jdk17
+FROM ${BASE_IMAGE_TAG}
 USER root
 # COPY --chmod=764 --from=resources docker-debian.sources /etc/apt/sources.list.d/docker.sources
 RUN apt update

@@ -16,7 +16,7 @@ services:
       - "cc.xfl12345.code.share.docker.setup.localbuild=true"
     container_name: jenkins
     # image: jenkins/jenkins:lts-jdk17 # jenkinsci/blueocean 镜像仅支持 amd64 架构，故ARM架构主机不能使用。如果执意使用会产生性能问题和其它奇怪的问题。
-    image: jenkins/jenkins:lts-jdk17-xfl
+    image: localbuild/jenkins
     pull_policy: build
     build:
       context: ./
@@ -24,12 +24,14 @@ services:
         resources: /media/justsave/docker/compose/build_resource
       dockerfile: jenkins-xfl.Dockerfile
       pull: true
+      args:
+        - BASE_IMAGE_TAG
     security_opt:
       - apparmor=unconfined
     hostname: jenkins
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/jenkins:/var/jenkins_home:rw
+      - /media/justsave/docker/volume/jenkins:/var/jenkins_home
       # 带环境进入容器 bash 的小工具
       - ./just_bash.sh:/usr/local/bin/just_bash.sh
       # # 挂载 docker socket ，直通宿主机
