@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+mkdir -p /etc
 os_release_id="$(cat /etc/os-release | grep '^ID=')"
 if [[ ! -z "$os_release_id" && "$(echo $os_release_id | cut -d'=' -f2 | tr '[:upper:]' '[:lower:]')" == "alpine" ]]; then
     my_docker_env_profile="/etc/profile.d/99-my_docker_environment.sh"  
@@ -59,20 +60,37 @@ test_cmd_exist() {
     echo "$tmp_result"
 }
 
-mkdir -p /etc
 apply_env() {
     declare -n ref_to_var="${1}"  
     echo "ENV[${1}] has been defined as [${ref_to_var}]. Writing to [/etc/environment]..."
-    _env_str="${1}=${ref_to_var}"
+    local _env_str="${1}=${ref_to_var}"
     echo "${_env_str}" >> /etc/environment
     eval "export ${_env_str}"
 }
+
 check_and_apply_env_if_found() {
-    the_env_key=$1
+    local the_env_key=$1
     declare -n ref_to_var="${the_env_key}"  
     if [[ x"${ref_to_var}" != "x" ]]; then
         apply_env "$the_env_key"
     fi
+}
+
+gid2name() {
+    # local _the_name="$(getent group $1 2>/dev/null | cut -d':' -f1)"
+    local _the_name="$(id -g $1 -n 2>/dev/null)"
+    if [[ -z "$_the_name" ]];then
+        _the_name="gid_${1}"
+    fi
+    echo "$_the_name"
+}
+
+uid2name() {
+    local _the_name="$(id -u $1 -n 2>/dev/null)"
+    if [[ -z "$_the_name" ]];then
+        _the_name="uid_${1}"
+    fi
+    echo "$_the_name"
 }
 
 if [ -n "$TZ" ]; then
@@ -84,24 +102,10 @@ if [ -n "$TZ" ]; then
     fi
 fi
 
-if [[ x"$MY_DOCKER_APP_USER_NAME" == "x" && x"$PUID" == "x" ]]; then
+if [[ x"$PUID" == "x" ]]; then
     PUID=$(id -u)
-    old_uid_username="$(id -n -u $PUID 2>/dev/null)"
-    if [[ x"$old_uid_username" == "x" ]]; then
-        MY_DOCKER_APP_USER_NAME="uid_$PUID"
-    else
-        MY_DOCKER_APP_USER_NAME="$old_uid_username"
-    fi
 else
-    if [[ x"$MY_DOCKER_APP_USER_NAME" == "x" ]]; then
-        MY_DOCKER_APP_USER_NAME="uid_${PUID}"
-    else
-        if [[ x"$PUID" == "x" ]]; then
-            PUID=$(id -u)
-        else
-            PUID=$((10#$PUID))
-        fi
-    fi
+    PUID=$((10#$PUID))
 fi
 
 if [[ x"$PGID" == "x" ]]; then
@@ -109,20 +113,19 @@ if [[ x"$PGID" == "x" ]]; then
 else
     PGID=$((10#$PGID))
 fi
+
 apply_env PUID
 apply_env PGID
 # echo "After: PUID[$PUID] PGID[$PGID]"
 
+if [[ x"$MY_DOCKER_APP_USER_NAME" == "x" ]]; then
+    MY_DOCKER_APP_USER_NAME="$(uid2name $PUID)"
+fi
 if [[ x"$MY_DOCKER_APP_USER_GROUP_NAME" == "x" ]]; then
-    old_groupname_id="$(getent group $MY_DOCKER_APP_USER_NAME 2>/dev/null| awk -F':' '{print $NF}')"
-    if [[ x"$old_groupname_id" == "x" ]]; then
-        MY_DOCKER_APP_USER_GROUP_NAME="gid_${PGID}"
-    else
-        MY_DOCKER_APP_USER_GROUP_NAME="$old_groupname_id"
-    fi
+    MY_DOCKER_APP_USER_GROUP_NAME="$(gid2name $PGID)"
 fi
 if [[ x"$MY_DOCKER_APP_USER_HOME" == "x" ]]; then
-    MY_DOCKER_APP_USER_HOME="$(getent passwd $MY_DOCKER_APP_USER_NAME | cut -d: -f6)"
+    MY_DOCKER_APP_USER_HOME="$(getent passwd $MY_DOCKER_APP_USER_NAME | cut -d':' -f6)"
     if [[ x"$MY_DOCKER_APP_USER_HOME" == "x" ]]; then
         MY_DOCKER_APP_USER_HOME="/home/${MY_DOCKER_APP_USER_NAME}"
     fi
@@ -137,11 +140,11 @@ fi
 if [[ x"$MY_DOCKER_APP_USER_ADD_GROUP_ID_LIST" == "x" ]]; then
     MY_DOCKER_APP_USER_ADD_GROUP_ID_LIST=""
 fi
-check_and_apply_env_if_found MY_DOCKER_APP_USER_NAME
-check_and_apply_env_if_found MY_DOCKER_APP_USER_HOME
-check_and_apply_env_if_found MY_DOCKER_APP_USER_SHELL
-check_and_apply_env_if_found MY_DOCKER_APP_USER_GROUP_NAME
-check_and_apply_env_if_found MY_DOCKER_APP_USER_ADD_GROUP_ID_LIST
+check_and_apply_env_if_found "MY_DOCKER_APP_USER_NAME"
+check_and_apply_env_if_found "MY_DOCKER_APP_USER_HOME"
+check_and_apply_env_if_found "MY_DOCKER_APP_USER_SHELL"
+check_and_apply_env_if_found "MY_DOCKER_APP_USER_GROUP_NAME"
+check_and_apply_env_if_found "MY_DOCKER_APP_USER_ADD_GROUP_ID_LIST"
 
 check_and_apply_env_if_found "HTTP_PROXY"
 check_and_apply_env_if_found "HTTPS_PROXY"
@@ -150,39 +153,50 @@ check_and_apply_env_if_found "http_proxy"
 check_and_apply_env_if_found "https_proxy"
 check_and_apply_env_if_found "all_proxy"
 
-gid2name() {
-    _the_name="$(getent group $1 2>/dev/null| awk -F':' '{print $1}')"
-    if [[ -z "$_the_name" ]];then
-        _the_name="gid_$1"
+old_username_id="$(id -u $MY_DOCKER_APP_USER_NAME 2>/dev/null)"
+old_groupname_id="$(id -g $MY_DOCKER_APP_USER_GROUP_NAME 2>/dev/null)"
+if [[ "$(test_cmd_exist 'usermod')" == "y" ]]; then
+    if [[ x"${old_groupname_id}" == "x" ]]; then
+        if [[ "$(test_cmd_exist 'groupadd')" == "y" ]]; then
+            groupadd --gid $PGID $MY_DOCKER_APP_USER_GROUP_NAME
+        else
+            if [[ "$(busybox --list | grep addgroup)" == "addgroup" ]]; then
+                busybox addgroup -g $PGID $MY_DOCKER_APP_USER_GROUP_NAME
+            else
+                addgroup --gid $PGID $MY_DOCKER_APP_USER_GROUP_NAME
+            fi
+        fi
     fi
-    echo "$_the_name"
-}
 
-if [[ "${MY_DOCKER_APP_USER_NAME}" == "root" ]]; then
-    if [[ "$(test_cmd_exist 'usermod')" == "n" ]]; then
-        echo "Failed to initialize environment due to missing command [usermod]."
-        exit 1
-    else
-        usermod -u $PUID -g $PGID root 
-        for item in $(echo "$MY_DOCKER_APP_USER_ADD_GROUP" | tr ',' "$(just_get_ifs_char)"); do
-            groupadd --gid $item $item
-            usermod -aG $item $MY_DOCKER_APP_USER_NAME
-        done
+    if [[ x"${old_username_id}" == "x" ]]; then
+        if [[ "$(test_cmd_exist 'useradd')" == "y" ]]; then
+            useradd -g $MY_DOCKER_APP_USER_GROUP_NAME $_add_group_list_flag $_group_name_list -u $PUID -s $MY_DOCKER_APP_USER_SHELL -d "$MY_DOCKER_APP_USER_HOME" $MY_DOCKER_APP_USER_NAME
+        else
+            if [[ "$(busybox --list | grep adduser)" == "adduser" ]]; then
+                busybox adduser -D -s $MY_DOCKER_APP_USER_SHELL -h "$MY_DOCKER_APP_USER_HOME" -u $PUID -G $MY_DOCKER_APP_USER_GROUP_NAME $MY_DOCKER_APP_USER_NAME
+            else
+                adduser --shell $MY_DOCKER_APP_USER_SHELL --home "$MY_DOCKER_APP_USER_HOME" --uid $PUID --gid $PGID --disabled-password --no-create-home --gecos "" $MY_DOCKER_APP_USER_NAME
+            fi
+        fi
     fi
+
+    usermod --uid $PUID --gid $PGID $MY_DOCKER_APP_USER_NAME 
+    for item in $(echo "$MY_DOCKER_APP_USER_ADD_GROUP" | tr ',' "$(just_get_ifs_char)"); do
+        groupadd --gid $item $item
+        usermod -aG $item $MY_DOCKER_APP_USER_NAME
+    done
+elif [[ "${PUID}" == "0" || "${PGID}" == "0" ]]; then
+    echo "Failed to initialize environment due to missing command [usermod]."
+    exit 1
 else
-    # sed -i "/:x:$PUID:$PUID:/d" /etc/passwd
-    # sed -i "/:x:$PGID:/d" /etc/group
+    old_id_username="$(id -u $PUID -n 2>/dev/null)"
+    old_id_groupname="$(id -g $PGID -n 2>/dev/null)"
 
-    old_username_uid="$(id -u $MY_DOCKER_APP_USER_NAME 2>/dev/null)"
-    old_uid_username="$(id -n -u $PUID 2>/dev/null)"
-    old_groupname_id="$(getent group $MY_DOCKER_APP_USER_NAME 2>/dev/null| awk -F':' '{print $NF}')"
-    old_id_groupname="$(getent group $PGID 2>/dev/null| awk -F':' '{print $1}')"
-
-    if [[ x"${old_username_uid}" != "x" ]]; then
+    if [[ x"${old_username_id}" != "x" ]]; then
         deluser $MY_DOCKER_APP_USER_NAME
     fi
-    if [[ x"${old_uid_username}" != "x" ]]; then
-        deluser $old_uid_username
+    if [[ x"${old_id_username}" != "x" ]]; then
+        deluser $old_id_username
     fi
     if [[ x"${old_groupname_id}" != "x" ]]; then
         delgroup $MY_DOCKER_APP_USER_NAME
