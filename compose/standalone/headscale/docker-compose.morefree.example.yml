@@ -5,6 +5,7 @@ services:
   headscale:
     image: headscale/headscale:0.23.0
     container_name: headscale
+    pull_policy: always
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
@@ -38,6 +39,7 @@ services:
         required: false
     image: ghcr.io/gurucomputing/headscale-ui:latest
     container_name: headscale-webui
+    pull_policy: always
     user: "1000"
     networks:
       - headscale-docker-bridge
