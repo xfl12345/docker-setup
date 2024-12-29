@@ -50,7 +50,7 @@ function generateMirrorlist(r) {
 
     r.status = 200;
     // 设置响应头
-    r.headersOut['Content-Type'] = 'text/plain';
+    r.headersOut['Content-Type'] = 'text/plain; charset=utf-8';
     r.headersOut['Content-Disposition'] = 'inline; filename="mirrorlist"';
 
     // 发送响应体
