@@ -21,8 +21,6 @@ services:
     volumes:
       - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale
-      - /dev/net/tun:/dev/net/tun
-      - /lib/modules:/lib/modules:ro
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
