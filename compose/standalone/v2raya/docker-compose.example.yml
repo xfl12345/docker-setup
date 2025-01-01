@@ -1,0 +1,12 @@
+services:
+  v2raya:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: v2raya
+    pid: host
+    ipc: host
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: unless-stopped
