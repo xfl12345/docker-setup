@@ -14,7 +14,7 @@ services:
       - NET_ADMIN
       - SYS_MODULE
     devices:
-      - /dev/net/tun
+      - "/dev/net/tun:/dev/net/tun:rwm"
     container_name: tailscale-client
     image: tailscale/tailscale:latest
     hostname: tailscale-client
