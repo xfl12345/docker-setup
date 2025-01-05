@@ -65,7 +65,9 @@
 |28049|frigate|
 |28050|BitComet WebAPI|
 |28051|v2raya|
-|28052~28099|`reserved`|
+|28052|jfrog Artifactory|
+|28053|jfrog Router|
+|28054~28099|`reserved`|
 
 ## Docker Tag 指定情况 （不含强依赖镜像）
 
