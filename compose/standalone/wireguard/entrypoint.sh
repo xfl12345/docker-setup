@@ -5,6 +5,8 @@ just_log() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S')][${my_file_name}] ${1}"
 }
 
+just_log "ENV[WG_INTERFACE]=${WG_INTERFACE}"
+
 run_hook() {
     __script_file_path=$1
     if [ -f $__script_file_path -a -r $__script_file_path ]; then
@@ -27,10 +29,10 @@ run_hook() {
 
 run_hook "/entrypoint-before-up.sh"
 
-wg-quick up wg0 || exit $?
+wg-quick up $WG_INTERFACE || exit $?
 
 run_hook "/entrypoint-after-up.sh"
 
 /infinite_sleep_loop.sh
 
-wg-quick down wg0
+wg-quick down $WG_INTERFACE
