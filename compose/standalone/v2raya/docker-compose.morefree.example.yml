@@ -9,18 +9,18 @@ services:
         required: true # default
       - path: /media/justsave/docker/env/v2raya/docker.env
         required: false
+    container_name: v2raya
+    image: mzz2017/v2raya:latest
+    pull_policy: always
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
     security_opt:
       - apparmor=unconfined
-    devices:
-      - "/dev/net/tun:/dev/net/tun"
     tmpfs:
       - /tmp
-    image: mzz2017/v2raya:latest
-    container_name: v2raya
-    pull_policy: always
+    devices:
+      - "/dev/net/tun:/dev/net/tun:rwm"
     volumes:
       # - /media/justsave/docker/volume/v2raya/fs/etc/resolv.conf:/etc/resolv.conf
       - /media/justsave/docker/volume/v2raya/fs/etc/v2raya:/etc/v2raya

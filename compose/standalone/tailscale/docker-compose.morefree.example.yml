@@ -10,14 +10,15 @@ services:
         required: true # default
       - path: /media/justsave/docker/env/tailscale/client.env
         required: false
+    container_name: tailscale-client
+    hostname: tailscale-client
+    image: tailscale/tailscale:latest
+    pull_policy: always
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
     devices:
       - "/dev/net/tun:/dev/net/tun:rwm"
-    container_name: tailscale-client
-    image: tailscale/tailscale:latest
-    hostname: tailscale-client
     volumes:
       - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale
