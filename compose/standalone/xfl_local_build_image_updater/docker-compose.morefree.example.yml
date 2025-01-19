@@ -22,4 +22,5 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /media/justsave/docker/compose:/media/justsave/docker/compose:ro
+      - /media/justsave/docker/volume/xfl_local_build_image_updater/app/logs:/app/logs
     restart: always
