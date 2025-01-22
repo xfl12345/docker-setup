@@ -14,10 +14,12 @@ services:
       - net.ipv6.conf.all.accept_ra=2
       - net.ipv6.conf.all.proxy_ndp=1
       - net.ipv6.conf.all.autoconf=1
+      - net.ipv4.conf.all.src_valid_mark=1
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
     volumes:
+      - /lib/modules:/lib/modules:ro
       - /media/justsave/docker/volume/wgcf:/wgcf
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
