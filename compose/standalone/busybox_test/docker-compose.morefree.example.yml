@@ -6,4 +6,4 @@ services:
     # command: 'sh -c "ifconfig && ping6 -c 4 www.taobao.com"'
     command: sh /infinite_sleep_loop.sh
     volumes:
-      - /media/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh

@@ -27,7 +27,7 @@ services:
       context: ./
       dockerfile: gitea-runner-xfl.Dockerfile
       additional_contexts:
-        resources: /media/justsave/docker/compose/build_resource
+        resources: /mnt/justsave/docker/compose/build_resource
       pull: true
     cap_add:
       - NET_ADMIN
@@ -35,7 +35,7 @@ services:
       - "/dev/net/tun:/dev/net/tun:rwm"
     volumes:
       - ./clash:/root/.config/mihomo
-      # - /media/justsave/docker/volume/gitea/runner/clash:/root/.config/mihomo
+      # - /mnt/justsave/docker/volume/gitea/runner/clash:/root/.config/mihomo
     networks:
       gitea-docker-bridge:
         ipv4_address: 172.20.4.3

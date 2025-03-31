@@ -6,7 +6,7 @@ services:
     env_file:
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/wg_easy/docker.env
+      - path: /mnt/justsave/docker/env/wg_easy/docker.env
         required: true
     container_name: wg-easy
     image: ghcr.io/wg-easy/wg-easy:latest
@@ -18,7 +18,7 @@ services:
       - net.ipv4.ip_forward=1
       - net.ipv4.conf.all.src_valid_mark=1
     volumes:
-      - /media/justsave/docker/volume/wg_easy/data/etc/wireguard:/etc/wireguard
+      - /mnt/justsave/docker/volume/wg_easy/data/etc/wireguard:/etc/wireguard
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

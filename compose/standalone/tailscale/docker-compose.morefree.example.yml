@@ -8,7 +8,7 @@ services:
     env_file:
       - path: ./default_tailscale_clinet.env
         required: true # default
-      - path: /media/justsave/docker/env/tailscale/client.env
+      - path: /mnt/justsave/docker/env/tailscale/client.env
         required: false
     container_name: tailscale-client
     hostname: tailscale-client
@@ -20,7 +20,7 @@ services:
     devices:
       - "/dev/net/tun:/dev/net/tun:rwm"
     volumes:
-      - /media/justsave/docker/volume/tailscale/data:/var/lib/tailscale
+      - /mnt/justsave/docker/volume/tailscale/data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro

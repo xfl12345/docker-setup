@@ -10,7 +10,7 @@ from ruamel.yaml.comments import CommentedMap
 root_path = os.path.abspath(os.path.curdir)
 # print(root_path)
 # exit(0)
-# root_path = "/media/justsave/docker/compose/standalone/ttt"
+# root_path = "/mnt/justsave/docker/compose/standalone/ttt"
 print(f"当前目录：[{root_path}]")
 
 curr_app_dir = root_path
@@ -53,13 +53,13 @@ app_morefree_example_content = OrderedDict({
         curr_app_dir_name: {
             "env_file": [
                 {
-                    "path": "/media/justsave/docker/compose/global_default.env",
+                    "path": "/mnt/justsave/docker/compose/global_default.env",
                     "required": True
                 }, {
                     "path": "./default.env",
                     "required": True
                 },{
-                    "path": f"/media/justsave/docker/env/{curr_app_dir_name}/docker.env",
+                    "path": f"/mnt/justsave/docker/env/{curr_app_dir_name}/docker.env",
                     "required": False
                 }
             ]

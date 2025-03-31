@@ -2,7 +2,7 @@
 services:
   xfl_cv_javaweb:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -17,8 +17,8 @@ services:
       # - /etc/timezone:/etc/timezone:ro
       # - /etc/localtime:/etc/localtime:ro
       # 持久化
-      - /media/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
-      - /media/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs
+      - /mnt/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
+      - /mnt/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

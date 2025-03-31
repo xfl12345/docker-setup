@@ -4,11 +4,11 @@
 services:
   glances:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/glances/docker.env
+      - path: /mnt/justsave/docker/env/glances/docker.env
         required: false
     container_name: glances
     image: nicolargo/glances:latest-full
@@ -21,8 +21,8 @@ services:
       - apparmor=unconfined
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/glances/local_config:/root/.config/glances
-      - /media/justsave/docker/volume/glances/global_config:/etc/glances:ro
+      - /mnt/justsave/docker/volume/glances/local_config:/root/.config/glances
+      - /mnt/justsave/docker/volume/glances/global_config:/etc/glances:ro
       # 挂载 docker socket ，直通宿主机
       - /var/run/docker.sock:/var/run/docker.sock
     restart: always

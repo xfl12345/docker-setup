@@ -4144,10 +4144,10 @@ installRemoteModule() {
 				if test $PHP_MAJMIN_VERSION -le 702; then
 					installRemoteModule_version=1.13.0
 				else
-					installRemoteModule_version="$(git -c versionsort.suffix=- ls-remote --tags --refs --quiet --exit-code --sort=version:refname https://github.com/wikimedia/mediawiki-php-wikidiff2.git 'refs/tags/*.*.*' | tail -1 | cut -d/ -f3)"
+					installRemoteModule_version="$(git -c versionsort.suffix=- ls-remote --tags --refs --quiet --exit-code --sort=version:refname https://github.com/wikimedia/mntwiki-php-wikidiff2.git 'refs/tags/*.*.*' | tail -1 | cut -d/ -f3)"
 				fi
 			fi
-			installRemoteModule_src="$(getPackageSource "https://codeload.github.com/wikimedia/mediawiki-php-wikidiff2/tar.gz/refs/tags/$installRemoteModule_version")"
+			installRemoteModule_src="$(getPackageSource "https://codeload.github.com/wikimedia/mntwiki-php-wikidiff2/tar.gz/refs/tags/$installRemoteModule_version")"
 			cd -- "$installRemoteModule_src"
 			phpize
 			./configure

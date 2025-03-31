@@ -5,11 +5,11 @@
 services:
   jenkins:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/jenkins/docker.env
+      - path: /mnt/justsave/docker/env/jenkins/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -21,7 +21,7 @@ services:
     build:
       context: ./
       additional_contexts:
-        resources: /media/justsave/docker/compose/build_resource
+        resources: /mnt/justsave/docker/compose/build_resource
       dockerfile: jenkins-xfl.Dockerfile
       pull: true
       args:
@@ -31,7 +31,7 @@ services:
     hostname: jenkins
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/jenkins:/var/jenkins_home
+      - /mnt/justsave/docker/volume/jenkins:/var/jenkins_home
       # 带环境进入容器 bash 的小工具
       - ./just_bash.sh:/usr/local/bin/just_bash.sh
       # # 挂载 docker socket ，直通宿主机

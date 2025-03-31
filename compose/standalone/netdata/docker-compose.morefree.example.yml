@@ -5,20 +5,20 @@
 services:
   netdata:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/netdata/docker.env
+      - path: /mnt/justsave/docker/env/netdata/docker.env
         required: false
     image: netdata/netdata:latest
     container_name: netdata
     volumes:
-      - /media/justsave/docker/volume/netdata/config:/etc/netdata
-      # 如需自定义，请自行添加映射 /media/justsave/docker/volume/netdata/config/netdata.conf:/etc/netdata/netdata.conf
+      - /mnt/justsave/docker/volume/netdata/config:/etc/netdata
+      # 如需自定义，请自行添加映射 /mnt/justsave/docker/volume/netdata/config/netdata.conf:/etc/netdata/netdata.conf
       - ./netdata.example.conf:/etc/netdata/netdata.conf
-      - /media/justsave/docker/volume/netdata/lib:/var/lib/netdata
-      - /media/justsave/docker/volume/netdata/cache:/var/cache/netdata
+      - /mnt/justsave/docker/volume/netdata/lib:/var/lib/netdata
+      - /mnt/justsave/docker/volume/netdata/cache:/var/cache/netdata
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /etc/localtime:/etc/localtime:ro

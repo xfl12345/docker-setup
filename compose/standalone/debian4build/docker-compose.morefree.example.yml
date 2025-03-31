@@ -27,4 +27,4 @@ services:
     #   - /dev/gpiochip4:/dev/gpiochip4
     command: /infinite_sleep_loop.sh
     volumes:
-      - /media/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh

@@ -16,7 +16,7 @@ services:
     image: redroid/redroid:13.0.0-latest
     privileged: true
     volumes:
-      - /media/justsave/docker/volume/redroid/data:/data
+      - /mnt/justsave/docker/volume/redroid/data:/data
     command: androidboot.redroid_gpu_mode=host androidboot.use_memfd=1 androidboot.redroid_width=1080 androidboot.redroid_height=1920 androidboot.redroid_fps=120 ro.enable_ipv6_default=true persist.sys.ipv6.enable=true persist.sys.ipv4.enable=true
     restart: always
 

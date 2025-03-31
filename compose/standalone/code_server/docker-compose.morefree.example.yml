@@ -5,11 +5,11 @@
 services:
   code_server:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/code_server/docker.env
+      - path: /mnt/justsave/docker/env/code_server/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -24,9 +24,9 @@ services:
     user: "2006:2006"
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/code_server/home/.local:/home/coder/.local
-      - /media/justsave/docker/volume/code_server/home/.config:/home/coder/.config
-      - /media/justsave/docker/volume/code_server/home/project:/home/coder/project
+      - /mnt/justsave/docker/volume/code_server/home/.local:/home/coder/.local
+      - /mnt/justsave/docker/volume/code_server/home/.config:/home/coder/.config
+      - /mnt/justsave/docker/volume/code_server/home/project:/home/coder/project
       # Fix BUG https://github.com/coder/code-server/issues/2767
       - ./entrypoint.sh:/usr/bin/entrypoint.sh
       # # 挂载 docker socket ，直通宿主机

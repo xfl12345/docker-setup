@@ -14,7 +14,7 @@ services:
     privileged: true
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/portainer/data:/data
+      - /mnt/justsave/docker/volume/portainer/data:/data
       # 挂载 docker socket ，直通宿主机
       - /var/run/docker.sock:/var/run/docker.sock
       # 共享host的时间环境

@@ -5,9 +5,9 @@
 services:
   bitcomet:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /media/justsave/docker/env/bitcomet/docker.env
+      - path: /mnt/justsave/docker/env/bitcomet/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -33,7 +33,7 @@ services:
       pull: true
     entrypoint: ["/my_entrypoint.sh"]
     volumes:
-      - /media/justsave/docker/volume/bitcomet/appdata/BitComet:/home/sandbox/.config/BitComet
-      - /media/justsave/docker/volume/bitcomet/share:/home/sandbox/share
+      - /mnt/justsave/docker/volume/bitcomet/appdata/BitComet:/home/sandbox/.config/BitComet
+      - /mnt/justsave/docker/volume/bitcomet/share:/home/sandbox/share
       - ./my_entrypoint.sh:/my_entrypoint.sh
     restart: always

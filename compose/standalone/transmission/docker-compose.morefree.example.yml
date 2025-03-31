@@ -5,21 +5,21 @@
 services:
   transmission:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/transmission/docker.env
+      - path: /mnt/justsave/docker/env/transmission/docker.env
         required: false
     container_name: transmission
     image: linuxserver/transmission:latest
     pull_policy: always
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/transmission/data:/config
-      - /media/justsave/docker/volume/transmission/downloads:/downloads
-      - /media/justsave/docker/volume/transmission/folder:/watch
+      - /mnt/justsave/docker/volume/transmission/data:/config
+      - /mnt/justsave/docker/volume/transmission/downloads:/downloads
+      - /mnt/justsave/docker/volume/transmission/folder:/watch
       # BT客户端专享目录
-      - /media/justsave/BT:/media/justsave/BT
-      - /media/justsave/PT:/media/justsave/PT
+      - /mnt/justsave/BT:/mnt/justsave/BT
+      - /mnt/justsave/PT:/mnt/justsave/PT
     restart: unless-stopped

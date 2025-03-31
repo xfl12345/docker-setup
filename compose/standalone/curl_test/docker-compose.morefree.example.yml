@@ -4,7 +4,7 @@
 services:
   curl_test:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
     container_name: curl-test
     image: alpine/curl-http3

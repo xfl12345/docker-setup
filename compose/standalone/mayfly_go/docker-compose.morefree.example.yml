@@ -5,11 +5,11 @@
 services:
   mayfly_go:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/mayfly_go/docker.env
+      - path: /mnt/justsave/docker/env/mayfly_go/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -22,7 +22,7 @@ services:
     container_name: mayfly-go
     volumes:
       # 映射配置文件（需要提前准备）
-      - /media/justsave/docker/volume/mayfly_go/server:/mayfly
-      # - /media/justsave/docker/volume/mayfly_go/server/config.yml:/mayfly/config.yml
+      - /mnt/justsave/docker/volume/mayfly_go/server:/mayfly
+      # - /mnt/justsave/docker/volume/mayfly_go/server/config.yml:/mayfly/config.yml
     extra_hosts:
       - "host.docker.internal:host-gateway"

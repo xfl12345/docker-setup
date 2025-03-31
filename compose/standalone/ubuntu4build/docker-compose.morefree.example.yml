@@ -2,11 +2,11 @@
 services:
   ubuntu4build:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/ubuntu4build/docker.env
+      - path: /mnt/justsave/docker/env/ubuntu4build/docker.env
         required: false
     container_name: ubuntu4build
     image: ubuntu4build

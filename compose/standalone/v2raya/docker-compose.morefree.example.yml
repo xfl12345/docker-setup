@@ -3,11 +3,11 @@
 services:
   v2raya:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/v2raya/docker.env
+      - path: /mnt/justsave/docker/env/v2raya/docker.env
         required: false
     container_name: v2raya
     image: mzz2017/v2raya:latest
@@ -22,7 +22,7 @@ services:
     devices:
       - "/dev/net/tun:/dev/net/tun:rwm"
     volumes:
-      # - /media/justsave/docker/volume/v2raya/fs/etc/resolv.conf:/etc/resolv.conf
-      - /media/justsave/docker/volume/v2raya/fs/etc/v2raya:/etc/v2raya
-      - /media/justsave/docker/volume/v2raya/fs/usr/local/share/v2raya:/usr/local/share/v2raya
-      - /media/justsave/docker/volume/v2raya/fs/root/.local/share/v2ray:/root/.local/share/v2ray
+      # - /mnt/justsave/docker/volume/v2raya/fs/etc/resolv.conf:/etc/resolv.conf
+      - /mnt/justsave/docker/volume/v2raya/fs/etc/v2raya:/etc/v2raya
+      - /mnt/justsave/docker/volume/v2raya/fs/usr/local/share/v2raya:/usr/local/share/v2raya
+      - /mnt/justsave/docker/volume/v2raya/fs/root/.local/share/v2ray:/root/.local/share/v2ray

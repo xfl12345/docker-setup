@@ -93,8 +93,8 @@ services:
     #   - command: "service sendmail restart"
     entrypoint: ["/entrypoint.sh"]
     volumes:
-      - "/media/justsave/docker/volume/gitlab/config:/etc/gitlab"
-      - "/media/justsave/docker/volume/gitlab/logs:/var/log/gitlab"
-      - "/media/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
-      - "/media/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
+      - "/mnt/justsave/docker/volume/gitlab/config:/etc/gitlab"
+      - "/mnt/justsave/docker/volume/gitlab/logs:/var/log/gitlab"
+      - "/mnt/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
+      - "/mnt/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
       - "./entrypoint.sh:/entrypoint.sh"

@@ -7,7 +7,7 @@ services:
     env_file:
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/mariadb/docker.env
+      - path: /mnt/justsave/docker/env/mariadb/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -23,9 +23,9 @@ services:
       retries: 200
     hostname: "docker-mariadb"
     volumes:
-      - /media/justsave/docker/volume/mariadb/conf:/etc/mysql/conf.d
-      - /media/justsave/docker/volume/mariadb/data:/var/lib/mysql
-      - /media/justsave/docker/volume/mariadb/log:/var/log/mysql
+      - /mnt/justsave/docker/volume/mariadb/conf:/etc/mysql/conf.d
+      - /mnt/justsave/docker/volume/mariadb/data:/var/lib/mysql
+      - /mnt/justsave/docker/volume/mariadb/log:/var/log/mysql
       - /var/run/mysqld:/var/run/mysqld
       # healthcheck 小工具
       - ./my_mariadb_healthcheck.sh:/my_mariadb_healthcheck.sh:ro

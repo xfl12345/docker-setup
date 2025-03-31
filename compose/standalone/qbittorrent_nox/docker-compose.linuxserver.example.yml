@@ -4,13 +4,13 @@
 services:
   qbittorrent_nox:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
       - path: ./default_linuxserver.env
         required: true # default
-      - path: /media/justsave/docker/env/qbittorrent_nox/docker.env
+      - path: /mnt/justsave/docker/env/qbittorrent_nox/docker.env
         required: false
     container_name: qbittorrent-nox
     image: linuxserver/qbittorrent:latest
@@ -25,11 +25,11 @@ services:
     tty: true
     volumes:
       # 数据持久化
-      - /media/justsave/docker/volume/qbittorrent_nox:/media/justsave/docker/volume/qbittorrent_nox
-      - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
-      - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
-      - /media/justsave/BT:/media/justsave/BT
-      - /media/justsave/PT:/media/justsave/PT
+      - /mnt/justsave/docker/volume/qbittorrent_nox:/mnt/justsave/docker/volume/qbittorrent_nox
+      - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
+      - /mnt/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /mnt/justsave/BT:/mnt/justsave/BT
+      - /mnt/justsave/PT:/mnt/justsave/PT
     # restart: always
     # restart: "no"
     restart: unless-stopped

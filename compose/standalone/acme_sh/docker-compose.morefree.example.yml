@@ -5,7 +5,7 @@
 services:
   acme_sh:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -21,9 +21,9 @@ services:
     command: daemon
     volumes:
       # acme.sh
-      - /media/justsave/docker/volume/acme_sh/app:/acme.sh
+      - /mnt/justsave/docker/volume/acme_sh/app:/acme.sh
       # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
+      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
       # docker socket
       - /var/run/docker.sock:/var/run/docker.sock 
       # 自己写的工具脚本

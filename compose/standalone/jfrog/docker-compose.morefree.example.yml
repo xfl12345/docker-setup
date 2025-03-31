@@ -4,11 +4,11 @@
 services:
   jfrog_artifactory_oss:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default_jfrog_artifactory_oss.env
         required: true # default
-      - path: /media/justsave/docker/env/jfrog/artifactory/oss/docker.env
+      - path: /mnt/justsave/docker/env/jfrog/artifactory/oss/docker.env
         required: false
     container_name: jfrog-artifactory-oss
     image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
@@ -21,7 +21,7 @@ services:
       # See https://jfrog.com/help/r/jfrog-installation-setup-documentation/generic-directory-layout
       # https://jfrog.com/help/r/jfrog-installation-setup-documentation/jfrog-home
       # 需要手动完成一些初始化 
-      - /media/justsave/docker/volume/jfrog/artifactory/oss/fs/var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory
+      - /mnt/justsave/docker/volume/jfrog/artifactory/oss/fs/var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-my_docker_volume_dir="/media/justsave/docker/volume"
+my_docker_volume_dir="/mnt/justsave/docker/volume"
 the_realpath_feature_flag="-P"
 my_file_name="$(basename "$0")"
 
@@ -18,13 +18,13 @@ if [[ x"$(realpath --help | grep -w '\-\-canonicalize\-missing')" != "x" ]]; the
     the_realpath_feature_flag="-Pm"
 fi
 
-GLOBAL_DEFAULT_ENV_FILE_PATH="/media/justsave/docker/compose/global_default.env"
+GLOBAL_DEFAULT_ENV_FILE_PATH="/mnt/justsave/docker/compose/global_default.env"
 if [ ! -e $GLOBAL_DEFAULT_ENV_FILE_PATH ]; then
     if [[ "$(date +%z 2>/dev/null)" == "+0800" ]]; then
-        ln -s /media/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
+        ln -s /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
         just_log "Created a global default env file as a symbolic link: $GLOBAL_DEFAULT_ENV_FILE_PATH"
     else
-        cp /media/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
+        cp /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
         just_log "Created global default env file: $GLOBAL_DEFAULT_ENV_FILE_PATH"
     fi
 fi
@@ -140,21 +140,21 @@ just_chown() {
 }
 
 just_chown "www-data:www-data" "$my_docker_volume_dir/nginx/"
-just_chown "www-data:www-data" "/media/justsave/wwwroot/download/"
-just_chown "www-data:www-data" "/media/justsave/wwwlogs/"
+just_chown "www-data:www-data" "/mnt/justsave/wwwroot/download/"
+just_chown "www-data:www-data" "/mnt/justsave/wwwlogs/"
 # just_chown "nginx:nginx" "$my_docker_volume_dir/nginx/"
 just_chown "metacubex:metacubex" "$my_docker_volume_dir/clash_meta/"
 just_chown "jenkins:jenkins" "$my_docker_volume_dir/jenkins/"
 just_chown "gitea:gitea" "$my_docker_volume_dir/gitea/"
 just_chown "libreoffice:libreoffice" "$my_docker_volume_dir/libreoffice/"
 just_chown "qbtuser:qbtuser" "$my_docker_volume_dir/qbittorrent_nox/"
-just_chown "qbtuser:btuser" "/media/justsave/BT/"
-just_chown "qbtuser:btuser" "/media/justsave/PT/"
+just_chown "qbtuser:btuser" "/mnt/justsave/BT/"
+just_chown "qbtuser:btuser" "/mnt/justsave/PT/"
 just_chown "transmission:btuser" "$my_docker_volume_dir/transmission/"
 just_chown "code-server:code-server" "$my_docker_volume_dir/code_server/home/"
 just_chown "peerbanhelper:peerbanhelper" "$my_docker_volume_dir/peer_ban_helper/app/"
 
-docker_setup_app_dir_path="/media/justsave/docker/compose/standalone/docker_setup"
+docker_setup_app_dir_path="/mnt/justsave/docker/compose/standalone/docker_setup"
 docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.yml"
 if [ ! -e $docker_setup_app_compose_file_path ]; then
     docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.example.yml"

@@ -4,7 +4,7 @@ services:
   # official docs URL=https://wiki.metacubex.one/
   clash:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -21,7 +21,7 @@ services:
     devices:
       - "/dev/net/tun:/dev/net/tun:rwm"
     volumes:
-      - /media/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
+      - /mnt/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
     restart: always
 
   # official repo URL=https://github.com/MetaCubeX/metacubexd
@@ -31,7 +31,7 @@ services:
     pull_policy: always
     user: "2002"
     volumes:
-      - /media/justsave/docker/volume/clash_meta/caddy:/config/caddy
+      - /mnt/justsave/docker/volume/clash_meta/caddy:/config/caddy
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
