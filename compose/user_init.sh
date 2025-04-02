@@ -18,14 +18,15 @@ if [[ x"$(realpath --help | grep -w '\-\-canonicalize\-missing')" != "x" ]]; the
     the_realpath_feature_flag="-Pm"
 fi
 
-GLOBAL_DEFAULT_ENV_FILE_PATH="/mnt/justsave/docker/compose/global_default.env"
-if [ ! -e $GLOBAL_DEFAULT_ENV_FILE_PATH ]; then
+if [ ! -e /mnt/justsave/docker/compose/global_default.env ]; then
     if [[ "$(date +%z 2>/dev/null)" == "+0800" ]]; then
-        ln -s /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
-        just_log "Created a global default env file as a symbolic link: $GLOBAL_DEFAULT_ENV_FILE_PATH"
+        bash -c "cd /mnt/justsave/docker/compose && ln -s global_defaul{t.example,t}.env"
+        just_log "Created a global default env file as a symbolic link. Checking..."
+        ls -lah /mnt/justsave/docker/compose/global_default.env
     else
-        cp /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
-        just_log "Created global default env file: $GLOBAL_DEFAULT_ENV_FILE_PATH"
+        bash -c "cd /mnt/justsave/docker/compose && cp global_defaul{t.example,t}.env"
+        just_log "Created global default env file. Checking..."
+        ls -lah /mnt/justsave/docker/compose/global_default.env
     fi
 fi
 
