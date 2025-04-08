@@ -2,11 +2,11 @@
 services:
   xfl_local_build_image_updater:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/xfl_local_build_image_updater/docker.env
+      - path: /mnt/justsave/docker/env/xfl_local_build_image_updater/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -16,10 +16,11 @@ services:
     build:
       context: ./
       additional_contexts:
-        resources: /media/justsave/docker/compose/build_resource
+        resources: /mnt/justsave/docker/compose/build_resource
       dockerfile: xfl.Dockerfile
       pull: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /media/justsave/docker/compose:/media/justsave/docker/compose:ro
+      - /mnt/justsave/docker/compose:/mnt/justsave/docker/compose:ro
+      - /mnt/justsave/docker/volume/xfl_local_build_image_updater/app/logs:/app/logs
     restart: always

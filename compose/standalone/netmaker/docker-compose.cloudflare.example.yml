@@ -8,29 +8,29 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: netclient
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker-client.env
+      - path: /mnt/justsave/docker/env/netmaker/cloudflare/netmaker-client.env
         required: true
     volumes:
-      - /media/justsave/docker/volume/netmaker/cloudflare/etc/netclient:/etc/netclient
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/etc/netclient:/etc/netclient
 
   netmaker:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: netmaker
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cloudflare/netmaker.env
         required: false
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/config/dnsconfig
-      - /media/justsave/docker/volume/netmaker/cloudflare/sqldata:/root/data
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/config/dnsconfig
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/sqldata:/root/data
 
   netmaker_ui:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: netmaker_ui
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker-ui.env
+      - path: /mnt/justsave/docker/env/netmaker/cloudflare/netmaker-ui.env
         required: true
 
   coredns:
@@ -38,20 +38,20 @@ services:
       file: ./docker-compose.morefree.example.yml
       service: coredns
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cloudflare/netmaker.env
         required: true
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/dnsconfig
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/dnsconfig:/root/dnsconfig
 
   mq:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: mq
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cloudflare/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cloudflare/netmaker.env
         required: true
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/logs:/mosquitto/log
-      - /media/justsave/docker/volume/netmaker/cloudflare/mosquitto/data:/mosquitto/data
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/mosquitto/logs:/mosquitto/log
+      - /mnt/justsave/docker/volume/netmaker/cloudflare/mosquitto/data:/mosquitto/data

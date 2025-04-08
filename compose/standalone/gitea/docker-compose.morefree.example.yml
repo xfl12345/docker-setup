@@ -4,11 +4,11 @@
 services:
   gitea:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./gitea_default.env
         required: true # default
-      - path: /media/justsave/docker/env/gitea/docker.env
+      - path: /mnt/justsave/docker/env/gitea/docker.env
         required: false
     image: gitea/gitea:1.22
     pull_policy: always
@@ -19,27 +19,27 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # 持久化
-      - /media/justsave/docker/volume/gitea/data:/data
+      - /mnt/justsave/docker/volume/gitea/data:/data
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: unless-stopped
 
   gitea_runner:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./gitea_runner_default.env
         required: true # default
-      - path: /media/justsave/docker/env/gitea/runner/docker.env
+      - path: /mnt/justsave/docker/env/gitea/runner/docker.env
         required: false
     image: gitea/act_runner:latest
     pull_policy: always
     container_name: gitea-runner
     volumes:
-      - /media/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
-      - /media/justsave/docker/volume/gitea/runner/data:/data
-      - /media/justsave/docker/volume/gitea/runner/root:/root
-      - /media/justsave/docker:/media/justsave/docker:ro
+      - /mnt/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
+      - /mnt/justsave/docker/volume/gitea/runner/data:/data
+      - /mnt/justsave/docker/volume/gitea/runner/root:/root
+      - /mnt/justsave/docker:/mnt/justsave/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
     extra_hosts:
       - "host.docker.internal:host-gateway"

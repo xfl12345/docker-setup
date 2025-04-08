@@ -5,17 +5,19 @@
 services:
   xray:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     container_name: xray
     image: teddysun/xray:latest
     pull_policy: always
     hostname: xray
     command: /my_entrypoint.sh
     volumes:
-      - /media/justsave/docker/volume/xray/config/config.json:/etc/xray/config.json:ro
-      - /media/justsave/docker/volume/xray/log:/var/log/xray:rw
-      - /media/justsave/docker/volume/xray/bin:/usr/share/xray:ro
+      - /mnt/justsave/docker/volume/xray/config/config.json:/etc/xray/config.json:ro
+      - /mnt/justsave/docker/volume/xray/log:/var/log/xray:rw
+      - /mnt/justsave/docker/volume/xray/bin:/usr/share/xray:ro
       # 添加 启动脚本
       - ./my_entrypoint.sh:/my_entrypoint.sh
     cap_add:

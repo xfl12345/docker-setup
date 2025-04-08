@@ -8,13 +8,17 @@ services:
         max-size: 4m
     ports:
       # Web GUI client port
-      - 127.0.0.1:28043:80
+      - "127.0.0.1:28043:80"
       # Web API port
-      - 127.0.0.1:28050:28050
+      - "127.0.0.1:28050:28050"
       # VNC GUI client port
-      - 127.0.0.1:55900:5900
+      - "127.0.0.1:55900:5900"
       # 以下配置不可或缺，需自行决定！！！
       # BT connection
-      - 6882:6882
-      - 6882:6882/udp
-    network_mode: bridge
+      - "6882:6882"
+      - "6882:6882/udp"
+    networks:
+      my_docker_network: {}
+
+include:
+  - ../../docker-compose.preset.network.yml

@@ -1,5 +1,5 @@
 networks:
-  docker-bridge-for-stack-all-in-one:
+  my_docker_network:
     name: "docker-bridge-for-stack-all-in-one"
     driver: bridge
     enable_ipv6: true

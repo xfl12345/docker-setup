@@ -1,0 +1,20 @@
+services:
+  fping:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/fping/docker.env
+        required: false
+    image: localbuild-fping
+    container_name: fping
+    pull_policy: build
+    build: 
+      args:
+        - PING_NET
+      context: ./
+      additional_contexts:
+        resources: /mnt/justsave/docker/compose/build_resource
+      dockerfile: ./fping.Dockerfile
+      pull: true

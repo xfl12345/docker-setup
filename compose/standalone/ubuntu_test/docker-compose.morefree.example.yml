@@ -5,7 +5,9 @@ services:
     image: ubuntu:24.04
     pull_policy: always
     restart: "no"
-    command: /bin/bash -c "touch /tmp/just_hold_docker_bash.txt && tail -f /tmp/just_hold_docker_bash.txt"
+    command: /infinite_sleep_loop.sh
+    volumes:
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
 
 # 强行停机方法
 # docker compose down --timeout 1

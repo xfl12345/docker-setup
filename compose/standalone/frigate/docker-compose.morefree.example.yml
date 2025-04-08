@@ -5,11 +5,11 @@
 services:
   frigate:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/frigate/docker.env
+      - path: /mnt/justsave/docker/env/frigate/docker.env
         required: false
     container_name: frigate
     image: ghcr.io/blakeblackshear/frigate:stable
@@ -25,8 +25,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # 持久化
-      - /media/justsave/docker/volume/frigate/config:/config
-      - /media/justsave/docker/volume/frigate/storage:/media/frigate
+      - /mnt/justsave/docker/volume/frigate/config:/config
+      - /mnt/justsave/docker/volume/frigate/storage:/mnt/frigate
       # - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
       #   target: /tmp/cache
       #   tmpfs:

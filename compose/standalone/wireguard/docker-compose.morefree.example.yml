@@ -1,0 +1,24 @@
+services:
+  wireguard_common:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+    image: wireguard-common
+    container_name: wireguard-common
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /mnt/justsave/docker/compose/build_resource
+      pull: true
+      dockerfile: ./wireguard.Dockerfile
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - "/dev/net/tun:/dev/net/tun:rwm"
+    volumes:
+      - /mnt/justsave/docker/volume/wireguard/default/etc/wireguard:/etc/wireguard
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+

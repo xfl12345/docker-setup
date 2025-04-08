@@ -1,16 +1,31 @@
 #!/usr/bin/env bash
-my_docker_volume_dir="/media/justsave/docker/volume"
+my_docker_volume_dir="/mnt/justsave/docker/volume"
 the_realpath_feature_flag="-P"
+my_file_name="$(basename "$0")"
+
+just_log() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')][${my_file_name}] ${1}"
+}
+
+exec_cmd() {
+    local __tmp_cmd="$1"
+    just_log "CMD[$__tmp_cmd]"
+    eval "$__tmp_cmd"
+}
+
 if [[ x"$(realpath --help | grep -w '\-\-canonicalize\-missing')" != "x" ]]; then
-    echo "[$(which realpath)] support '--canonicalize-missing'"
+    just_log "[$(which realpath)] support '--canonicalize-missing'"
     the_realpath_feature_flag="-Pm"
 fi
 
-if [ ! -e /media/justsave/docker/compose/global_default.env ]; then
+GLOBAL_DEFAULT_ENV_FILE_PATH="/mnt/justsave/docker/compose/global_default.env"
+if [ ! -e $GLOBAL_DEFAULT_ENV_FILE_PATH ]; then
     if [[ "$(date +%z 2>/dev/null)" == "+0800" ]]; then
-        ln -s /media/justsave/docker/compose/global_default.example.env /media/justsave/docker/compose/global_default.env
+        ln -s /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
+        just_log "Created a global default env file as a symbolic link: $GLOBAL_DEFAULT_ENV_FILE_PATH"
     else
-        cp /media/justsave/docker/compose/global_default.example.env /media/justsave/docker/compose/global_default.env
+        cp /mnt/justsave/docker/compose/global_default.example.env $GLOBAL_DEFAULT_ENV_FILE_PATH
+        just_log "Created global default env file: $GLOBAL_DEFAULT_ENV_FILE_PATH"
     fi
 fi
 
@@ -41,10 +56,10 @@ my_id_map["gitlab-www"]=3008
 # $2 is group id
 insert_or_update_group_id() {
     if getent group $1 >/dev/null 2>&1; then
-        echo "Setting Group[$1] id to [$2]..."
+        just_log "Setting Group[$1] id to [$2]..."
         groupmod -g $2 $1
     else
-        echo "Adding Group[$1] with id [$2]..."
+        just_log "Adding Group[$1] with id [$2]..."
         groupadd -g $2 $1
     fi
 }
@@ -66,6 +81,26 @@ done
 
 # $1 is user name
 # $2 is group name
+just_set_user_main_group() {
+    _user_name="$1"
+    _new_group="$2"
+    _current_primary="$(id -gn "$_user_name")"
+
+    # 获取当前用户的所有附加组
+    _other_groups="$(id -Gn "$_user_name" | tr ' ' '\n' | grep -v "$_current_primary" | grep -v "$_new_group" | tr '\n' ',' | sed 's#,$##')"
+    # 将当前用户的主组添加到附加组列表中
+    if [[ -z "$_other_groups" ]]; then
+        _other_groups="$_current_primary"
+    else
+        _other_groups="${_other_groups},${_current_primary}"
+    fi
+
+    exec_cmd "usermod -g $_new_group -aG $_other_groups $_user_name"
+    just_log "$(id $_user_name)"
+}
+
+# $1 is user name
+# $2 is group name
 just_add_user_to_group() {
     if [ "`groups $1 | grep -w "$2"`" = "" ]; then
         gpasswd -a $1 $2
@@ -75,7 +110,8 @@ just_add_user_to_group() {
     fi
 }
 
-just_add_user_to_group qbtuser btuser
+just_set_user_main_group qbtuser btuser
+just_set_user_main_group transmission btuser
 just_add_user_to_group jenkins docker
 just_add_user_to_group gitea docker
 
@@ -104,26 +140,26 @@ just_chown() {
 }
 
 just_chown "www-data:www-data" "$my_docker_volume_dir/nginx/"
-just_chown "www-data:www-data" "/media/justsave/wwwroot/download/"
-just_chown "www-data:www-data" "/media/justsave/wwwlogs/"
+just_chown "www-data:www-data" "/mnt/justsave/wwwroot/download/"
+just_chown "www-data:www-data" "/mnt/justsave/wwwlogs/"
 # just_chown "nginx:nginx" "$my_docker_volume_dir/nginx/"
 just_chown "metacubex:metacubex" "$my_docker_volume_dir/clash_meta/"
 just_chown "jenkins:jenkins" "$my_docker_volume_dir/jenkins/"
 just_chown "gitea:gitea" "$my_docker_volume_dir/gitea/"
 just_chown "libreoffice:libreoffice" "$my_docker_volume_dir/libreoffice/"
 just_chown "qbtuser:qbtuser" "$my_docker_volume_dir/qbittorrent_nox/"
-just_chown "qbtuser:btuser" "/media/justsave/BT/"
-just_chown "qbtuser:btuser" "/media/justsave/PT/"
+just_chown "qbtuser:btuser" "/mnt/justsave/BT/"
+just_chown "qbtuser:btuser" "/mnt/justsave/PT/"
 just_chown "transmission:btuser" "$my_docker_volume_dir/transmission/"
 just_chown "code-server:code-server" "$my_docker_volume_dir/code_server/home/"
 just_chown "peerbanhelper:peerbanhelper" "$my_docker_volume_dir/peer_ban_helper/app/"
 
-docker_setup_app_dir_path="/media/justsave/docker/compose/standalone/docker_setup"
+docker_setup_app_dir_path="/mnt/justsave/docker/compose/standalone/docker_setup"
 docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.yml"
 if [ ! -e $docker_setup_app_compose_file_path ]; then
     docker_setup_app_compose_file_path="${docker_setup_app_dir_path}/docker-compose.example.yml"
 fi
 
-SCRIPT_PATH="/app/user_init.sh"
-docker compose -f $docker_setup_app_compose_file_path up
-docker compose -f $docker_setup_app_compose_file_path down
+export SCRIPT_PATH="/app/user_init.sh"
+# docker compose -f $docker_setup_app_compose_file_path up
+# docker compose -f $docker_setup_app_compose_file_path rm -f docker_setup

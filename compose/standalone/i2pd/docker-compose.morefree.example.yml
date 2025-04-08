@@ -5,11 +5,11 @@
 services:
   i2pd:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/i2pd/docker.env
+      - path: /mnt/justsave/docker/env/i2pd/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -20,9 +20,9 @@ services:
     build:
       context: ./
       additional_contexts:
-        resources: /media/justsave/docker/compose/build_resource
+        resources: /mnt/justsave/docker/compose/build_resource
       dockerfile: i2pd-xfl.Dockerfile
       pull: true
     volumes:
-      - /media/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
+      - /mnt/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
     restart: always

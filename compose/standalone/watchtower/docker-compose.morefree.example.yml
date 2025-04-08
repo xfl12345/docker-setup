@@ -5,9 +5,9 @@
 services:
   watchtower:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /media/justsave/docker/env/watchtower/docker.env
+      - path: /mnt/justsave/docker/env/watchtower/docker.env
         required: false
     image: containrrr/watchtower:latest
     container_name: watchtower

@@ -4,11 +4,11 @@
 services:
   puter:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/puter/docker.env
+      - path: /mnt/justsave/docker/env/puter/docker.env
         required: false
     container_name: puter
     # image: ghcr.io/heyputer/puter:latest
@@ -21,6 +21,6 @@ services:
       retries: 3
       start_period: 30s
     volumes:
-      - /media/justsave/docker/volume/puter/config:/etc/puter
-      - /media/justsave/docker/volume/puter/data:/var/puter
+      - /mnt/justsave/docker/volume/puter/config:/etc/puter
+      - /mnt/justsave/docker/volume/puter/data:/var/puter
     restart: unless-stopped

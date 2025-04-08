@@ -3,4 +3,8 @@ services:
     extends:
       file: ./docker-compose.morefree.example.yml
       service: debian_test
-    network_mode: bridge
+    networks:
+      my_docker_network: {}
+
+include:
+  - ../../docker-compose.preset.network.yml

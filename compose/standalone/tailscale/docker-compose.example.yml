@@ -1,0 +1,12 @@
+services:
+  tailscale_client:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: tailscale_client
+    # depends_on:
+    #   - headscale
+    #   - headscale_webui
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host

@@ -1,0 +1,5 @@
+# Defined in /mnt/justsave/docker/compose/standalone/docker_setup/docker-compose.network.yml
+networks:
+  my_docker_network:
+    name: "my-default-docker-bridge-network"
+    external: true

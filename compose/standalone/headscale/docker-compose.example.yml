@@ -9,7 +9,7 @@ services:
     ports:
       # - "8090:8090"
       - 127.0.0.1:28015:8080
-      - 0.0.0.0:9090:9090
+      # - 0.0.0.0:9090:9090
       - 3478:3478/udp
 
   headscale_webui:
@@ -20,18 +20,14 @@ services:
       options:
         max-size: 4m
     ports:
-      - 127.0.0.1:28016:5000
+      - 127.0.0.1:28016:8080
 
   tailscale_client:
     extends:
-      file: ./docker-compose.morefree.example.yml
+      file: ../tailscale/docker-compose.example.yml
       service: tailscale_client
-    depends_on:
-      - headscale
-      - headscale_webui
-    logging:
-      options:
-        max-size: 4m
-    network_mode: host
+    # depends_on:
+    #   - headscale
+    #   - headscale_webui
 include:
   - ./docker-compose.network.yml

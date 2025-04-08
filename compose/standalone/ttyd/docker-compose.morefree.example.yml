@@ -4,11 +4,11 @@
 services:
   ttyd:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/ttyd/docker.env
+      - path: /mnt/justsave/docker/env/ttyd/docker.env
         required: false
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -20,13 +20,13 @@ services:
     build:
       context: ./
       additional_contexts:
-        resources: /media/justsave/docker/compose/build_resource
+        resources: /mnt/justsave/docker/compose/build_resource
       dockerfile: ttyd-xfl.Dockerfile
       pull: true
     # command: "ttyd --writable --ipv6 --port 28041 bash"
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/ttyd/home:/home/ttyd
+      - /mnt/justsave/docker/volume/ttyd/home:/home/ttyd
       # socket 通信
       - /var/run/ttyd:/var/run/ttyd
     extra_hosts:

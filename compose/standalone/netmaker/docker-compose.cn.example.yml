@@ -9,10 +9,10 @@ services:
       service: netclient
     container_name: netclient-cn
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cn/netmaker-client.env
+      - path: /mnt/justsave/docker/env/netmaker/cn/netmaker-client.env
         required: true
     volumes:
-      - /media/justsave/docker/volume/netmaker/cn/etc/netclient:/etc/netclient
+      - /mnt/justsave/docker/volume/netmaker/cn/etc/netclient:/etc/netclient
 
   netmaker_cn:
     extends:
@@ -20,12 +20,12 @@ services:
       service: netmaker
     container_name: netmaker-cn
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cn/netmaker.env
         required: false
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/config/dnsconfig
-      - /media/justsave/docker/volume/netmaker/cn/sqldata:/root/data
+      - /mnt/justsave/docker/volume/netmaker/cn/dnsconfig:/root/config/dnsconfig
+      - /mnt/justsave/docker/volume/netmaker/cn/sqldata:/root/data
 
 
   netmaker_ui_cn:
@@ -34,7 +34,7 @@ services:
       service: netmaker_ui
     container_name: netmaker-ui-cn
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cn/netmaker-ui.env
+      - path: /mnt/justsave/docker/env/netmaker/cn/netmaker-ui.env
         required: true
 
   coredns_cn:
@@ -43,11 +43,11 @@ services:
       service: coredns
     container_name: coredns-cn
     env_file:
-      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cn/netmaker.env
         required: true
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cn/dnsconfig:/root/dnsconfig
+      - /mnt/justsave/docker/volume/netmaker/cn/dnsconfig:/root/dnsconfig
 
   mq_cn:
     extends:
@@ -55,9 +55,9 @@ services:
       service: mq
     container_name: mq-cn
     env_file: 
-      - path: /media/justsave/docker/env/netmaker/cn/netmaker.env
+      - path: /mnt/justsave/docker/env/netmaker/cn/netmaker.env
         required: true
     volumes:
       # storage for mqtt
-      - /media/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
-      - /media/justsave/docker/volume/netmaker/cn/mosquitto/data:/mosquitto/data
+      - /mnt/justsave/docker/volume/netmaker/cn/mosquitto/logs:/mosquitto/log
+      - /mnt/justsave/docker/volume/netmaker/cn/mosquitto/data:/mosquitto/data

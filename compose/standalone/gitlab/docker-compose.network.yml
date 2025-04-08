@@ -1,0 +1,13 @@
+networks:
+  gitlab-docker-bridge:
+    name: "gitlab-docker-bridge"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.20.7.0/24"
+          gateway: "172.20.7.100"
+          ip_range: "172.20.7.0/24"
+        - subnet: "fd00:dcdc:7::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-gitlab0"

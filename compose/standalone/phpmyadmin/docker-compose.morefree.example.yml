@@ -5,18 +5,18 @@
 services:
   phpmyadmin:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
-      - path: /media/justsave/docker/env/phpmyadmin/docker.env
+      - path: /mnt/justsave/docker/env/phpmyadmin/docker.env
         required: false
     container_name: phpmyadmin
     image: phpmyadmin:latest
     pull_policy: always
     volumes:
       # 持久化
-      - /media/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
+      - /mnt/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
       # mysql unix socket
       - /var/run/mysqld:/var/run/mysqld
       # # 开启 socket 监听

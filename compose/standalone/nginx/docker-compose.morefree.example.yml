@@ -3,6 +3,11 @@
 # official docs URL=https://github.com/docker-library/docs/blob/master/nginx/README.md
 services:
   nginx:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
     container_name: nginx
     image: nginx:latest
     pull_policy: always
@@ -11,22 +16,29 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # nginx conf file
-      - /media/justsave/docker/volume/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /mnt/justsave/docker/volume/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # nginx vhost
-      - /media/justsave/docker/volume/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /mnt/justsave/docker/volume/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx snippets
-      - /media/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets
+      - /mnt/justsave/docker/volume/nginx/snippets:/etc/nginx/snippets
       # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
       # openssl dhparam
-      - /media/justsave/docker/volume/nginx/dhparam:/etc/ssl/dhparam
+      - /mnt/justsave/docker/volume/nginx/dhparam:/etc/ssl/dhparam
       # apache htpasswd file
-      - /media/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
+      - /mnt/justsave/docker/volume/nginx/htpasswd:/etc/nginx/htpasswd:ro
+      # nginx geoip
+      - /mnt/justsave/docker/volume/nginx/geoip:/etc/nginx/geoip
+      # GEOIP is not usable
+      # # pre-prepared GeoIP file for geoip support
+      # # Downloaded from https://github.com/Loyalsoldier/geoip/raw/af44001d23a7ce53e0594b304228822d95a1c317/GeoLite2-Country.mmdb
+      # - ./geoip:/etc/nginx/geoip/example:ro
       # nginx web root
-      - /media/justsave/wwwroot:/media/justsave/wwwroot:ro
-      # - /media/justsave/wwwroot/default:/var/www/html:ro
+      - /mnt/justsave/wwwroot/default:/mnt/justsave/wwwroot/default:ro
+      - /mnt/justsave/wwwroot:/mnt/justsave/wwwroot:ro
+      # - /mnt/justsave/wwwroot/default:/var/www/html:ro
       # nginx log
-      - /media/justsave/wwwlogs:/media/justsave/wwwlogs
+      - /mnt/justsave/wwwlogs:/mnt/justsave/wwwlogs
       # nginx init
       - ./05-xfl-init.sh:/docker-entrypoint.d/05-xfl-init.sh
     restart: always

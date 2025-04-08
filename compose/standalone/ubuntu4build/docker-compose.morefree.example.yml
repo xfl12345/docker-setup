@@ -1,0 +1,18 @@
+# version: "3"
+services:
+  ubuntu4build:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/ubuntu4build/docker.env
+        required: false
+    container_name: ubuntu4build
+    image: ubuntu4build
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: ubuntu.Dockerfile
+      pull: true
+    restart: always

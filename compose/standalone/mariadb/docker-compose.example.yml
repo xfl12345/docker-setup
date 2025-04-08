@@ -7,7 +7,10 @@ services:
       options:
         max-size: 4m
     ports:
-      - 127.0.0.1:3306:3306
-      # host-gateway 改变的时候，这里也要改！
-      - 172.17.0.1:3306:3306
-    network_mode: bridge
+      - 0.0.0.0:3306:3306
+      - 0.0.0.0:3306:3306/udp
+    networks:
+      my_docker_network: {}
+
+include:
+  - ../../docker-compose.preset.network.yml

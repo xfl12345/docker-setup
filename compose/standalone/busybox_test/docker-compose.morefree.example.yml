@@ -4,7 +4,6 @@ services:
     container_name: busybox-test
     image: busybox:latest
     # command: 'sh -c "ifconfig && ping6 -c 4 www.taobao.com"'
-    command: /bin/sh -c "touch /tmp/just_hold_docker_bash.txt && tail -f /tmp/just_hold_docker_bash.txt"
-
-# 强行停机方法
-# docker compose down --timeout 1
+    command: sh /infinite_sleep_loop.sh
+    volumes:
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh

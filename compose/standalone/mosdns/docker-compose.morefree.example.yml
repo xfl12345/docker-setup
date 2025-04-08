@@ -4,6 +4,8 @@
 # official docs URL=https://irine-sistiana.gitbook.io/mosdns-wiki
 services:
   mosdns:
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     container_name: mosdns
     image: irinesistiana/mosdns:v5.3.1
     pull_policy: always
@@ -15,9 +17,9 @@ services:
       timeout: 5s
       retries: 24
     volumes:
-      - /media/justsave/docker/volume/mosdns:/etc/mosdns:rw
+      - /mnt/justsave/docker/volume/mosdns:/etc/mosdns:rw
       # nginx ssl cert
-      - /media/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

@@ -86,7 +86,7 @@ if current_env_arch_name == "":
     exit(1)
 
 origin_working_dir = os.getcwd()
-root_path = "/media/justsave/docker/compose/standalone"
+root_path = "/mnt/justsave/docker/compose/standalone"
 
 root_dir_items:list = os.listdir(root_path)
 skipped_app_list = []

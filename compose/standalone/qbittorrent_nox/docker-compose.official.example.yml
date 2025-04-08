@@ -11,13 +11,13 @@
 services:
   qbittorrent_nox:
     env_file:
-      - path: /media/justsave/docker/compose/global_default.env
+      - path: /mnt/justsave/docker/compose/global_default.env
         required: true
       - path: ./default.env
         required: true # default
       - path: ./default_official.env
         required: true # default
-      - path: /media/justsave/docker/env/qbittorrent_nox/docker.env
+      - path: /mnt/justsave/docker/env/qbittorrent_nox/docker.env
         required: false
     container_name: qbittorrent-nox
     # image: qbittorrentofficial/qbittorrent-nox:4.6.5-1
@@ -41,16 +41,16 @@ services:
     tty: true
     volumes:
       # 数据持久化
-      - /media/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
-      - /media/justsave/docker/volume/qbittorrent_nox/official/config:/config
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/.cache:/config/.cache
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/BT_backup:/config/qBittorrent/data/BT_backup
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/GeoDB:/config/qBittorrent/data/GeoDB
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss:/config/qBittorrent/config/rss
-      # - /media/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss/articles:/config/qBittorrent/data/rss/articles
-      - /media/justsave/BT:/media/justsave/BT
-      - /media/justsave/PT:/media/justsave/PT
+      - /mnt/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /mnt/justsave/docker/volume/qbittorrent_nox/official/config:/config
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/.cache:/config/.cache
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/BT_backup:/config/qBittorrent/data/BT_backup
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/GeoDB:/config/qBittorrent/data/GeoDB
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/data/logs:/config/qBittorrent/data/logs
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss:/config/qBittorrent/config/rss
+      # - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config/qBittorrent/rss/articles:/config/qBittorrent/data/rss/articles
+      - /mnt/justsave/BT:/mnt/justsave/BT
+      - /mnt/justsave/PT:/mnt/justsave/PT
     # restart: always
     # restart: "no"
     restart: unless-stopped

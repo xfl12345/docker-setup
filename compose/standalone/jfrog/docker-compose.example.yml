@@ -1,0 +1,14 @@
+services:
+  jfrog_artifactory_oss:
+    extends:
+      file: ./docker-compose.morefree.example.yml
+      service: jfrog_artifactory_oss
+    logging:
+      options:
+        max-size: 4m
+    networks:
+      my_docker_network: {}
+    # See https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-network-ports
+    ports:
+      - 127.0.0.1:28052:8081
+      - 127.0.0.1:28053:8082
