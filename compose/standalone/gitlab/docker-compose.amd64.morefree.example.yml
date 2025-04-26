@@ -8,8 +8,8 @@ services:
     #   GITLAB_OMNIBUS_CONFIG: |
     #     manage_accounts['enable'] = true
 
-    #     user['username'] = "gitlab"
-    #     user['group'] = "gitlab"
+    #     user['username'] = "git"
+    #     user['group'] = "git"
     #     consul['username'] = "gitlab-consul"
     #     consul['group'] = "gitlab-consul"
     #     mattermost['username'] = "gitlab-mattermost"
