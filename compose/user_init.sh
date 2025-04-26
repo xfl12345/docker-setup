@@ -162,5 +162,5 @@ if [ ! -e $docker_setup_app_compose_file_path ]; then
 fi
 
 export SCRIPT_PATH="/app/user_init.sh"
-# docker compose -f $docker_setup_app_compose_file_path up
-# docker compose -f $docker_setup_app_compose_file_path rm -f docker_setup
+docker compose -f $docker_setup_app_compose_file_path up
+docker compose -f $docker_setup_app_compose_file_path rm -f docker_setup
