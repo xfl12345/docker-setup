@@ -5,6 +5,7 @@
 ## 重大破坏性更新
 
 - 2025年3月31日 提交 HASH `b3825b27a720db408a1d681619424a7a8ef0788b` 为最后一版，以 `/media` 为默认持久化目录。
+  - 迁移帮助文档见 [step.md](./docs/markdown/migration/by-commit-sha1/980d68c01d8fc2d18333d6aa97c86515e84629ca/step.md)
 
 ## 说明与约定
 
