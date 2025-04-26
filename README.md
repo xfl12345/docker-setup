@@ -92,7 +92,7 @@
 |`gitea/gitea`|`1.22`|
 |`yrzr/gitlab-ce-arm64v8`|`16.10.1-ce.0`|
 |`nicolargo/glances`|`latest-full`|
-|`headscale/headscale`|`0.22.3`|
+|`headscale/headscale`|`0.23.0`|
 |`ifargle/headscale-webui`|`latest`|
 |`tailscale/tailscale`|`latest`|
 |`apache/hertzbeat`|`latest`|
