@@ -5,6 +5,7 @@
 **/docker-compose.yml
 **/*.bak
 /compose/global_default.env
+/compose/standalone/test
 
 !/volume/nginx/
 /volume/nginx/*
