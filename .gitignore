@@ -6,6 +6,7 @@
 **/*.bak
 /compose/global_default.env
 /compose/standalone/test
+/compose/standalone/tmp
 
 !/volume/nginx/
 /volume/nginx/*
