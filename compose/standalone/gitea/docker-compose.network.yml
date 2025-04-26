@@ -1,5 +1,5 @@
 networks:
-  gitea-docker-bridge:
+  my_docker_network:
     name: "gitea-docker-bridge"
     driver: bridge
     enable_ipv6: true
