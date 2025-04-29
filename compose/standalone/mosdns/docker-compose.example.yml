@@ -1,9 +1,0 @@
-services:
-  mosdns:
-    extends:
-      file: ./docker-compose.morefree.example.yml
-      service: mosdns
-    logging:
-      options:
-        max-size: 4m
-    network_mode: host

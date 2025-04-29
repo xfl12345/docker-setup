@@ -1,0 +1,43 @@
+# version: '3'
+
+# official repo URL=https://github.com/coder/code-server
+# official docs URL=https://coder.com/docs/code-server
+services:
+  code_server:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/code_server/docker.env
+        required: false
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+      - cc.xfl12345.code.share.docker.setup.localbuild=true
+    user: 2006:2006
+    image: localbuild/code-server
+    container_name: code-server
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: code-server.Dockerfile
+      pull: true
+    volumes:
+      # 持久化
+      - /mnt/justsave/docker/volume/code_server/home/.local:/home/coder/.local
+      - /mnt/justsave/docker/volume/code_server/home/.config:/home/coder/.config
+      - /mnt/justsave/docker/volume/code_server/home/project:/home/coder/project
+      # Fix BUG https://github.com/coder/code-server/issues/2767
+      - ./entrypoint.sh:/usr/bin/entrypoint.sh
+      # # 挂载 docker socket ，直通宿主机
+      # - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28042:8080
+    restart: always
+

@@ -1,0 +1,48 @@
+# version: "3"
+services:
+  # official repo URL=https://github.com/MetaCubeX/mihomo
+  # official docs URL=https://wiki.metacubex.one/
+  clash:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    # user: "2002"
+    pid: host
+    ipc: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    image: metacubex/mihomo:v1.19.1    # 最新版用 metacubex/mihomo:Alpha
+    container_name: clash-meta
+    pull_policy: always
+    devices:
+      - /dev/net/tun:/dev/net/tun:rwm
+    volumes:
+      - /mnt/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: always
+
+  # official repo URL=https://github.com/MetaCubeX/metacubexd
+  metacubexd:
+    user: '2002'
+    image: ghcr.io/metacubex/metacubexd:latest
+    container_name: metacubexd
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/volume/clash_meta/caddy:/config/caddy
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28002:80
+    restart: always

@@ -1,0 +1,20 @@
+# version: "3"
+
+# official repo URL=https://github.com/alpine-docker/curl-http3
+services:
+  curl_test:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+    image: alpine/curl-http3
+    container_name: curl-test
+    # official repo URL=https://github.com/curl/curl-container
+    # image: ghcr.io/curl/curl-container/curl:master
+    # official repo URL=https://github.com/ZoeyVid/curl-quic
+    # image: zoeyvid/curl-quic
+    pull_policy: always
+    command: curl --head https://www.google.com/
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    restart: no

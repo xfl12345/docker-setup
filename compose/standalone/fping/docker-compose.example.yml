@@ -1,9 +1,0 @@
-services:
-  fping:
-    extends:
-      file: ./docker-compose.morefree.example.yml
-      service: fping
-    logging:
-      options:
-        max-size: 4m
-    restart: always

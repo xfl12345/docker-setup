@@ -1,9 +1,0 @@
-services:
-  acme_sh:
-    extends:
-      file: ./docker-compose.morefree.example.yml
-      service: acme_sh
-    logging:
-      options:
-        max-size: 4m
-    network_mode: host

@@ -1,0 +1,57 @@
+# version: "3"
+
+# official docs URL=https://docs.gitea.com/installation/install-with-docker
+services:
+  gitea:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./gitea_default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/gitea/docker.env
+        required: false
+    # UID: id -u gitea
+    image: gitea/gitea:1.22
+    container_name: gitea
+    pull_policy: always
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      - /mnt/justsave/docker/volume/gitea/data:/data
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28014:3000
+      - 22014:22
+    restart: unless-stopped
+
+  gitea_runner:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./gitea_runner_default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/gitea/runner/docker.env
+        required: false
+    image: gitea/act_runner:latest
+    container_name: gitea-runner
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
+      - /mnt/justsave/docker/volume/gitea/runner/data:/data
+      - /mnt/justsave/docker/volume/gitea/runner/root:/root
+      - /mnt/justsave/docker:/mnt/justsave/docker:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    restart: unless-stopped

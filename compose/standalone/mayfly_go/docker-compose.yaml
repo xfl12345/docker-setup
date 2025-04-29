@@ -1,0 +1,35 @@
+# version: "3.9"
+
+# official repo URL=https://gitee.com/dromara/mayfly-go
+# official docs URL=https://www.yuque.com/may-fly/mayfly-go
+services:
+  mayfly_go:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/mayfly_go/docker.env
+        required: false
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    image: mayfly/mayfly-go:v1.8.8
+    container_name: mayfly-go
+    pull_policy: build
+    build:
+      context: https://gitee.com/dromara/mayfly-go.git#v1.8.8
+      dockerfile: Dockerfile
+      pull: true
+    volumes:
+      # 映射配置文件（需要提前准备）
+      - /mnt/justsave/docker/volume/mayfly_go/server:/mayfly
+      # - /mnt/justsave/docker/volume/mayfly_go/server/config.yml:/mayfly/config.yml
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28046:8888
+    restart: always

@@ -1,0 +1,35 @@
+# official repo URL=https://github.com/tailscale/tailscale
+# official docs URL=https://tailscale.com/kb/1282/docker
+services:
+  # 需要进容器里手动 tailscale login --login-server=https://xxx
+  tailscale_client:
+    env_file:
+      - path: ./default_tailscale_clinet.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/tailscale/client.env
+        required: false
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    image: tailscale/tailscale:latest
+    container_name: tailscale-client
+    pull_policy: always
+    devices:
+      - /dev/net/tun:/dev/net/tun:rwm
+    volumes:
+      # 持久化
+      - /mnt/justsave/docker/volume/tailscale/data:/var/lib/tailscale
+      # UNIX Domain Socket
+      - /var/run/tailscale:/var/run/tailscale
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    # command: "tailscaled"
+    logging:
+      options:
+        max-size: 4m
+    hostname: tailscale-client
+    network_mode: host
+    restart: unless-stopped

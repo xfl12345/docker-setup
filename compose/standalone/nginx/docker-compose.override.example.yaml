@@ -1,0 +1,8 @@
+services:
+  nginx:
+    volumes:
+      # host UNIX Domain Socket
+      - /var/run/php:/var/run/php
+      - /var/run/mysqld:/var/run/mysqld
+      - /var/run/ttyd:/var/run/ttyd
+      - /var/run/xray:/var/run/xray

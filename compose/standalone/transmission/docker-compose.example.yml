@@ -1,9 +1,0 @@
-services:
-  transmission:
-    extends:
-      file: ./docker-compose.morefree.example.yml
-      service: transmission
-    logging:
-      options:
-        max-size: 4m
-    network_mode: host

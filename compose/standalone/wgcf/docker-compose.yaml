@@ -1,0 +1,32 @@
+# version: "3"
+
+# official repo URL=https://github.com/Neilpang/wgcf-docker
+services:
+  wgcf:
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    sysctls:
+      # - net.ipv6.conf.default.disable_ipv6=0
+      # - net.ipv6.conf.default.autoconf=1
+      # - net.ipv6.conf.lo.disable_ipv6=0
+      - net.ipv6.conf.all.disable_ipv6=0
+      - net.ipv6.conf.all.forwarding=1
+      - net.ipv6.conf.all.accept_ra=2
+      - net.ipv6.conf.all.proxy_ndp=1
+      - net.ipv6.conf.all.autoconf=1
+      - net.ipv4.conf.all.src_valid_mark=1
+    image: neilpang/wgcf-docker:latest
+    container_name: wgcf
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /mnt/justsave/docker/volume/wgcf:/wgcf
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge

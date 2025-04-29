@@ -1,0 +1,33 @@
+# version: '3'
+
+# official repo URL=https://github.com/nicolargo/glances
+services:
+  glances:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/glances/docker.env
+        required: false
+    pid: host
+    ipc: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    image: nicolargo/glances:latest-full
+    container_name: glances
+    pull_policy: always
+    volumes:
+      # 持久化
+      - /mnt/justsave/docker/volume/glances/local_config:/root/.config/glances
+      - /mnt/justsave/docker/volume/glances/global_config:/etc/glances:ro
+      # 挂载 docker socket ，直通宿主机
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/os-release:/etc/os-release:ro
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: always

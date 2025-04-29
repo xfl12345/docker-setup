@@ -1,0 +1,11 @@
+# version: "3"
+services:
+  ubuntu_test:
+    image: ubuntu:24.04
+    container_name: ubuntu-test
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
+    command: /infinite_sleep_loop.sh
+    network_mode: bridge
+    restart: no

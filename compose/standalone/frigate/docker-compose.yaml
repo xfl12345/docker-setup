@@ -1,0 +1,45 @@
+# version: "3.9"
+
+# official repo URL=https://github.com/blakeblackshear/frigate
+# official docs URL=https://docs.frigate.video/
+services:
+  frigate:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/frigate/docker.env
+        required: false
+    privileged: true # this may not be necessary for all setups
+    # shm_size: "1GB" # update for your cameras based on calculation above
+    image: ghcr.io/blakeblackshear/frigate:stable
+    container_name: frigate
+    # devices:
+    #   # - /dev/bus/usb:/dev/bus/usb # Passes the USB Coral, needs to be modified for other versions
+    #   # - /dev/apex_0:/dev/apex_0 # Passes a PCIe Coral, follow driver instructions here https://coral.ai/docs/m2/get-started/#2a-on-linux
+    #   # - /dev/video11:/dev/video11 # For Raspberry Pi 4B
+    #   - /dev/dri/renderD128:/dev/dri/renderD128 # For intel hwaccel, needs to be updated for your hardware
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      - /mnt/justsave/docker/volume/frigate/config:/config
+      - /mnt/justsave/docker/volume/frigate/storage:/mnt/frigate
+      # - type: tmpfs # Optional: 1GB of memory, reduces SSD/SD Card wear
+      #   target: /tmp/cache
+      #   tmpfs:
+      #     size: 1000000000
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28049:8971
+      # - "5000:5000" # Internal unauthenticated access. Expose carefully.
+      # - 8554:8554   # RTSP feeds
+      # - 8555:8555/tcp   # WebRTC over tcp
+      # - 8555:8555/udp   # WebRTC over udp
+    restart: unless-stopped
+

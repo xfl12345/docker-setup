@@ -1,0 +1,36 @@
+# version: "3.9"
+
+# official repo URL=https://github.com/PBH-BTN/PeerBanHelper
+# official docs URL=https://github.com/PBH-BTN/PeerBanHelper/wiki
+services:
+  peerbanhelper:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/peer_ban_helper/docker.env
+        required: false
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+      - cc.xfl12345.code.share.docker.setup.localbuild=true
+    # image: ghostchu/peerbanhelper:latest
+    image: localbuild/peerbanhelper
+    container_name: peerbanhelper
+    # pull_policy: always
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /mnt/justsave/docker/compose/build_resource
+      dockerfile: peer_ban_helper.Dockerfile
+      pull: true
+    volumes:
+      - /mnt/justsave/docker/volume/peer_ban_helper/app/data:/app/data
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28048:9898
+    restart: unless-stopped

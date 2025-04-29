@@ -1,0 +1,35 @@
+# official repo URL=
+# official docs URL=
+services:
+  v2raya:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/v2raya/docker.env
+        required: false
+    pid: host
+    ipc: host
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    security_opt:
+      - apparmor=unconfined
+    image: mzz2017/v2raya:latest
+    container_name: v2raya
+    pull_policy: always
+    devices:
+      - /dev/net/tun:/dev/net/tun:rwm
+    tmpfs:
+      - /tmp
+    volumes:
+      # - /mnt/justsave/docker/volume/v2raya/fs/etc/resolv.conf:/etc/resolv.conf
+      - /mnt/justsave/docker/volume/v2raya/fs/etc/v2raya:/etc/v2raya
+      - /mnt/justsave/docker/volume/v2raya/fs/usr/local/share/v2raya:/usr/local/share/v2raya
+      - /mnt/justsave/docker/volume/v2raya/fs/root/.local/share/v2ray:/root/.local/share/v2ray
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: unless-stopped

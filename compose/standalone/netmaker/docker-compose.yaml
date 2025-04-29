@@ -1,0 +1,149 @@
+# version: "3.4"
+
+# source code URL=https://github.com/gravitl/netmaker/blob/master/compose/docker-compose.yml
+services:
+
+  netclient:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: /mnt/justsave/docker/env/netmaker/netmaker-client.env
+        required: true
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    # privileged: true
+    pid: host
+    ipc: host
+    cap_add:
+      - ALL
+    security_opt:
+      - apparmor=unconfined
+    image: gravitl/netclient:v0.26.0
+    container_name: netclient
+    volumes:
+      - /mnt/justsave/docker/volume/netmaker/moved_root/etc/netclient:/etc/netclient
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: always
+
+  netmaker:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default_netmaker.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+        required: false
+    image: gravitl/netmaker:v0.26.0
+    container_name: netmaker
+    volumes:
+      # storage for mqtt
+      - /mnt/justsave/docker/volume/netmaker/moved_root/root/config/dnsconfig:/root/config/dnsconfig
+      - /mnt/justsave/docker/volume/netmaker/moved_root/root/data:/root/data
+    logging:
+      options:
+        max-size: 4m
+    networks:
+      - netmaker_docker_bridge
+    ports:
+      - "127.0.0.1:28031:8081"
+    restart: always
+
+  netmaker_ui:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: /mnt/justsave/docker/env/netmaker/netmaker-ui.env
+        required: true
+    # environment:
+    #   # config-dependant vars
+    #   # URL where UI will send API requests. Change based on SERVER_HOST, SERVER_HTTP_HOST, and API_PORT
+    #   BACKEND_URL: "https://api.example.com"
+    image: gravitl/netmaker-ui:v0.26.0
+    container_name: netmaker-ui
+    logging:
+      options:
+        max-size: 4m
+    links:
+      - "netmaker:api"
+    networks:
+      - netmaker_docker_bridge
+    ports:
+      - "127.0.0.1:28030:80"
+    depends_on:
+      - netmaker
+    restart: always
+    
+  # caddy:
+  #   env_file:
+  #     - /mnt/justsave/docker/env/netmaker/cloudflare/netmaker.env
+  #   image: caddy:2.6.2
+  #   container_name: caddy
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #     # storage for Caddy
+  #     - /mnt/justsave/docker/volume/netmaker/cloudflare/caddy/data:/data
+  #     - /mnt/justsave/docker/volume/netmaker/cloudflare/caddy/conf:/config
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+  #   networks:
+  #     - netmaker_docker_bridge
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   restart: unless-stopped
+
+  coredns:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+        required: true
+    image: coredns/coredns:1.10.1
+    container_name: coredns
+    volumes:
+      # storage for mqtt
+      - /mnt/justsave/docker/volume/netmaker/moved_root/root/dnsconfig:/root/dnsconfig
+    command: ["-conf", "/root/dnsconfig/Corefile"]
+    logging:
+      options:
+        max-size: 4m
+    #network_mode: host
+    networks:
+      - netmaker_docker_bridge
+    ports:
+      - "127.0.0.1:5554:53/udp"
+    depends_on:
+      - netmaker
+    restart: always
+
+  mq:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+        required: true
+    image: eclipse-mosquitto:2.0.15-openssl
+    container_name: mq
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./wait.sh:/mosquitto/config/wait.sh
+      # storage for mqtt
+      - /mnt/justsave/docker/volume/netmaker/moved_root/mosquitto/log:/mosquitto/log
+      - /mnt/justsave/docker/volume/netmaker/moved_root/mosquitto/data:/mosquitto/data
+    command: [ "/mosquitto/config/wait.sh" ]
+    logging:
+      options:
+        max-size: 4m
+    networks:
+      - netmaker_docker_bridge
+    ports:
+      - "127.0.0.1:28033:8883"
+    depends_on:
+      - netmaker
+    restart: unless-stopped
+
+include:
+  - ./docker-compose.network.yml

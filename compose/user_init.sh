@@ -140,10 +140,7 @@ just_chown() {
     fi
 }
 
-just_chown "www-data:www-data" "$my_docker_volume_dir/nginx/"
-just_chown "www-data:www-data" "/mnt/justsave/wwwroot/download/"
-just_chown "www-data:www-data" "/mnt/justsave/wwwlogs/"
-# just_chown "nginx:nginx" "$my_docker_volume_dir/nginx/"
+just_chown "www-data:www-data" "$my_docker_volume_dir/nginx/moved_root/"
 just_chown "metacubex:metacubex" "$my_docker_volume_dir/clash_meta/"
 just_chown "jenkins:jenkins" "$my_docker_volume_dir/jenkins/"
 just_chown "gitea:gitea" "$my_docker_volume_dir/gitea/"

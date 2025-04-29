@@ -1,0 +1,10 @@
+# version: "3"
+services:
+  busybox_test:
+    image: busybox:latest
+    container_name: busybox-test
+    volumes:
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
+    # command: 'sh -c "ifconfig && ping6 -c 4 www.taobao.com"'
+    command: sh /infinite_sleep_loop.sh
+    network_mode: bridge

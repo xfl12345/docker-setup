@@ -1,0 +1,31 @@
+# version: "3"
+
+# official repo URL=https://github.com/XTLS/Xray-core
+# official docs URL=https://xtls.github.io/
+services:
+  xray:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+    cap_add:
+      - NET_ADMIN
+    image: teddysun/xray:latest
+    container_name: xray
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/volume/xray/config/config.json:/etc/xray/config.json:ro
+      - /mnt/justsave/docker/volume/xray/log:/var/log/xray:rw
+      - /mnt/justsave/docker/volume/xray/bin:/usr/share/xray:ro
+      # 添加 启动脚本
+      - ./my_entrypoint.sh:/my_entrypoint.sh
+      # xtls/xray unix socket
+      - /var/run/xray:/var/run/xray
+    command: /my_entrypoint.sh
+    logging:
+      options:
+        max-size: 4m
+    hostname: xray
+    network_mode: host
+    restart: always

@@ -1,0 +1,47 @@
+# version: '3.5'
+
+# official repo URL=https://github.com/kalcaddle/kodbox
+# official docs URL=https://docs.kodcloud.com/
+services:
+  kodbox:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/kodbox/docker.env
+        required: false
+    image: kodcloud/kodbox:latest
+    container_name: kodbox
+    volumes:
+      # 站点目录
+      - /mnt/justsave/docker/volume/kodbox/site:/var/www/html
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      kodbox_docker_bridge:
+        ipv4_address: 172.20.5.2
+        ipv6_address: fd00:dcdc:5::2
+    ports:
+      - 127.0.0.1:28047:80
+    depends_on:
+      - kodbox_redis
+    restart: always
+
+  kodbox_redis:
+    image: redis:alpine
+    container_name: kodbox-redis
+    logging:
+      options:
+        max-size: 4m
+    networks:
+      kodbox_docker_bridge:
+        ipv4_address: 172.20.5.3
+        ipv6_address: fd00:dcdc:5::3
+    restart: always
+
+include:
+  - ./docker-compose.network.yml

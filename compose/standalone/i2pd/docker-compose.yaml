@@ -1,0 +1,32 @@
+# version: "3.5"
+
+# official repo URL=https://github.com/PurpleI2P/i2pd
+# official docs URL=https://i2pd.readthedocs.io/en/latest/
+services:
+  i2pd:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/i2pd/docker.env
+        required: false
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+      - cc.xfl12345.code.share.docker.setup.localbuild=true
+    image: localbuild/i2pd
+    container_name: i2pd
+    pull_policy: build
+    build:
+      context: ./
+      additional_contexts:
+        resources: /mnt/justsave/docker/compose/build_resource
+      dockerfile: i2pd.Dockerfile
+      pull: true
+    volumes:
+      - /mnt/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: always

@@ -1,0 +1,30 @@
+# version: "3"
+
+# 构建时临时使用代理的方法
+# fq_host=the_ip_address_of_host:7890
+# 以下二选一
+# docker compose build --build-arg HTTP_PROXY=http://$fq_host --build-arg HTTPS_PROXY=http://$fq_host  --build-arg ALL_PROXY=socks5://$fq_host --no-cache
+# 或者
+# docker compose build --build-arg ALL_PROXY=socks5://$fq_host --no-cache
+
+# official repo URL=https://github.com/qbittorrent/docker-qbittorrent-nox
+services:
+  qbittorrent_nox:
+    env_file:
+      - path: ./default_official.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/qbittorrent_nox/docker.env
+        required: false
+    image: localbuild/qbittorrent-nox:4.6.4
+    container_name: qbittorrent-nox
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: qbittorrent-nox.Dockerfile
+      # args:
+      #   - ALL_PROXY=socks5://host.docker.internal:7890
+      # extra_hosts:
+      #   - "host.docker.internal:host-gateway"
+      pull: true
+    volumes:
+      - /mnt/justsave/docker/volume/qbittorrent_nox/official/config:/config

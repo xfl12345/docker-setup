@@ -1,0 +1,34 @@
+# version: "3.8"
+
+# official repo URL=https://github.com/HeyPuter/puter
+services:
+  puter:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/puter/docker.env
+        required: false
+    # image: ghcr.io/heyputer/puter:latest
+    image: ghcr.io/heyputer/puter:sha-ec31007
+    container_name: puter
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/volume/puter/config:/etc/puter
+      - /mnt/justsave/docker/volume/puter/data:/var/puter
+    healthcheck:
+      test: wget --no-verbose --tries=1 --spider http://puter.local:4100/test || exit
+        1
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 4100:4100
+    restart: unless-stopped
+

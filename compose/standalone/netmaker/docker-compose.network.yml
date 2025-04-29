@@ -1,0 +1,13 @@
+networks:
+  netmaker_docker_bridge:
+    name: "netmaker-docker-bridge"
+    driver: bridge
+    enable_ipv6: true
+    ipam:
+      config:
+        - subnet: "172.20.1.0/24"
+          gateway: "172.20.1.1"
+          ip_range: "172.20.1.0/24"
+        - subnet: "fd00:dcdc:1::/64"
+    driver_opts:
+      com.docker.network.bridge.name: "br-netmaker1"

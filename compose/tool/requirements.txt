@@ -1,0 +1,4 @@
+docker==7.1.0
+loguru==0.7.3
+python_on_whales==0.76.1
+tzlocal==5.3.1

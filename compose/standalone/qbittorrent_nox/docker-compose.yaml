@@ -1,0 +1,42 @@
+services:
+  qbittorrent_nox:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: ./default_linuxserver.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/qbittorrent_nox/docker.env
+        required: false
+    # for debugging
+    cap_add:
+      - SYS_PTRACE
+    # read_only: true
+    # tmpfs:
+    #   - /tmp
+    tty: true
+    image: linuxserver/qbittorrent:latest
+    container_name: qbittorrent-nox
+    pull_policy: always
+    volumes:
+      # 数据持久化
+      - /mnt/justsave/docker/volume/qbittorrent_nox:/mnt/justsave/docker/volume/qbittorrent_nox
+      - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
+      - /mnt/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /mnt/justsave/BT:/mnt/justsave/BT
+      - /mnt/justsave/PT:/mnt/justsave/PT
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28012:28012
+      # BT connection port (MUST be the same as the env var "TORRENTING_PORT")
+      - 55285:55285
+      - 55285:55285/udp
+    # restart: always
+    # restart: "no"
+    stop_grace_period: 30m
+    restart: unless-stopped
+

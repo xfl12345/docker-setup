@@ -1,0 +1,34 @@
+# version: "3"
+
+# official repo URL=https://github.com/acmesh-official/acme.sh
+# official docs URL=https://wiki.acme.sh/
+services:
+  acme_sh:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+      - cc.xfl12345.code.share.docker.setup.localbuild=true
+    image: localbuild/acme-sh
+    container_name: acme.sh
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: acme-sh-bundle-with-docker.Dockerfile
+      pull: true
+    volumes:
+      # acme.sh
+      - /mnt/justsave/docker/volume/acme_sh/app:/acme.sh
+      # nginx ssl cert
+      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
+      # docker socket
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 自己写的工具脚本
+      - ./acme_util.sh:/acme_util.sh
+    command: daemon
+    logging:
+      options:
+        max-size: 4m
+    network_mode: host
+    restart: always

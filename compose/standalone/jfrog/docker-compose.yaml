@@ -1,0 +1,35 @@
+# version: "3"
+
+# official docs URL=https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-docker
+services:
+  jfrog_artifactory_oss:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default_jfrog_artifactory_oss.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/jfrog/artifactory/oss/docker.env
+        required: false
+    image: releases-docker.jfrog.io/jfrog/artifactory-oss:latest
+    container_name: jfrog-artifactory-oss
+    pull_policy: always
+    volumes:
+      # 共享host的时间环境
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      # 持久化
+      # See https://jfrog.com/help/r/jfrog-installation-setup-documentation/generic-directory-layout
+      # https://jfrog.com/help/r/jfrog-installation-setup-documentation/jfrog-home
+      # 需要手动完成一些初始化 
+      - /mnt/justsave/docker/volume/jfrog/artifactory/oss/fs/var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory
+    logging:
+      options:
+        max-size: 4m
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    network_mode: bridge
+    # See https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-network-ports
+    ports:
+      - 127.0.0.1:28052:8081
+      - 127.0.0.1:28053:8082
+    restart: unless-stopped

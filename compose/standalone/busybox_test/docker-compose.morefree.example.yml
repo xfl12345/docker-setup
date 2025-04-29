@@ -1,9 +1,0 @@
-# version: "3"
-services:
-  busybox_test:
-    container_name: busybox-test
-    image: busybox:latest
-    # command: 'sh -c "ifconfig && ping6 -c 4 www.taobao.com"'
-    command: sh /infinite_sleep_loop.sh
-    volumes:
-      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh

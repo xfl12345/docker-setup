@@ -1,0 +1,28 @@
+# version: "3.4"
+
+# official repo URL=https://github.com/m1k1o/neko
+# official docs URL=https://neko.m1k1o.net/#/getting-started/configuration
+services:
+  neko:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/neko/docker.env
+        required: false
+    privileged: true
+    shm_size: 1gb
+    image: m1k1o/neko:chromium
+    container_name: neko
+    pull_policy: always
+    logging:
+      options:
+        max-size: 4m
+    network_mode: bridge
+    ports:
+      - 127.0.0.1:28044:8080
+      - 127.0.0.1:28044:8080/udp
+      - 52000-52100:52000-52100/udp
+    restart: unless-stopped
+

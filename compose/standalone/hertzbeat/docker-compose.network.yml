@@ -1,5 +1,5 @@
 networks:
-  hertzbeat-docker-bridge:
+  hertzbeat_docker_bridge:
     name: hertzbeat-docker-bridge
     driver: bridge
     enable_ipv6: true

@@ -1,0 +1,11 @@
+# version: "3"
+services:
+  debian_test:
+    image: debian:bookworm
+    container_name: debian-test
+    pull_policy: always
+    volumes:
+      - /mnt/justsave/docker/compose/build_resource/infinite_sleep_loop.sh:/infinite_sleep_loop.sh
+    command: /infinite_sleep_loop.sh
+    network_mode: bridge
+    restart: no
