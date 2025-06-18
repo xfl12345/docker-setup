@@ -1,6 +1,22 @@
 # docker-setup
 
-高度可复用的 docker 配置，开源出来方便大家抄作业，同时制定虚空标准。  
+高度可复用的 docker 配置，开源出来方便大家抄作业，同时制定虚空标准。
+
+## WIP
+
+⚠️⚠️⚠️
+
+> WIP 即 "Work In Progress" 的首字母所写。  
+> 目前项目依然处于不稳定状态，路径结构即将发生重大调整。  
+> 当前项目仅供参考，一键脚本是不可用的（borken），敬请期待新版本发布
+
+### 计划内容
+
+* [ ] volume 目录结构加个 namespace 层级
+* [ ] NGINX 的 "jquery-like" snippets 重命名
+* [ ] 尝试使用 traefik 之类的根据取代现有 NGINX 部分套件
+* [ ] 上线 docker-setup WebUI
+* [ ] 新版迁移助手及文档
 
 ## 重大破坏性更新
 
