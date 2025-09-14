@@ -21,7 +21,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun:rwm
     volumes:
-      - /mnt/justsave/docker/volume/wireguard/default/etc/wireguard:/etc/wireguard
+      - /mnt/justsave/docker/volume/default/wireguard/moved_root/etc/wireguard:/etc/wireguard
       - ./entrypoint.sh:/entrypoint.sh
     entrypoint: ["/entrypoint.sh"]
     logging:

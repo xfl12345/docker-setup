@@ -16,7 +16,7 @@ services:
     devices:
       - /dev/dri:/dev/dri
     volumes:
-      - /mnt/justsave/docker/volume/libreoffice/config:/config
+      - /mnt/justsave/docker/volume/default/libreoffice/moved_root/config:/config
     logging:
       options:
         max-size: 4m

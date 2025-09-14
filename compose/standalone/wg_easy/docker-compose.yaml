@@ -18,7 +18,7 @@ services:
     container_name: wg-easy
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/wg_easy/data/etc/wireguard:/etc/wireguard
+      - /mnt/justsave/docker/volume/default/wg_easy/moved_root/etc/wireguard:/etc/wireguard
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

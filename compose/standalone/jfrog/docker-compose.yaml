@@ -21,7 +21,7 @@ services:
       # See https://jfrog.com/help/r/jfrog-installation-setup-documentation/generic-directory-layout
       # https://jfrog.com/help/r/jfrog-installation-setup-documentation/jfrog-home
       # 需要手动完成一些初始化 
-      - /mnt/justsave/docker/volume/jfrog/artifactory/oss/fs/var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory
+      - /mnt/justsave/docker/volume/default/jfrog/moved_root/var/opt/jfrog/artifactory:/var/opt/jfrog/artifactory
     logging:
       options:
         max-size: 4m

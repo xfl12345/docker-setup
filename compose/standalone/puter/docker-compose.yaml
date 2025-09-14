@@ -15,8 +15,8 @@ services:
     container_name: puter
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/puter/config:/etc/puter
-      - /mnt/justsave/docker/volume/puter/data:/var/puter
+      - /mnt/justsave/docker/volume/default/puter/moved_root/etc/puter:/etc/puter
+      - /mnt/justsave/docker/volume/default/puter/moved_root/var/puter:/var/puter
     healthcheck:
       test: wget --no-verbose --tries=1 --spider http://puter.local:4100/test || exit
         1

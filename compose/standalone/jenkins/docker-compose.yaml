@@ -30,7 +30,7 @@ services:
         - BASE_IMAGE_TAG
     volumes:
       # 持久化
-      - /mnt/justsave/docker/volume/jenkins:/var/jenkins_home
+      - /mnt/justsave/docker/volume/default/jenkins/moved_root/var/jenkins_home:/var/jenkins_home
       # 带环境进入容器 bash 的小工具
       - ./just_bash.sh:/usr/local/bin/just_bash.sh
       # # 挂载 docker socket ，直通宿主机

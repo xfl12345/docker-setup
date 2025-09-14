@@ -21,7 +21,7 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun:rwm
     volumes:
-      - /mnt/justsave/docker/volume/clash_meta/clash:/root/.config/mihomo
+      - /mnt/justsave/docker/volume/default/clash/moved_root/root/.config/mihomo:/root/.config/mihomo
     logging:
       options:
         max-size: 4m
@@ -35,7 +35,7 @@ services:
     container_name: metacubexd
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/clash_meta/caddy:/config/caddy
+      - /mnt/justsave/docker/volume/default/clash/moved_root/config/caddy:/config/caddy
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

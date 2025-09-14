@@ -21,7 +21,7 @@ services:
     image: gravitl/netclient:v0.26.0
     container_name: netclient
     volumes:
-      - /mnt/justsave/docker/volume/netmaker/moved_root/etc/netclient:/etc/netclient
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/etc/netclient:/etc/netclient
     logging:
       options:
         max-size: 4m
@@ -40,8 +40,8 @@ services:
     container_name: netmaker
     volumes:
       # storage for mqtt
-      - /mnt/justsave/docker/volume/netmaker/moved_root/root/config/dnsconfig:/root/config/dnsconfig
-      - /mnt/justsave/docker/volume/netmaker/moved_root/root/data:/root/data
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/root/config/dnsconfig:/root/config/dnsconfig
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/root/data:/root/data
     logging:
       options:
         max-size: 4m
@@ -105,7 +105,7 @@ services:
     container_name: coredns
     volumes:
       # storage for mqtt
-      - /mnt/justsave/docker/volume/netmaker/moved_root/root/dnsconfig:/root/dnsconfig
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/root/dnsconfig:/root/dnsconfig
     command: ["-conf", "/root/dnsconfig/Corefile"]
     logging:
       options:
@@ -131,8 +131,8 @@ services:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
       - ./wait.sh:/mosquitto/config/wait.sh
       # storage for mqtt
-      - /mnt/justsave/docker/volume/netmaker/moved_root/mosquitto/log:/mosquitto/log
-      - /mnt/justsave/docker/volume/netmaker/moved_root/mosquitto/data:/mosquitto/data
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/mosquitto/log:/mosquitto/log
+      - /mnt/justsave/docker/volume/default/netmaker/moved_root/mosquitto/data:/mosquitto/data
     command: [ "/mosquitto/config/wait.sh" ]
     logging:
       options:

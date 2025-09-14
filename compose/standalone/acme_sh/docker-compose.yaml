@@ -19,9 +19,9 @@ services:
       pull: true
     volumes:
       # acme.sh
-      - /mnt/justsave/docker/volume/acme_sh/app:/acme.sh
+      - /mnt/justsave/docker/volume/default/acme_sh/moved_root/acme.sh:/acme.sh
       # nginx ssl cert
-      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:rw
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:rw
       # docker socket
       - /var/run/docker.sock:/var/run/docker.sock
       # 自己写的工具脚本

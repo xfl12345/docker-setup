@@ -26,7 +26,7 @@ services:
       dockerfile: peer_ban_helper.Dockerfile
       pull: true
     volumes:
-      - /mnt/justsave/docker/volume/peer_ban_helper/app/data:/app/data
+      - /mnt/justsave/docker/volume/default/peer_ban_helper/moved_root/app/data:/app/data
     logging:
       options:
         max-size: 4m

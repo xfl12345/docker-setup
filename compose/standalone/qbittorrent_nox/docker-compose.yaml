@@ -21,8 +21,8 @@ services:
     pull_policy: always
     volumes:
       # 数据持久化
-      - /mnt/justsave/docker/volume/qbittorrent_nox/linuxserver/config:/config
-      - /mnt/justsave/docker/volume/qbittorrent_nox/downloads:/downloads
+      - /mnt/justsave/docker/volume/default/qbittorrent_nox/linuxserver/moved_root/config:/config
+      - /mnt/justsave/docker/volume/default/qbittorrent_nox/moved_root/downloads:/downloads
       - /mnt/justsave/BT:/mnt/justsave/BT
       - /mnt/justsave/PT:/mnt/justsave/PT
     logging:

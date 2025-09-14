@@ -19,7 +19,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # 持久化
-      - /mnt/justsave/docker/volume/gitea/data:/data
+      - /mnt/justsave/docker/volume/default/gitea/moved_root/data:/data
     logging:
       options:
         max-size: 4m
@@ -43,9 +43,9 @@ services:
     container_name: gitea-runner
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/gitea/runner/config.yaml:/config.yaml
-      - /mnt/justsave/docker/volume/gitea/runner/data:/data
-      - /mnt/justsave/docker/volume/gitea/runner/root:/root
+      - /mnt/justsave/docker/volume/default/gitea_runner/moved_root/config.yaml:/config.yaml
+      - /mnt/justsave/docker/volume/default/gitea_runner/moved_root/data:/data
+      - /mnt/justsave/docker/volume/default/gitea_runner/moved_root/root:/root
       - /mnt/justsave/docker:/mnt/justsave/docker:ro
       - /var/run/docker.sock:/var/run/docker.sock
     logging:

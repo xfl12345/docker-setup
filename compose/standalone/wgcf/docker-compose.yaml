@@ -20,7 +20,7 @@ services:
     container_name: wgcf
     volumes:
       - /lib/modules:/lib/modules:ro
-      - /mnt/justsave/docker/volume/wgcf:/wgcf
+      - /mnt/justsave/docker/volume/default/wgcf/moved_root/wgcf:/wgcf
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

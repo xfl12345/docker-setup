@@ -1,5 +1,5 @@
 networks:
-  gitlab-docker-bridge:
+  gitlab_docker_bridge:
     name: "gitlab-docker-bridge"
     driver: bridge
     enable_ipv6: true

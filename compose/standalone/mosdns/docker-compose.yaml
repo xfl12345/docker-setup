@@ -10,9 +10,9 @@ services:
     container_name: mosdns
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/mosdns:/etc/mosdns:rw
+      - /mnt/justsave/docker/volume/default/mosdns/moved_root/etc/mosdns:/etc/mosdns:rw
       # nginx ssl cert
-      - /mnt/justsave/docker/volume/nginx/ssl:/etc/nginx/ssl:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:ro
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

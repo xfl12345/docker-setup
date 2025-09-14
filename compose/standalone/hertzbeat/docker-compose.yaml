@@ -13,11 +13,11 @@ services:
     container_name: hertzbeat
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/hertzbeat/data:/opt/hertzbeat/data
-      - /mnt/justsave/docker/volume/hertzbeat/logs:/opt/hertzbeat/logs
-      - /mnt/justsave/docker/volume/hertzbeat/ext-lib:/opt/hertzbeat/ext-lib
-      - /mnt/justsave/docker/volume/hertzbeat/config/application.yml:/opt/hertzbeat/config/application.yml
-      - /mnt/justsave/docker/volume/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
+      - /mnt/justsave/docker/volume/default/hertzbeat/moved_root/opt/hertzbeat/data:/opt/hertzbeat/data
+      - /mnt/justsave/docker/volume/default/hertzbeat/moved_root/opt/hertzbeat/logs:/opt/hertzbeat/logs
+      - /mnt/justsave/docker/volume/default/hertzbeat/moved_root/opt/hertzbeat/ext-lib:/opt/hertzbeat/ext-lib
+      - /mnt/justsave/docker/volume/default/hertzbeat/moved_root/opt/hertzbeat/config/application.yml:/opt/hertzbeat/config/application.yml
+      - /mnt/justsave/docker/volume/default/hertzbeat/moved_root/opt/hertzbeat/config/sureness.yml:/opt/hertzbeat/config/sureness.yml
     logging:
       options:
         max-size: 4m

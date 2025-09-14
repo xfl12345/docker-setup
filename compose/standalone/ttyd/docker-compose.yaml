@@ -26,7 +26,7 @@ services:
     # command: "ttyd --writable --ipv6 --port 28041 bash"
     volumes:
       # 持久化
-      - /mnt/justsave/docker/volume/ttyd/home:/home/ttyd
+      - /mnt/justsave/docker/volume/default/ttyd/moved_root/home/ttyd:/home/ttyd
       # socket 通信
       - /var/run/ttyd:/var/run/ttyd
     logging:

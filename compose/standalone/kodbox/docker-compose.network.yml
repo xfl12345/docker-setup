@@ -1,5 +1,5 @@
 networks:
-  kodbox-docker-bridge:
+  kodbox_docker_bridge:
     name: kodbox-docker-bridge
     driver: bridge
     enable_ipv6: true

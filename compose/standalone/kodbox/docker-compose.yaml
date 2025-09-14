@@ -15,7 +15,7 @@ services:
     container_name: kodbox
     volumes:
       # 站点目录
-      - /mnt/justsave/docker/volume/kodbox/site:/var/www/html
+      - /mnt/justsave/docker/volume/default/kodbox/moved_root/var/www/html:/var/www/html
     logging:
       options:
         max-size: 4m

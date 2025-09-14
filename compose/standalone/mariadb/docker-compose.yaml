@@ -15,9 +15,9 @@ services:
     container_name: mariadb
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/mariadb/conf:/etc/mysql/conf.d
-      - /mnt/justsave/docker/volume/mariadb/data:/var/lib/mysql
-      - /mnt/justsave/docker/volume/mariadb/log:/var/log/mysql
+      - /mnt/justsave/docker/volume/default/mariadb/moved_root/etc/mysql/conf.d:/etc/mysql/conf.d
+      - /mnt/justsave/docker/volume/default/mariadb/moved_root/var/lib/mysql:/var/lib/mysql
+      - /mnt/justsave/docker/volume/default/mariadb/moved_root/var/log/mysql:/var/log/mysql
       - /var/run/mysqld:/var/run/mysqld
       # healthcheck 小工具
       - ./my_mariadb_healthcheck.sh:/my_mariadb_healthcheck.sh:ro

@@ -87,10 +87,10 @@ services:
       dockerfile: Dockerfile
       pull: true
     volumes:
-      - "/mnt/justsave/docker/volume/gitlab/config:/etc/gitlab"
-      - "/mnt/justsave/docker/volume/gitlab/logs:/var/log/gitlab"
-      - "/mnt/justsave/docker/volume/gitlab/data:/var/opt/gitlab"
-      - "/mnt/justsave/docker/volume/gitlab/trace_dump:/opt/gitlab/embedded/cookbooks/cache"
+      - "/mnt/justsave/docker/volume/default/gitlab/moved_root/etc/gitlab:/etc/gitlab"
+      - "/mnt/justsave/docker/volume/default/gitlab/moved_root/var/log/gitlab:/var/log/gitlab"
+      - "/mnt/justsave/docker/volume/default/gitlab/moved_root/var/opt/gitlab:/var/opt/gitlab"
+      - "/mnt/justsave/docker/volume/default/gitlab/moved_root/opt/gitlab/embedded/cookbooks/cache:/opt/gitlab/embedded/cookbooks/cache"
       - "./entrypoint.sh:/entrypoint.sh"
     # 以下需要 Docker Compose v1.30.2 或更高版本
     # 已弃用
@@ -101,9 +101,12 @@ services:
       options:
         max-size: "4m"
     networks:
-      - "gitlab-docker-bridge"
+      - gitlab_docker_bridge
     ports:
       - "127.0.0.1:28013:80"
       # - "443:443"
       - "2424:22"
     restart: unless-stopped
+
+include:
+  - ./docker-compose.network.yml

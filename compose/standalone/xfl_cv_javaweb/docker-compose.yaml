@@ -19,8 +19,8 @@ services:
       # - /etc/timezone:/etc/timezone:ro
       # - /etc/localtime:/etc/localtime:ro
       # 持久化
-      - /mnt/justsave/docker/volume/xfl_cv_javaweb/config:/app/config
-      - /mnt/justsave/docker/volume/xfl_cv_javaweb/logs:/home/xfl/logs
+      - /mnt/justsave/docker/volume/default/xfl_cv_javaweb/moved_root/app/config:/app/config
+      - /mnt/justsave/docker/volume/default/xfl_cv_javaweb/moved_root/home/xfl/logs:/home/xfl/logs
     logging:
       options:
         max-size: 4m

@@ -20,7 +20,7 @@ services:
         RUN apk add bind-tools
       pull: true
     volumes:
-      - /mnt/justsave/docker/volume/ddns_go:/root:rw
+      - /mnt/justsave/docker/volume/default/ddns_go/moved_root/root:/root:rw
     command: -l 127.0.0.1:9876 -f 10
     logging:
       options:

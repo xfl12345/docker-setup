@@ -24,9 +24,9 @@ services:
       pull: true
     volumes:
       # 持久化
-      - /mnt/justsave/docker/volume/code_server/home/.local:/home/coder/.local
-      - /mnt/justsave/docker/volume/code_server/home/.config:/home/coder/.config
-      - /mnt/justsave/docker/volume/code_server/home/project:/home/coder/project
+      - /mnt/justsave/docker/volume/default/code_server/moved_root/home/coder/.local:/home/coder/.local
+      - /mnt/justsave/docker/volume/default/code_server/moved_root/home/coder/.config:/home/coder/.config
+      - /mnt/justsave/docker/volume/default/code_server/moved_root/home/coder/project:/home/coder/project
       # Fix BUG https://github.com/coder/code-server/issues/2767
       - ./entrypoint.sh:/usr/bin/entrypoint.sh
       # # 挂载 docker socket ，直通宿主机

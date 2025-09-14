@@ -18,27 +18,27 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # nginx conf file
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # nginx vhost
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx snippets
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/snippets:/etc/nginx/snippets
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/snippets:/etc/nginx/snippets
       # nginx ssl cert
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:ro
       # openssl dhparam
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/dhparam:/etc/ssl/dhparam
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/ssl/dhparam:/etc/ssl/dhparam
       # apache htpasswd file
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/htpasswd:/etc/nginx/htpasswd:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/htpasswd:/etc/nginx/htpasswd:ro
       # nginx geoip
-      - /mnt/justsave/docker/volume/nginx/moved_root/etc/nginx/geoip:/etc/nginx/geoip
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/geoip:/etc/nginx/geoip
       # GEOIP is not usable
       # # pre-prepared GeoIP file for geoip support
       # # Downloaded from https://github.com/Loyalsoldier/geoip/raw/af44001d23a7ce53e0594b304228822d95a1c317/GeoLite2-Country.mmdb
       # - ./geoip:/etc/nginx/geoip/example:ro
       # nginx web root
-      - /mnt/justsave/docker/volume/nginx/moved_root/usr/share/nginx:/usr/share/nginx:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/usr/share/nginx:/usr/share/nginx:ro
       # nginx log
-      - /mnt/justsave/docker/volume/nginx/moved_root/var/log/nginx:/var/log/nginx
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/var/log/nginx:/var/log/nginx
       # nginx init
       - ./05-just-init.sh:/docker-entrypoint.d/05-just-init.sh
     logging:

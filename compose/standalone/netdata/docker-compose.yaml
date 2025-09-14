@@ -20,11 +20,11 @@ services:
     image: netdata/netdata:latest
     container_name: netdata
     volumes:
-      - /mnt/justsave/docker/volume/netdata/config:/etc/netdata
-      # 如需自定义，请自行添加映射 /mnt/justsave/docker/volume/netdata/config/netdata.conf:/etc/netdata/netdata.conf
+      - /mnt/justsave/docker/volume/default/netdata/moved_root/etc/netdata:/etc/netdata
+      # 如需自定义，请自行添加映射 /mnt/justsave/docker/volume/default/netdata/moved_root/etc/netdata/netdata.conf:/etc/netdata/netdata.conf
       - ./netdata.example.conf:/etc/netdata/netdata.conf
-      - /mnt/justsave/docker/volume/netdata/lib:/var/lib/netdata
-      - /mnt/justsave/docker/volume/netdata/cache:/var/cache/netdata
+      - /mnt/justsave/docker/volume/default/netdata/moved_root/var/lib/netdata:/var/lib/netdata
+      - /mnt/justsave/docker/volume/default/netdata/moved_root/var/cache/netdata:/var/cache/netdata
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /etc/localtime:/etc/localtime:ro

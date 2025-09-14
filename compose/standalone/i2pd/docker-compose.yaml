@@ -24,7 +24,7 @@ services:
       dockerfile: i2pd.Dockerfile
       pull: true
     volumes:
-      - /mnt/justsave/docker/volume/i2pd/data:/home/i2pd/data  # Persist data
+      - /mnt/justsave/docker/volume/default/i2pd/moved_root/home/i2pd/data:/home/i2pd/data  # Persist data
     logging:
       options:
         max-size: 4m

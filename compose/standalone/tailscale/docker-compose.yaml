@@ -20,7 +20,7 @@ services:
       - /dev/net/tun:/dev/net/tun:rwm
     volumes:
       # 持久化
-      - /mnt/justsave/docker/volume/tailscale/data:/var/lib/tailscale
+      - /mnt/justsave/docker/volume/default/tailscale/moved_root/var/lib/tailscale:/var/lib/tailscale
       # UNIX Domain Socket
       - /var/run/tailscale:/var/run/tailscale
       # 共享host的时间环境

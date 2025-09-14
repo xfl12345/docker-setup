@@ -17,8 +17,8 @@ services:
     container_name: headscale
     pull_policy: always
     volumes:
-      - /mnt/justsave/docker/volume/headscale/data:/var/lib/headscale
-      - /mnt/justsave/docker/volume/headscale/config:/etc/headscale
+      - /mnt/justsave/docker/volume/default/headscale/moved_root/var/lib/headscale:/var/lib/headscale
+      - /mnt/justsave/docker/volume/default/headscale/moved_root/etc/headscale:/etc/headscale
       - /var/run/headscale:/var/run/headscale
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro

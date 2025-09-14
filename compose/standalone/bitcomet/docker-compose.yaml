@@ -32,8 +32,8 @@ services:
         RUN apt install -y locales locales-all at-spi2-core
       pull: true
     volumes:
-      - /mnt/justsave/docker/volume/bitcomet/appdata/BitComet:/home/sandbox/.config/BitComet
-      - /mnt/justsave/docker/volume/bitcomet/share:/home/sandbox/share
+      - /mnt/justsave/docker/volume/default/bitcomet/moved_root/home/sandbox/.config/BitComet:/home/sandbox/.config/BitComet
+      - /mnt/justsave/docker/volume/default/bitcomet/moved_root/home/sandbox/share:/home/sandbox/share
       - ./my_entrypoint.sh:/my_entrypoint.sh
     entrypoint: [/my_entrypoint.sh]
     logging:

@@ -16,7 +16,7 @@ services:
     pull_policy: always
     volumes:
       # 持久化
-      - /mnt/justsave/docker/volume/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
+      - /mnt/justsave/docker/volume/default/phpmyadmin/moved_root/etc/phpmyadmin/conf.d:/etc/phpmyadmin/conf.d:ro
       # mysql unix socket
       - /var/run/mysqld:/var/run/mysqld
       # # 开启 socket 监听
