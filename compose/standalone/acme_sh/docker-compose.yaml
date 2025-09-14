@@ -16,6 +16,9 @@ services:
     build:
       context: ./
       dockerfile: acme-sh-bundle-with-docker.Dockerfile
+      additional_contexts:
+        # 自动部署 SSL证书 到 阿里云CDN https://github.com/yxzlwz/ssl_update
+        cdn_ssl_update: https://github.com/yxzlwz/ssl_update.git
       pull: true
     volumes:
       # acme.sh
