@@ -84,8 +84,8 @@ services:
   #   volumes:
   #     - ./Caddyfile:/etc/caddy/Caddyfile
   #     # storage for Caddy
-  #     - /mnt/justsave/docker/volume/netmaker/cloudflare/caddy/data:/data
-  #     - /mnt/justsave/docker/volume/netmaker/cloudflare/caddy/conf:/config
+  #     - /mnt/justsave/docker/volume/default/netmaker/moved_root/data:/data
+  #     - /mnt/justsave/docker/volume/default/netmaker/moved_root/conf:/config
   #   extra_hosts:
   #     - "host.docker.internal:host-gateway"
   #   networks:

@@ -24,7 +24,7 @@ services:
     tmpfs:
       - /tmp
     volumes:
-      # - /mnt/justsave/docker/volume/v2raya/fs/etc/resolv.conf:/etc/resolv.conf
+      # - /mnt/justsave/docker/volume/default/v2raya/moved_root/etc/resolv.conf:/etc/resolv.conf
       - /mnt/justsave/docker/volume/default/v2raya/moved_root/etc/v2raya:/etc/v2raya
       - /mnt/justsave/docker/volume/default/v2raya/moved_root/usr/local/share/v2raya:/usr/local/share/v2raya
       - /mnt/justsave/docker/volume/default/v2raya/moved_root/root/.local/share/v2ray:/root/.local/share/v2ray

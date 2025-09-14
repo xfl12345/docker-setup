@@ -27,4 +27,4 @@ services:
       #   - "host.docker.internal:host-gateway"
       pull: true
     volumes:
-      - /mnt/justsave/docker/volume/qbittorrent_nox/official/config:/config
+      - /mnt/justsave/docker/volume/default/qbittorrent_nox/official/moved_root/config:/config
