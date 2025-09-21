@@ -12,7 +12,7 @@
 
 ### 计划内容
 
-* [ ] volume 目录结构加个 namespace 层级
+* [x] volume 目录结构加个 namespace 层级
 * [ ] NGINX 的 "jquery-like" snippets 重命名
 * [ ] 尝试使用 traefik 之类的根据取代现有 NGINX 部分套件
 * [ ] 上线 docker-setup WebUI
