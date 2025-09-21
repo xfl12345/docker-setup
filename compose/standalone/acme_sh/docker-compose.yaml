@@ -10,6 +10,8 @@ services:
     labels:
       - com.centurylinklabs.watchtower.enable=false
       - cc.xfl12345.code.share.docker.setup.localbuild=true
+    stdin_open: true
+    tty: true
     image: localbuild/acme-sh
     container_name: acme.sh
     pull_policy: build

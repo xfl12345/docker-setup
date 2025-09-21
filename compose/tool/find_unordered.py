@@ -26,6 +26,7 @@ the_service_key_order = [
     "cap_add",
     "sysctls",
     "security_opt",
+    "stdin_open",
     "tty",
     "shm_size",
     "image",
