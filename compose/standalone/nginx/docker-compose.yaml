@@ -21,9 +21,9 @@ services:
       - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # nginx vhost
       - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/conf.d:/etc/nginx/conf.d
-      # 预设默认页路由
       - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
       # nginx snippets
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/snippets:/etc/nginx/snippets
       - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/snippets/example:/etc/nginx/snippets/example:ro
       # nginx ssl cert
       - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:ro
