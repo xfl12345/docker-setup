@@ -6,7 +6,7 @@ services:
     env_file:
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/wg_easy/docker.env
+      - path: /mnt/justsave/docker/env/default/wg_easy/docker.env
         required: true
     cap_add:
       - NET_ADMIN

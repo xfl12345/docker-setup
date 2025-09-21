@@ -7,7 +7,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/v2raya/docker.env
+      - path: /mnt/justsave/docker/env/default/v2raya/docker.env
         required: false
     pid: host
     ipc: host

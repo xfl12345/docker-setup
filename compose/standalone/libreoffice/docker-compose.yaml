@@ -6,7 +6,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/libreoffice/docker.env
+      - path: /mnt/justsave/docker/env/default/libreoffice/docker.env
         required: false
     privileged: true
     security_opt:

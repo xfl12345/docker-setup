@@ -7,7 +7,7 @@ services:
     env_file:
       - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /mnt/justsave/docker/env/netmaker/netmaker-client.env
+      - path: /mnt/justsave/docker/env/default/netmaker/netmaker-client.env
         required: true
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
@@ -34,7 +34,7 @@ services:
         required: true
       - path: ./default_netmaker.env
         required: true # default
-      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+      - path: /mnt/justsave/docker/env/default/netmaker/netmaker.env
         required: false
     image: gravitl/netmaker:v0.26.0
     container_name: netmaker
@@ -55,7 +55,7 @@ services:
     env_file:
       - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /mnt/justsave/docker/env/netmaker/netmaker-ui.env
+      - path: /mnt/justsave/docker/env/default/netmaker/netmaker-ui.env
         required: true
     # environment:
     #   # config-dependant vars
@@ -99,7 +99,7 @@ services:
     env_file:
       - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+      - path: /mnt/justsave/docker/env/default/netmaker/netmaker.env
         required: true
     image: coredns/coredns:1.10.1
     container_name: coredns
@@ -123,7 +123,7 @@ services:
     env_file:
       - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /mnt/justsave/docker/env/netmaker/netmaker.env
+      - path: /mnt/justsave/docker/env/default/netmaker/netmaker.env
         required: true
     image: eclipse-mosquitto:2.0.15-openssl
     container_name: mq

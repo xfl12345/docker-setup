@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/frigate/docker.env
+      - path: /mnt/justsave/docker/env/default/frigate/docker.env
         required: false
     privileged: true # this may not be necessary for all setups
     # shm_size: "1GB" # update for your cameras based on calculation above

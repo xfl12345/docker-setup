@@ -8,7 +8,7 @@ services:
         required: true
       - path: ./gitea_default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/gitea/docker.env
+      - path: /mnt/justsave/docker/env/default/gitea/docker.env
         required: false
     # UID: id -u gitea
     image: gitea/gitea:1.22
@@ -37,7 +37,7 @@ services:
         required: true
       - path: ./gitea_runner_default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/gitea/runner/docker.env
+      - path: /mnt/justsave/docker/env/default/gitea/runner/docker.env
         required: false
     image: gitea/act_runner:latest
     container_name: gitea-runner

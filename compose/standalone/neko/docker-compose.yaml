@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/neko/docker.env
+      - path: /mnt/justsave/docker/env/default/neko/docker.env
         required: false
     privileged: true
     shm_size: 1gb

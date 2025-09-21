@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/phpmyadmin/docker.env
+      - path: /mnt/justsave/docker/env/default/phpmyadmin/docker.env
         required: false
     image: phpmyadmin:latest
     container_name: phpmyadmin

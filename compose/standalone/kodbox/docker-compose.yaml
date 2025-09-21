@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/kodbox/docker.env
+      - path: /mnt/justsave/docker/env/default/kodbox/docker.env
         required: false
     image: kodcloud/kodbox:latest
     container_name: kodbox

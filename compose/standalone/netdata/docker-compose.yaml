@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/netdata/docker.env
+      - path: /mnt/justsave/docker/env/default/netdata/docker.env
         required: false
     pid: host
     cap_add:

@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/transmission/docker.env
+      - path: /mnt/justsave/docker/env/default/transmission/docker.env
         required: false
     image: linuxserver/transmission:latest
     container_name: transmission

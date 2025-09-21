@@ -9,7 +9,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/mayfly_go/docker.env
+      - path: /mnt/justsave/docker/env/default/mayfly_go/docker.env
         required: false
     labels:
       - com.centurylinklabs.watchtower.enable=false

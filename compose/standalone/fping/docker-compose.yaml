@@ -5,7 +5,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/fping/docker.env
+      - path: /mnt/justsave/docker/env/default/fping/docker.env
         required: false
     image: localbuild-fping
     container_name: fping

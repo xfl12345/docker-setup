@@ -6,7 +6,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/ubuntu4build/docker.env
+      - path: /mnt/justsave/docker/env/default/ubuntu4build/docker.env
         required: false
     image: ubuntu4build
     container_name: ubuntu4build

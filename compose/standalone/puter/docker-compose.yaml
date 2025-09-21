@@ -8,7 +8,7 @@ services:
         required: true
       - path: ./default.env
         required: true # default
-      - path: /mnt/justsave/docker/env/puter/docker.env
+      - path: /mnt/justsave/docker/env/default/puter/docker.env
         required: false
     # image: ghcr.io/heyputer/puter:latest
     image: ghcr.io/heyputer/puter:sha-ec31007

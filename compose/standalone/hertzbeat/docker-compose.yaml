@@ -7,7 +7,7 @@ services:
     env_file:
       - path: /mnt/justsave/docker/compose/global_default.env
         required: true
-      - path: /mnt/justsave/docker/env/hertzbeat/docker.env
+      - path: /mnt/justsave/docker/env/default/hertzbeat/docker.env
         required: false
     image: apache/hertzbeat:latest
     container_name: hertzbeat

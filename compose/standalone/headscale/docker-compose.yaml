@@ -43,7 +43,7 @@ services:
         required: true
       - path: ./default_headscale_webui.env
         required: true # default
-      - path: /mnt/justsave/docker/env/headscale/headscale-webui.env
+      - path: /mnt/justsave/docker/env/default/headscale/headscale-webui.env
         required: false
     user: '1000'
     image: ghcr.io/gurucomputing/headscale-ui:latest
