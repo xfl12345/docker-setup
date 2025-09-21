@@ -9,6 +9,7 @@
 /compose/standalone/test
 /compose/standalone/tmp
 
+!/volume/example/
 !/volume/nginx/
 /volume/nginx/*
 !/volume/nginx/moved_root/

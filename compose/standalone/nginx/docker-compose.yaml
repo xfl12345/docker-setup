@@ -18,11 +18,11 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       # nginx conf file
-      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       # nginx vhost
-      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/conf.d:/etc/nginx/conf.d:ro
+      - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/conf.d:/etc/nginx/conf.d:ro
       # nginx snippets
-      - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/snippets:/etc/nginx/snippets
+      - /mnt/justsave/docker/volume/example/nginx/moved_root/etc/nginx/snippets:/etc/nginx/snippets
       # nginx ssl cert
       - /mnt/justsave/docker/volume/default/nginx/moved_root/etc/nginx/ssl:/etc/nginx/ssl:ro
       # openssl dhparam
