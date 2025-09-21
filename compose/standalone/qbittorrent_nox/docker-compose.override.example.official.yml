@@ -13,7 +13,7 @@ services:
     env_file:
       - path: ./default_official.env
         required: true # default
-      - path: /mnt/justsave/docker/env/qbittorrent_nox/docker.env
+      - path: /mnt/justsave/docker/env/default/qbittorrent_nox/official/docker.env
         required: false
     image: localbuild/qbittorrent-nox:4.6.4
     container_name: qbittorrent-nox

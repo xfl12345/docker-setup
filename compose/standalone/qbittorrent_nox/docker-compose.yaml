@@ -7,7 +7,7 @@ services:
         required: true # default
       - path: ./default_linuxserver.env
         required: true # default
-      - path: /mnt/justsave/docker/env/default/qbittorrent_nox/docker.env
+      - path: /mnt/justsave/docker/env/default/qbittorrent_nox/linuxserver/docker.env
         required: false
     # for debugging
     cap_add:
