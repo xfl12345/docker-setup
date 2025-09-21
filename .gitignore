@@ -10,21 +10,3 @@
 /compose/standalone/tmp
 
 !/volume/example/
-!/volume/nginx/
-/volume/nginx/*
-!/volume/nginx/moved_root/
-/volume/nginx/moved_root/*
-!/volume/nginx/moved_root/etc/
-/volume/nginx/moved_root/etc/*
-!/volume/nginx/moved_root/etc/nginx/
-/volume/nginx/moved_root/etc/nginx/*
-!/volume/nginx/moved_root/etc/nginx/nginx.conf
-!/volume/nginx/moved_root/etc/nginx/snippets/
-/volume/nginx/moved_root/etc/nginx/snippets/private/*
-!/volume/nginx/moved_root/etc/nginx/conf.d/
-/volume/nginx/moved_root/etc/nginx/conf.d/*
-!/volume/nginx/moved_root/etc/nginx/conf.d/default.conf
-
-!/compose/standalone/gitea/clash/
-/compose/standalone/gitea/clash/*
-!/compose/standalone/gitea/clash/config.yaml
