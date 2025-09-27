@@ -18,7 +18,22 @@ just_exec_cmd() {
     eval "$1"
 }
 
-just_log "Current ID[$(id)]"
+if [ ! -e /etc/nginx/snippets/private/by_version/current ]; then
+    __latest_version="$(cat /etc/nginx/snippets/example/by_version/latest_version)"
+    __example_dir_path="/etc/nginx/snippets/example/by_version/${__latest_version}"
+    __private_dir_path="/etc/nginx/snippets/private/by_version/${__latest_version}"
+    echo "version[${__latest_version}] private_dir_path[${__private_dir_path}] example_dir_path[${__example_dir_path}]"
+    mkdir -p $__private_dir_path
+    echo -e "include /etc/nginx/snippets/example/by_version/${__latest_version}/nginx.conf;\n" >> $__private_dir_path/nginx.conf
+    ln -s $__example_dir_path/version $__private_dir_path/version
+    __old_wd=$(pwd)
+    cd /etc/nginx/snippets/private/by_version/
+    ln -s $__latest_version current
+    cd $__old_wd
+fi
+
+current_snippets_version="$(cat /etc/nginx/snippets/private/by_version/current/version)"
+just_log "Current ID[$(id)] current_snippets_version[${current_snippets_version}]"
 
 for rel_path in $mkdir_list; do
     curr_private_dir_path="$(realpath -Pm /etc/nginx/${rel_path})"
