@@ -2,6 +2,8 @@
 ex="example"
 pv="private"
 
+rm /var/run/nginx/*.sock
+
 # file_list="$(cat /usr/local/share/xfl/check_file_list.txt | grep -v '^$')"
 raw_file_list="$(grep -r --include="*.conf" "include snippets/private" /etc/nginx/snippets/$px /etc/nginx/snippets/$ex /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf | grep -v "conf:#")"
 generate_file_list="$(echo -e "$raw_file_list" | grep -v '*.conf;' | grep -oE 'include .*$' | sed 's#;$##' | cut -d' ' -f2 | sort | uniq)"
