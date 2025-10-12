@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
-ex="example"
-pv="private"
-
-rm /var/run/nginx/*.sock
-
-# file_list="$(cat /usr/local/share/xfl/check_file_list.txt | grep -v '^$')"
-raw_file_list="$(grep -r --include="*.conf" "include snippets/private" /etc/nginx/snippets/$px /etc/nginx/snippets/$ex /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf | grep -v "conf:#")"
-generate_file_list="$(echo -e "$raw_file_list" | grep -v '*.conf;' | grep -oE 'include .*$' | sed 's#;$##' | cut -d' ' -f2 | sort | uniq)"
-mkdir_list="$(echo -e "$raw_file_list" | grep '*.conf;' | grep -oE 'include .*$' | sed 's#include ##g' | sed 's#\*\.conf;##g' | cut -d':' -f2 | sort | uniq)"
 
 just_log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')][xfl_init] $1"
@@ -18,47 +9,7 @@ just_exec_cmd() {
     eval "$1"
 }
 
-if [ ! -e /etc/nginx/snippets/private/by_version/current ]; then
-    __latest_version="$(cat /etc/nginx/snippets/example/by_version/latest_version)"
-    __example_dir_path="/etc/nginx/snippets/example/by_version/${__latest_version}"
-    __private_dir_path="/etc/nginx/snippets/private/by_version/${__latest_version}"
-    echo "version[${__latest_version}] private_dir_path[${__private_dir_path}] example_dir_path[${__example_dir_path}]"
-    mkdir -p $__private_dir_path
-    echo -e "include /etc/nginx/snippets/example/by_version/${__latest_version}/nginx.conf;\n" >> $__private_dir_path/nginx.conf
-    ln -s $__example_dir_path/version $__private_dir_path/version
-    __old_wd=$(pwd)
-    cd /etc/nginx/snippets/private/by_version/
-    ln -s $__latest_version current
-    cd $__old_wd
-fi
-
-current_snippets_version="$(cat /etc/nginx/snippets/private/by_version/current/version)"
-just_log "Current ID[$(id)] current_snippets_version[${current_snippets_version}]"
-
-for rel_path in $mkdir_list; do
-    curr_private_dir_path="$(realpath -Pm /etc/nginx/${rel_path})"
-    just_log "Checking dir[${curr_private_dir_path}]..."
-    if [ ! -e $curr_private_dir_path ]; then
-        just_exec_cmd "mkdir -p $curr_private_dir_path"
-    fi
-done
-
-for rel_path in $generate_file_list; do
-    curr_private_file_path="$(realpath -Pm /etc/nginx/$rel_path)"
-    curr_example_file_path="$(echo $curr_private_file_path | sed 's#^/etc/nginx/snippets/private#/etc/nginx/snippets/example#')"
-    just_log "Checking file[${curr_example_file_path}]..."
-    if [ ! -e $curr_private_file_path ]; then
-        if [ -e $curr_example_file_path ]; then
-            just_log "Example file[${curr_example_file_path}] was found."
-            file_content="include $(echo $curr_example_file_path | sed 's#^/etc/nginx/##');"
-        else
-            just_log "Example file[${curr_example_file_path}] was NOT found."
-            file_content=""
-        fi
-        just_exec_cmd "mkdir -p $(dirname $curr_private_file_path 2>/dev/null)"
-        just_exec_cmd "echo -e \"${file_content}\" >> $curr_private_file_path"
-    fi
-done
+just_exec_cmd "rm /var/run/nginx/*.sock"
 
 if [ ! -e /etc/ssl/dhparam/dhe4096.pem ]; then
     just_log "file[/etc/ssl/dhparam/dhe4096.pem] is not found. Generating..."
