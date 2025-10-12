@@ -20,31 +20,31 @@
 
 ## 重大破坏性更新
 
-- 2025年3月31日 提交 HASH `b3825b27a720db408a1d681619424a7a8ef0788b` 为最后一版，以 `/media` 为默认持久化目录。
-  - 迁移帮助文档见 [step.md](./docs/markdown/migration/by-commit-sha1/980d68c01d8fc2d18333d6aa97c86515e84629ca/step.md)
+* 2025年3月31日 提交 HASH `b3825b27a720db408a1d681619424a7a8ef0788b` 为最后一版，以 `/media` 为默认持久化目录。
+  * 迁移帮助文档见 [step.md](./docs/markdown/migration/by-commit-sha1/980d68c01d8fc2d18333d6aa97c86515e84629ca/step.md)
 
 ## 说明与约定
 
-- 所有 docker APP 相关的配置文件和持久化数据都应位于 `/mnt/justsave/docker` 目录之下。**后文相对路径均以该目录为根目录**。  
-- 所有目录名称命名不得含有中横线以及其它特殊符号。若一定要有，则使用下划线代替。  
-- 所有 APP 配置均必须以各自 APP 的名称新建一个该 APP 的专属目录，禁止“乱拉屎”。必须遵守该约定的目录包括但不限于 `./compose/standalone` 、 `./env` 和 `./volume` 。  
-- `./compose` 是存放所有 docker compose 配置文件 `docker-compose.yml` 的目录。  
-- `./compose` 的所有子对象（除了文件名为 `docker-compose.yml` 的文件）不得包含敏感信息的配置，以保持可安全开源的状态。  
-- `./compose` 的所有子对象中，文件名为 `docker-compose.yml` 的文件，推荐使用 `extends` 或者 `include` 关键字引用 `docker-compose*.example.yml` 文件，以便获得持续的维护支持同时减少空间占用。  
-- `./env` 是存放所有包含敏感信息的配置文件的目录。应始终保持防止添加到 git 仓库。  
-- docker compose 涉密环境变量存放到 `./env` 并使用关键字 `env_file` 引用。  
-- 所有 APP 的 docker compose 配置文件的目录都只能存放在目录 `./compose/standalone` 。
-- `./compose/all_in_one` 是存放投入生产的 docker compose 配置文件的目录。用以方便重装系统后只用一条命令拉起所有已配置的已投入过生产的 docker 容器，也为了方便统一管理生产 APP 以及指定 APP 开机启动的先后顺序。  
-- `./compose/standalone` 目录这般结构，是为了方便命令行 cd 进目录时，直接一条 `docker compose up -d` 运行 APP 。  
-- `./compose` 目录下的所有子对象中，文件名为 `default.env` 的文件不允许自行修改，由本项目控制。  
-- `./volume` 是存放所有 docker APP 持久化数据的默认目录。  
-- 每新增一个不能登录的系统普通用户时，往 `./compose/user_init.sh` 里添加，使用脚本完成用户添加，而非手动敲 useradd/adduser 命令，毕竟人总是非常容易犯错的。  
-- Web APP 端口号固定。需要添加请开 Pull Request 。  
+* 所有 docker APP 相关的配置文件和持久化数据都应位于 `/mnt/justsave/docker` 目录之下。**后文相对路径均以该目录为根目录**。  
+* 所有目录名称命名不得含有中横线以及其它特殊符号。若一定要有，则使用下划线代替。  
+* 所有 APP 配置均必须以各自 APP 的名称新建一个该 APP 的专属目录，禁止“乱拉屎”。必须遵守该约定的目录包括但不限于 `./compose/standalone` 、 `./env` 和 `./volume` 。  
+* `./compose` 是存放所有 docker compose 配置文件 `docker-compose.yml` 的目录。  
+* `./compose` 的所有子对象（除了文件名为 `docker-compose.yml` 的文件）不得包含敏感信息的配置，以保持可安全开源的状态。  
+* `./compose` 的所有子对象中，文件名为 `docker-compose.yml` 的文件，推荐使用 `extends` 或者 `include` 关键字引用 `docker-compose*.example.yml` 文件，以便获得持续的维护支持同时减少空间占用。  
+* `./env` 是存放所有包含敏感信息的配置文件的目录。应始终保持防止添加到 git 仓库。  
+* docker compose 涉密环境变量存放到 `./env` 并使用关键字 `env_file` 引用。  
+* 所有 APP 的 docker compose 配置文件的目录都只能存放在目录 `./compose/standalone` 。
+* `./compose/all_in_one` 是存放投入生产的 docker compose 配置文件的目录。用以方便重装系统后只用一条命令拉起所有已配置的已投入过生产的 docker 容器，也为了方便统一管理生产 APP 以及指定 APP 开机启动的先后顺序。  
+* `./compose/standalone` 目录这般结构，是为了方便命令行 cd 进目录时，直接一条 `docker compose up -d` 运行 APP 。  
+* `./compose` 目录下的所有子对象中，文件名为 `default.env` 的文件不允许自行修改，由本项目控制。  
+* `./volume` 是存放所有 docker APP 持久化数据的默认目录。  
+* 每新增一个不能登录的系统普通用户时，往 `./compose/user_init.sh` 里添加，使用脚本完成用户添加，而非手动敲 useradd/adduser 命令，毕竟人总是非常容易犯错的。  
+* Web APP 端口号固定。需要添加请开 Pull Request 。  
 
 ## 食用准备
 
-- 需要运行一次 `./compose/user_init.sh` ，然后再跑容器。
-- 配合 `./compose/standalone` 各个 APP 目录里的 `README.MD` 食用。  
+* 需要运行一次 `./compose/user_init.sh` ，然后再跑容器。
+* 配合 `./compose/standalone` 各个 APP 目录里的 `README.MD` 食用。  
   （注意，这些 `README.MD` 不一定是最新的，不一定跟得上官方发布的新版本。如有过时内容，欢迎提交 PR 修正）
 
 ## WebAPP 端口号分配
@@ -92,7 +92,7 @@
 
 ## Docker Tag 指定情况 （不含强依赖镜像）
 
-- 所谓“强依赖”，指的是某些 APP 官方指定的版本，但不服务于全局环境使用的其它镜像。  
+* 所谓“强依赖”，指的是某些 APP 官方指定的版本，但不服务于全局环境使用的其它镜像。  
 
 | 镜像名 | tag |
 |-:|:-|
@@ -148,7 +148,7 @@
 
 ### 同名同ID的部分
 
-- 这部分表格枚举的都是 用户名 和 组名 相同，UID 和 GID 相同的账户
+* 这部分表格枚举的都是 用户名 和 组名 相同，UID 和 GID 相同的账户
 
 | 用户名 | ID |
 |-:|:-|
