@@ -11,6 +11,14 @@ just_exec_cmd() {
 
 just_exec_cmd "rm /var/run/nginx/*.sock"
 
+latest_example_snippets_version="$(cat /etc/nginx/snippets/example/by_version/latest_version)"
+just_log "Current ID[$(id)] latest_example_snippets_version[${latest_example_snippets_version}]"
+
+if [ ! -e /etc/nginx/snippets/private/current ]; then
+    just_log "file[/etc/nginx/snippets/private/current] is not found. Will create it..."
+    just_exec_cmd "ln -s /etc/nginx/snippets/private/${latest_example_snippets_version} /etc/nginx/snippets/private/current"
+fi
+
 if [ ! -e /etc/ssl/dhparam/dhe4096.pem ]; then
     just_log "file[/etc/ssl/dhparam/dhe4096.pem] is not found. Generating..."
     openssl dhparam -out /etc/ssl/dhparam/dhe4096.pem 4096
