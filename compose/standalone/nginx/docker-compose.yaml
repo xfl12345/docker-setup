@@ -13,6 +13,7 @@ services:
     pull_policy: always
     tmpfs:
       - /var/cache/nginx
+      - /etc/nginx/snippets/config
     volumes:
       # 共享host的时间环境
       - /etc/timezone:/etc/timezone:ro

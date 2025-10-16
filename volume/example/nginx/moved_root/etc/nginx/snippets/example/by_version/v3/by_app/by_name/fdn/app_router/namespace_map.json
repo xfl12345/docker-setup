@@ -1,0 +1,18 @@
+{
+  "dev": {
+    "appList": [],
+    "blackListMode": true
+  },
+  "prod": {
+    "appList": ["portainer", "gitea", "gitlab"],
+    "blackListMode": false
+  },
+  "private": {
+    "appList": [],
+    "blackListMode": true
+  },
+  "public": {
+    "appList": ["gitea"],
+    "blackListMode": false
+  }
+}
