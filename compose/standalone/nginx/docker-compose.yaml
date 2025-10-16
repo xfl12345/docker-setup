@@ -39,6 +39,7 @@ services:
       # - ./geoip:/etc/nginx/geoip/example:ro
       # nginx web root
       - /mnt/justsave/docker/volume/default/nginx/moved_root/usr/share/nginx:/usr/share/nginx:ro
+      - /mnt/justsave/docker/volume/default/nginx/moved_root/usr/share/nginx/html:/usr/share/nginx/html:ro
       # nginx log
       - /mnt/justsave/docker/volume/default/nginx/moved_root/var/log/nginx:/var/log/nginx
       # nginx init
