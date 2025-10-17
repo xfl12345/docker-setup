@@ -66,7 +66,6 @@ link_items() {
 }
 
 if (( 10#$user_current_version_in_pure_num_text > 2 )); then
-
     # Link example config files
     link_items "$current_example_config_directory" "$mixins_config_directory"
     # Link user config files if they exist
@@ -74,8 +73,6 @@ if (( 10#$user_current_version_in_pure_num_text > 2 )); then
         link_items "$current_user_config_directory" "$mixins_config_directory"
     fi
 fi
-
-# snippets/example/by_version/v3/example_config
 
 if [ ! -e /etc/ssl/dhparam/dhe4096.pem ]; then
     just_log "file[/etc/ssl/dhparam/dhe4096.pem] is not found. Generating..."
