@@ -42,10 +42,35 @@ current_user_config_directory="/etc/nginx/snippets/private/by_version/current/co
 current_example_config_directory="/etc/nginx/snippets/example/by_version/${user_current_version}/config"
 mixins_config_directory="/etc/nginx/snippets/config/by_version/${user_current_version}"
 just_exec_cmd "mkdir -p $mixins_config_directory"
-just_exec_cmd "cp -rvp $current_example_config_directory/* $mixins_config_directory"
-if [ -e $current_user_config_directory ]; then
-    just_exec_cmd "cp -rvp $current_user_config_directory/* $mixins_config_directory"
+
+# Function to create symbolic links for files and directories
+link_items() {
+    local source_dir="$1"
+    local target_dir="$2"
+
+    for item in "$source_dir"/*; do
+        local basename_item=$(basename "$item")
+        local target_path="$target_dir/$basename_item"
+
+        if [ -d "$item" ]; then
+            # For directories, recursively link contents
+            just_exec_cmd "mkdir -p $target_path"
+            link_items "$item" "$target_path"
+        else
+            # For files, create symbolic link
+            just_exec_cmd "ln -sf $item $target_path"
+        fi
+    done
+}
+
+# Link example config files
+link_items "$current_example_config_directory" "$mixins_config_directory"
+# Link user config files if they exist
+if [ -e "$current_user_config_directory" ]; then
+    link_items "$current_user_config_directory" "$mixins_config_directory"
 fi
+
+unset link_items
 
 # snippets/example/by_version/v3/example_config
 
