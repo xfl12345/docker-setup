@@ -23,8 +23,6 @@ latest_example_snippets_version="$(cat /etc/nginx/snippets/example/by_version/la
 latest_example_snippets_directory="/etc/nginx/snippets/example/by_version/${latest_example_snippets_version}"
 user_current_snippets_directory="/etc/nginx/snippets/private/by_version/current"
 
-just_log "Current ID[$(id)] latest_example_snippets_version[${latest_example_snippets_version}]"
-
 if [ ! -e $user_current_snippets_directory ]; then
     just_log "file[$user_current_snippets_directory] is not found. Will create it..."
     user_versioned_snippets_directory="/etc/nginx/snippets/private/by_version/${latest_example_snippets_version}"
@@ -38,6 +36,10 @@ if [ ! -e $user_current_snippets_directory ]; then
 fi
 
 user_current_version="$(basename $(readlink $user_current_snippets_directory))"
+
+just_log "Current ID[$(id)] latest_example_snippets_version[${latest_example_snippets_version}] user_current_version[${user_current_version}]"
+
+user_current_version_in_pure_num_text=${user_current_version#v}
 current_user_config_directory="/etc/nginx/snippets/private/by_version/current/config"
 current_example_config_directory="/etc/nginx/snippets/example/by_version/${user_current_version}/config"
 mixins_config_directory="/etc/nginx/snippets/config/by_version/${user_current_version}"
@@ -63,14 +65,15 @@ link_items() {
     done
 }
 
-# Link example config files
-link_items "$current_example_config_directory" "$mixins_config_directory"
-# Link user config files if they exist
-if [ -e "$current_user_config_directory" ]; then
-    link_items "$current_user_config_directory" "$mixins_config_directory"
-fi
+if (( 10#$user_current_version_in_pure_num_text > 2 )); then
 
-unset link_items
+    # Link example config files
+    link_items "$current_example_config_directory" "$mixins_config_directory"
+    # Link user config files if they exist
+    if [ -e "$current_user_config_directory" ]; then
+        link_items "$current_user_config_directory" "$mixins_config_directory"
+    fi
+fi
 
 # snippets/example/by_version/v3/example_config
 
