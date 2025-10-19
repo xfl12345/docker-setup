@@ -15,7 +15,7 @@ services:
       - ALL
     security_opt:
       - apparmor=unconfined
-    image: metacubex/mihomo:v1.19.1    # 最新版用 metacubex/mihomo:Alpha
+    image: metacubex/mihomo:v1.19.15    # 最新版用 metacubex/mihomo:Alpha
     container_name: clash-meta
     pull_policy: always
     devices:
