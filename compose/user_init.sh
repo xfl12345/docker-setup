@@ -62,7 +62,7 @@ just_add_user_to_group gitea docker
 create_nginx_dir() {
     local the_nginx_dir_path=$1
     exec_cmd "mkdir -p $the_nginx_dir_path"
-    exec_cmd "chown -R nginx:nginx $the_nginx_dir_path"
+    exec_cmd "chown -R www-data:www-data $the_nginx_dir_path"
 }
 
 create_nginx_dir /mnt/justsave/docker/volume/default/nginx/moved_root/var/log/nginx
