@@ -33,6 +33,7 @@
     "request_uri",
     "rebuild_host",
     "rebuild_url",
+    "fdn_remote_addr",
     "fdn_app_name",
     "fdn_app_namespace",
     "fdn_app_route_upstream",

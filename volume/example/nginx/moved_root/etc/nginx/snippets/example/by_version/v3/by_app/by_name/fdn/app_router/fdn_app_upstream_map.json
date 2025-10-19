@@ -8,6 +8,7 @@
         }
     },
     "mihomo": {
+        "notCommon": true,
         "upstream": {
             "socket": "ip",
             "host": "127.0.0.1",
