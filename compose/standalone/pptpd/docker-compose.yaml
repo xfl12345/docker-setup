@@ -1,0 +1,33 @@
+# version: "3"
+services:
+  pptpd:
+    env_file:
+      - path: /mnt/justsave/docker/compose/global_default.env
+        required: true
+      - path: ./default.env
+        required: true # default
+      - path: /mnt/justsave/docker/env/default/pptpd/docker.env
+        required: false
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    devices:
+      - /dev/ppp:/dev/ppp:rwm
+    image: localbuild/pptpd
+    container_name: pptpd
+    pull_policy: build
+    build:
+      context: ./
+      dockerfile: ubuntu.Dockerfile
+      pull: true
+    volumes:
+      - /lib/modules:/lib/modules:ro
+      - /etc/hosts:/etc/hosts:ro
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/pptpd.conf:/etc/pptpd.conf
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/pptpd.conf:/etc/pptpd.conf
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/ppp/pptpd-options:/etc/ppp/pptpd-options
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/ppp/options:/etc/ppp/options
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/ppp/chap-secrets:/etc/ppp/chap-secrets
+      - /mnt/justsave/docker/volume/example/pptpd/moved_root/etc/ppp/pap-secrets:/etc/ppp/pap-secrets
+    network_mode: host
+    restart: always
