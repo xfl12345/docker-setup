@@ -45,6 +45,8 @@ services:
       - /mnt/justsave/docker/volume/default/nginx/moved_root/var/log/nginx:/var/log/nginx
       # nginx init
       - ./05-just-init.sh:/docker-entrypoint.d/05-just-init.sh
+      # nginx UDS
+      - /var/run/nginx:/var/run/nginx
     logging:
       options:
         max-size: 4m
